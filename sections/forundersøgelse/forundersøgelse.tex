@@ -1,34 +1,8 @@
 \section{Forundersøgelse}\label{ch:forundersoegelse}
 
+\subsection{Medarbjeder-mål Tabel}
 \begin{center}
-\begin{tabular}{ |p{100pt}|p{100pt}|p{100pt}| }
-    \hline
-    Medarbjeder & Opgave & Mål \\
-    \hline\hline
-    Sælgere
-    & udføre salg & salget er udført \\
-    \hline
-    & køre forberelse & sælger er klar til at køre \\
-    \hline
-    Lagermedarbejder
-    & påfyld bil & bil er fuld \\
-    \hline
-    & modtag ny levering & levering er i kølerbokse \\
-    \hline
-    Depotchef
-    & registrer salg of dagsomstætning på biller & aktiviter fra dagen før er bogført \\
-    \hline
-    & udprinte odrer & orderer er klar til sælgere \\
-    \hline
-    & lave router & router er klar til sælgerer \\
-    \hline
-    & bestemmer lager orden & lageret passer markets efterspørgsel \\
-    \hline
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{ |p{90pt}|p{90pt}|p{90pt}|p{90pt}| }
+\begin{longtable}{ |p{90pt}|p{90pt}|p{90pt}|p{90pt}| }
     \hline
     Medarbjeder & Opgave & Mål & Trin \\
     \hline\hline
@@ -86,28 +60,70 @@
     &&&
     - Varerne er afskrevet og kan ikke sælges \\
     \hline
-    Depotchef
-    & registrer salg of dagsomstætning på biller & aktiviter fra dagen før er bogført &
-    - test1 \\
+    Ismand & Isbilen skal ryddes op & Isbilens bokse er ryttet op så der er plads til nye varer & 
+    - Ismanden åbner en boks med is \\
     &&&
-    - test2 \\
-    \hline
-    & udprinte odrer & orderer er klar til sælgere &
-    - test1 \\
+    - Ismanden omrokerer pakkerne således at der er bedre plads til nye pakker næste dag \\
     &&&
-    - test2 \\
-    \hline
-    & lave router & router er klar til sælgerer &
-    - test1 \\
+    - Ismanden lukker boksen \\
     &&&
-    - test2 \\
+    - Gentages indtil alle bokse er ryddet op. \\
     \hline
-    & bestemmer lager orden & lageret passer markets efterspørgsel &
-    - test1 \\
+    Lagermedarbejder & Isbilen skal påfyldes med is & Isbilen er påfyldt & 
+    - Lagermedarbejder modtager bestillingsseddel, hvorpå der står hvor meget der skal fyldes på de forskellige biler. \\
     &&&
-    - test2 \\
+    - Lagermedarbejder fylder isene på en vogn inde i fryseren. Kører herefter vognen ud til isbilen og fylder på. \\
     \hline
-\end{tabular}
+    Bogfører (chef) & Mindstemængderne af isene skal opdateres & Mindstemængderne af isene er opdateret &
+    - først undersøges hvilke is der har solgt godt og mindre godt \\
+    &&&
+    - Der laves en evaluering ud fra antallet solgt og nuværende mindstemængde på hver is \\
+    &&&
+    - Efter en manuel vurdering opdateres mindstemængderne så det passer til efterspørgslen. \\
+    \hline
+    Bogfører (chef) & Is skal bestilles hjem ud fra hvor mange is der mindst skal være på lager, og hvor mange is der skal være i hver bil & Is er bestilt hjem, i henhold til den manuelle vurdering af hvor mange der skal være. &
+    - Undersøg hvor mange af hver is der blev solgt dagen før \\
+    &&&
+    - Lav en manuel vurdering af om mindste mængderne er i orden \\
+    &&&
+    - Lav en manuel vurdering af om nuværende antal på lageret er i orden \\
+    &&&
+    - Foretag ændringer af mindste mængder \\
+    &&&
+    - Bestil nye is hjem ud fra vurderingen så der er nok til næste gang \\
+    \hline
+    Ismand & Modtag nyt salg på ruten & Salget er registreret & 
+    - På ruten kommer en kunde forbi bilen og vil købe is \\
+    &&&
+    - ismanden finder de ønskede varer \\
+    &&&
+    - varerne tilføjes til salget \\
+    &&&
+    - kundeoplysninger tilføjes til salget \\
+    &&&
+    - salget afsluttes \\
+    &&&
+    - Ordrebekræftelse til kunde, lager og regnskab \\
+    \hline
+    Chef & Medarbejderen skal evalueres hver måned &Medarbejderen er evalueret &
+    - Medarbejderens præstationer ud fra målene læses \\
+    &&&
+    - Der laves en vurdering af hvilke områder medarbejderen skal fokusere på at gøre bedre \\
+    &&&
+    - Medarbejderen indkaldes til en samtale \\
+    &&&
+    - Medarbejderen for at vide hvilke områder der skal forbedres \\
+    \hline
+    Bogfører (chef) & Alle salg for dagen er afsluttet & Alle salgstal er bogført & 
+    - Find all tallene for dagen \\
+    &&&
+    - åben et excel dokument til bogføring \\
+    &&&
+    - manuelt skriv af til excel dokumentet \\
+    &&&
+    - gem dokumentet. \\
+    \hline
+\end{longtable}
 \end{center}
 
 \begin{figure}[H]
