@@ -123,3 +123,53 @@
     \caption{Workflow diagram}
     \label{fig:workflows}
 \end{figure}
+
+\subsection{Brief Use Cases}\label{brief}
+\textbf{Register ordre:}
+En order modtages, på hjemmesiden. Alt afhængigt af hvor ordren registrets, vil den blive sendt ud til det nærmeste depot. f.eks hvis ordren er fra Nordjylland bliver det depotet i Aalborg, som har ansvaret for at ordren skal leveres. Herfra modtager chefen ordren og registere den, efterfuldt af dette, vil en printet seddel gives til en sælger, som registere ordren, når den bliver afleveret til kunden. 
+
+\textbf{Annuller ordre:}
+En kunde fortryder sin ordre, herfra kan kunden annulere orderen
+
+\textbf{Afskriv vare:} 
+En lagermedarbejder finder en udgået varer og belyser depotchefen, som afskriver det i systemet. Herfra kan lagermedarbejderen smide varen ud. 
+
+\textbf{Optælling af isbilen:} 
+Depot chefen tæller isbilen op, notere det ned og opdatere lager. 
+
+\textbf{Modtag varer:} 
+En lagermedarbejder modtager varerne, når en lastbilerne fylder fryseren ud. Herfra registerer depotchefen de modtagede varer. 
+
+\textbf{Bestil varer:} 
+Depotchefen holder øje med depotets fryser og fylder ud, når der er mangel på bestemt varer. Udover dette bestiller depotchefen flere af en bestemt varer hjem, når der er tilbud på en bestemt varer. 
+
+\textbf{Kør salgsrute:} 
+En sælger modtager den bestemte rute, som sælgeren skal køre. Herfra indtaster sælgeren ruten ind i rutesystemet. Systemet finder ruten og nu er sælgeren klar til at køre ud med is. 
+
+\textbf{Bogføring:}
+Depotchefen tæller varene op, optæller om salgstallet stemmer overens. Herfra tastes tallene ind i excel. 
+
+\textbf{Print ordrersedler:}
+Depotchefen finder ordren og printer den ud. Herfra lægges den udprintede ordre på en hylde, som passer bedst med en af de kommende ruter.
+
+\subsection{Mock ups og designprincipper}
+Når det kommer til at designe en brugergrænseflade til sit system, er der indtil flere overvejelser man skal igennem. Målet er at gøre brugergrænsefladen så brugervenlig, hurtig og intuitiv som mulig. Dette afsnit vil derfor gennemgå hvilke overvejelser der er indgået i beslutningen for designet af de anvendte mock ups.
+
+\subsubsection{Farver}
+Farver i et professionelt UI system kan være en definerende faktor. Farven må ikke være for meget til stede, men giver blot en identitet til programmet. I programmer som Spotify og Visual Studio Code har de begge en identitetsfarve, henholdsvis grøn og blå, men farven ses kun vigtige steder i programmet. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/Preliminary/Spotify.png}
+    \label{fig:spotify}
+\end{figure}
+Som det kan ses forekommer den grønne farve i Spotify kun på den store Play/Pause knap, den sang man er i gang med, og hvilken enhed man bruger sin konto fra. Den grønne farve fylder knap 2\% af programmets brugergrænseflade, og fungerer godt sammen med de meget mørke og grå farver. 
+På Hjem-IS' hjemmeside er der allerede en god farvepalet, med både mørke og lyse farver. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/Preliminary/farvepalet.png}
+    \label{fig:farvepalet}
+\end{figure}
+Da blå er fokusfarven for Hjem-IS, er det vigtigt også at forstå betydningen af den farve. Den blå farve kan betyde tillid, rolighed, fred, og loyalitet. Disse ord passer godt med beskrivelsen af Hjem-IS' forhold med Danmark og dets kultur fra organisationsundersøgelsen. Til selve brugergrænsefladen, tages der en beslutning om at den mest brugte farve til baggrunden vil være Baby powder (FDFFFC). Hertil vil mindre kasser eller områder være i Oxford blue (11223C) og så vil der bruges Aero (64B1DF) til få highlights. Disse farver giver kontrast så det er nemt at se hvad der er i fokus, men samtidig komplimenterer farverne hinanden.
+
+\subsubsection{Skrifttype}
+Skrifttypen er valgt 
