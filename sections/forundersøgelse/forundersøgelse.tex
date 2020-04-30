@@ -10,7 +10,7 @@ Der er lavet workflow diagrammer for de opgaver der bliver udført hos Hjem-IS n
     \caption{Workflow diagram}
     \label{fig:workflows}
 \end{figure}
-De workflows der skal bruges til at kunne lave automatisk lagerstyring er Bestil Vare, Modtag Vare, Optælling af isbilen og Afskriv vare. Alle disse trin er nødvendige for at der kan laves en forudsigelse af, hvor mange varer der skal bestilles hjem. For at det kan lade sig gøre at lave et estimat på hvor mange af hvert produkt der skal bestilles hjem, kræves det at der i forvejen er et lager med varer, og mindst én dags salgsstatistik tilgængelig. Det er vigtigt at lave optælling af isbilen for at dobbelttjekke at lageret passer - det er trods alt den data der bruges til at bedømme hvor meget der skal bestilles hjem. Såfremt en vare skal afskrives, så skal lageret også opdateres så det stemmer. Til sidst skal der selvfølgelig bestilles varer, som så skal modtages og registreres som værende på lager. For at 
+De workflows der skal bruges til at kunne lave automatisk lagerstyring er Bestil Vare, Modtag Vare, Optælling af isbilen og Afskriv vare. Alle disse trin er nødvendige for at der kan laves en forudsigelse af, hvor mange varer der skal bestilles hjem. For at det kan lade sig gøre at lave et estimat på hvor mange af hvert produkt der skal bestilles hjem, kræves det at der i forvejen er et lager med varer, og mindst én dags salgsstatistik tilgængelig. Det er vigtigt at lave optælling af isbilen for at dobbelttjekke at lageret passer - det er trods alt den data der bruges til at bedømme hvor meget der skal bestilles hjem. Såfremt en vare skal afskrives, så skal lageret også opdateres så det stemmer. Til sidst skal der selvfølgelig bestilles varer, som så skal modtages og registreres som værende på lager. For at udpensle trinene i opgaverne laves der en medarbejder-mål-tabel over de workflows der er opstillet.
 
 \section{Medarbejder-mål Tabel}
 \begin{center}
@@ -168,7 +168,9 @@ Depotchefen finder ordren og printer den ud. Herfra lægges den udprintede ordre
 
 
 \section{Use Case Diagram}
-Nedenunder ses der et use case diagram for overstående briefs. Use case diagrammet giver et godt overblik over hvilke cases de forskellige aktør står overfor, samt kun noget af forholdet mellem aktør, system og use case \cite{visual-paradigm.com}. For at opnå det et bedre overblik over forholdet mellem system og aktør, bliver det nødvendig at tilføje flere diagrammer, der kigger mere specifikt på dette. Et af dette er fully dressed use case, som viser mere et mere detalieret og struktureret overblik.
+
+
+Nedenunder ses der et use case diagram for overstående briefs. Use case diagrammet giver et godt overblik over hvilke cases de forskellige aktør står overfor, samt kun noget af forholdet mellem aktør, system og use case \cite{visual-paradigm.com}. For at opnå det et bedre overblik over forholdet mellem system og aktør, bliver det nødvendig at tilføje flere diagrammer, der kigger mere specifikt på dette. Et af dette er fully dressed use case, som viser mere et mere detalieret og struktureret overblik \cite{Larman2004}.
 
 \begin{figure}[H]
     \centering
@@ -198,48 +200,3 @@ Da blå er fokusfarven for Hjem-IS, er det vigtigt også at forstå betydningen 
 
 \subsection{Skrifttype}
 Skrifttypen Segoe UI Black er valgt fordi den minder meget om skrifttypen anvendt på Hjem-IS' hjemmeside \cite{hjemis}. Skrifttypen er tyk, rund og ikke så skarp. Disse ord kan også beskrive deres produkter, hvilket giver god sammenhæng.
-
-
-
-\section{Fully Dressed}
-\begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }
-    \hline
-    Use case navn & Automatisk lagerstyring & \\
-    \hline
-    Aktør & Depotchefen & \\
-    \hline
-    Præbetingelser & Et lager med en addresse, penge til at bestille, lagerbeholding fysisk er det samme som i systemet, having a little bit sales data & \\
-    \hline
-    Postbetingelser & Et lager det er opfylgt med IS & \\
-    \hline
-    Frekvens & 1 gang om dagen & \\
-    \hline
-    Main Success Scenario (Flow of events) & Aktørhandling & Systemsvar \\
-    \hline
-    & 1. vis salgs statistik & 2. en hel masse statistik \\
-    \hline
-    & 3. klikker "generer lagerplan" & 4. fil dialog omkring hvor planen skal gemmes og er automaitsk sendt til plan-fanen \\
-    \hline
-    & 5. klikker "load plan" & 6. en eller anden form for UX feedback \\
-    \hline
-    Alternative flows & 5a. Aktøren vil gerne modificere planen, og gør det i plan-fanen \\
-    \hline
-\end{longtable}
-
-\begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }
-    \hline
-    Use case navn & Automatisk bogføring & \\
-    \hline
-    Aktør & Depotchefen & \\
-    \hline
-    Præbetingelser & ingen & \\
-    \hline
-    Postbetingelser & bogføring er automatisk færdiggjord i et excel ark & \\
-    \hline
-    Frekvens & 1 gang om dagen & \\
-    \hline
-    Main Success Scenario (Flow of events) & Aktørhandling & Systemsvar \\
-    \hline
-    & 1. klikker "export bogføring" & 2. systemet exporter en excel fil med bogføring \\
-    \hline
-\end{longtable}
