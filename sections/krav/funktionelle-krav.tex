@@ -25,7 +25,7 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     \textbf{Aktør} & Depotchefen & \\
     \hline
-    \textbf{Præbetingelser} & Et lager med en addresse, penge til at bestille, lagerbeholding fysisk er det samme som i systemet og en smule salgsdata & \\
+    \textbf{Præbetingelser} & Et lager med en addresse, penge til at bestille, lager og isbiler er talt op og en smule salgsdata & \\
     \hline
     \textbf{Postbetingelser} & Et lager tilpas fyldt med is & \\
     \hline
@@ -35,15 +35,26 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     & 1. Aktøren trykker på "Vis salgsstatistik" & 2. Viser salgsstatistik \\
     \hline
-    & 3. Klikker på "generer lagerplan" & 4. Fil dialogboks omkring hvor bestillingsplanen skal gemmes, sendes automatisk til plan-fanen \\
+    & 3. Klikker på "generer lagerplan" & 4. Fil-dialogboks omkring hvor bestillingsplanen skal gemmes. \\
+    & & 5. Planen gemmes og sendes automatisk til plan-fanen \\
     \hline
-    & 5. Klikker "Åben plan" & 6. Viser bestillingsplanen med mulighed for at kunne rette i den estimerede bestillingsplan. \\
+    & 6. Klikker "Åben plan" & 7. Viser bestillingsplanen med mulighed for at kunne rette i den estimerede bestillingsplan. \\
     \hline
-    & 7. Klikker "Opret bestilling" & 8. Opretter en bestilling af varer ud fra bestillingsplanen. \\
+    & 8. Klikker "Opret bestilling" & 9. Opretter en bestilling af varer ud fra bestillingsplanen. \\
     \hline
-    & 9. Efter nogle dage registreres de ankomne varer i systemet & 10. Lagerstatus opdateret. \\
-    \textbf{Alternative flows} & 5a. Aktøren vil gerne modificere planen, og gør det i plan-fanen & \\
+    & 10. Efter nogle dage registreres de ankomne varer i systemet & 11. Lagerstatus opdateret. \\
     \hline
+    \textbf{Alternative flows} & 0.1 Udgåede eller ødelagte varer skal afskrives & \\
+    \hline
+    & 0.2 Afskrevne varer registreres i systemet. & 0.3 Lager status opdateret. \\
+    \hline
+    & & 4.1 Aktøren vil gerne modificere planen, retter det i plan-fanen og gemmer planen & \\
+    \hline
+    & & 5.1 Der er ikke mere plads på harddisken. \\
+    \hline
+    & 5.2 Aktøren sletter unødvendige filer for at gøre plads til planen. & 5.3 Gentag trin 5.\\
+    \hline
+    & & 9.1 Planen er tom. Der kan ikke oprettes en bestilling. Slut på flow. \\
 \end{longtable}
 
 \begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }
@@ -60,6 +71,9 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     \textbf{Main Success Scenario} (Flow of events) & \textbf{Aktørhandling} & \textbf{Systemsvar} \\
     \hline
-    & 1. klikker "export bogføring" & 2. systemet exporter en excel fil med bogføring \\
+    & 1. Aktøren trykker på "Vis salgsstatistik" & 2. Viser salgsstatistik \\
     \hline
+    & 3. Klikker "Eksporter bogføring" & 4. Systemet exporter en Excel fil med bogføringsdata \\
+    \hline
+    & 5. Aktøren dobbelttjekker at tallene stemmer overens. & \\
 \end{longtable}
