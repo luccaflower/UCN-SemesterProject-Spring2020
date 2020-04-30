@@ -1,5 +1,14 @@
 \chapter{Forundersøgelse}\label{ch:forundersoegelse}
-Nu hvor virksomheden 
+Nu hvor virksomheden er blevet undersøgt og hovedproblemerne er opsat, kan der nu laves en undersøgelse af, hvilke use cases der skal integreres i systemet.
+
+\subsection{Workflow Diagrams}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/Forundersøgelse/workflows.png}
+    \caption{Workflow diagram}
+    \label{fig:workflows}
+\end{figure}
 
 \subsection{Medarbejder-mål Tabel}
 \begin{center}
@@ -127,7 +136,7 @@ Nu hvor virksomheden
 \end{longtable}
 \end{center}
 
-\subsection{Use Cases}
+\subsection{Brief Use Cases}\label{brief}
 \textbf{Register ordre:} \\
 En order modtages, på hjemmesiden. Alt afhængigt af hvor ordren registrets, vil den blive sendt ud til det nærmeste depot. f.eks hvis ordren er fra Nordjylland bliver det depotet i Aalborg, som har ansvaret for at ordren skal leveres. Herfra modtager chefen ordren og registere den, efterfuldt af dette, vil en printet seddel gives til en sælger, som registere ordren, når den bliver afleveret til kunden. 
 
@@ -164,43 +173,6 @@ Depotchefen finder ordren og printer den ud. Herfra lægges den udprintede ordre
     \label{fig:use_case_diagram}
 \end{figure}
 
-\subsection{Workflow Diagrams}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/Forundersøgelse/workflows.png}
-    \caption{Workflow diagram}
-    \label{fig:workflows}
-\end{figure}
-
-\subsection{Brief Use Cases}\label{brief}
-\textbf{Register ordre:}
-En order modtages, på hjemmesiden. Alt afhængigt af hvor ordren registrets, vil den blive sendt ud til det nærmeste depot. f.eks hvis ordren er fra Nordjylland bliver det depotet i Aalborg, som har ansvaret for at ordren skal leveres. Herfra modtager chefen ordren og registere den, efterfuldt af dette, vil en printet seddel gives til en sælger, som registere ordren, når den bliver afleveret til kunden. 
-
-\textbf{Annuller ordre:}
-En kunde fortryder sin ordre, herfra kan kunden annulere orderen
-
-\textbf{Afskriv vare:} 
-En lagermedarbejder finder en udgået varer og belyser depotchefen, som afskriver det i systemet. Herfra kan lagermedarbejderen smide varen ud. 
-
-\textbf{Optælling af isbilen:} 
-Depot chefen tæller isbilen op, notere det ned og opdatere lager. 
-
-\textbf{Modtag varer:} 
-En lagermedarbejder modtager varerne, når en lastbilerne fylder fryseren ud. Herfra registerer depotchefen de modtagede varer. 
-
-\textbf{Bestil varer:} 
-Depotchefen holder øje med depotets fryser og fylder ud, når der er mangel på bestemt varer. Udover dette bestiller depotchefen flere af en bestemt varer hjem, når der er tilbud på en bestemt varer. 
-
-\textbf{Kør salgsrute:} 
-En sælger modtager den bestemte rute, som sælgeren skal køre. Herfra indtaster sælgeren ruten ind i rutesystemet. Systemet finder ruten og nu er sælgeren klar til at køre ud med is. og sælge videre. 
-
-\textbf{Bogføring:}
-Depotchefen tæller varene op, optæller om salgstallet stemmer overens. Herfra tastes tallene ind i excel. 
-
-\textbf{Print ordrersedler:}
-Depotchefen finder ordren og printer den ud. Herfra lægges den udprintede ordre på en hylde, som passer bedst med en af de kommende ruter.
-
 \subsection{Mock ups og designprincipper}
 Når det kommer til at designe en brugergrænseflade til sit system, er der indtil flere overvejelser man skal igennem. Målet er at gøre brugergrænsefladen så brugervenlig, hurtig og intuitiv som mulig. Dette afsnit vil derfor gennemgå hvilke overvejelser der er indgået i beslutningen for designet af de anvendte mock ups.
 
@@ -225,3 +197,4 @@ Skrifttypen Segoe UI Black er valgt fordi den minder meget om skrifttypen anvend
 
 
 
+\subsection{Fully Dressed}
