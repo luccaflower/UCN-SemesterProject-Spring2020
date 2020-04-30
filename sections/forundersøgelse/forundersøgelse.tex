@@ -1,7 +1,8 @@
 \chapter{Forundersøgelse}\label{ch:forundersoegelse}
-Nu hvor virksomheden er blevet undersøgt og hovedproblemerne er opsat, kan der nu laves en undersøgelse af, hvilke use cases der skal integreres i systemet.
+Nu hvor virksomheden er blevet undersøgt og hovedproblemerne er opsat, kan der nu laves en undersøgelse af, hvilke use cases der skal integreres i systemet. De opgaver, som er stillet op fra konklusionen på business analysen, er automatisk lagerstyring, integration af ordre i systemet og automatisk bogføring. Af de tre opgaver her fravælges integration af ordre, da der også skulle integreres et ruteplanlægningssystem, hvilket er dømt til at være for stor en opgave. Første prioritet er i stedet automatisk lagerstyring, og anden prioritet er automatisk bogføring.
 
 \subsection{Workflow Diagrams}
+Der er lavet workflow diagrammer for de opgaver der bliver udført hos Hjem-IS nu. Disse workflows beskriver i store træk hvilke trin der er i opgaverne. Disse workflows vil også blive brugt til at finde ud af hvilke af opgaverne der skal bruges og laves om, så det kan passe til et nyt system. 
 
 \begin{figure}[H]
     \centering
@@ -14,7 +15,7 @@ Nu hvor virksomheden er blevet undersøgt og hovedproblemerne er opsat, kan der 
 \begin{center}
 \begin{longtable}{ |p{90pt}|p{90pt}|p{90pt}|p{90pt}| }
     \hline
-    Medarbjeder & Opgave & Mål & Trin \\
+    Medarbejder & Opgave & Mål & Trin \\
     \hline\hline
     Ismand
     & Modtager ny ordre & Ordren er registreret som værende solgt. &
@@ -164,6 +165,8 @@ Depotchefen tæller varene op, optæller om salgstallet stemmer overens. Herfra 
 \textbf{Print ordrersedler:} \\
 Depotchefen finder ordren og printer den ud. Herfra lægges den udprintede ordre på en hylde, som passer bedst med en af de kommende ruter.
 
+Nedenunder ses der et use case diagram for overstående briefs. Use case diagrammet giver et godt overblik over hvilke cases de forskellige aktør står overfor, samt kun noget af forholdet mellem aktør, system og use case \cite{visual-paradigm.com}. For at opnå det et bedre overblik over forholdet mellem system og aktør, bliver det nødvendig at tilføje flere diagrammer, der kigger mere specifikt på dette. Et af dette er fully dressed use case, som viser mere et mere detalieret og struktureret overblik.
+
 \subsection{Use Case Diagram}
 
 \begin{figure}[H]
@@ -198,3 +201,26 @@ Skrifttypen Segoe UI Black er valgt fordi den minder meget om skrifttypen anvend
 
 
 \subsection{Fully Dressed}
+\begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }
+    \hline
+    Use case navn & Automatisk lagerstyring & \\
+    \hline
+    Aktør & Depotchefen & \\
+    \hline
+    Præbetingelser & Et lager med en addresse, penge til at bestille, lagerbeholding fysisk er det samme som i systemet, having a little bit sales data & \\
+    \hline
+    Postbetingelser & Et lager det er opfylgt med IS & \\
+    \hline
+    Frekvens & 1 gang om dagen & \\
+    \hline
+    Main Success Scenario (Flow of events) & Aktørhandling & Systemsvar \\
+    \hline
+    & 1. vis salgs statistik & 2. en hel masse statistik \\
+    \hline
+    & 3. klikker "generer lagerplan" & 4. fil dialog omkring hvor planen skal gemmes og er automaitsk sendt til plan-fanen \\
+    \hline
+    & 5. klikker "load plan" & 6. en eller anden form for UX feedback \\
+    \hline
+    Alternative flows & 5a. Aktøren vil gerne modificere planen, og gør det i plan-fanen \\
+    \hline
+\end{longtable}
