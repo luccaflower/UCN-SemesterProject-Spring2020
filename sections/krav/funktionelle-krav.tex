@@ -25,21 +25,24 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     \textbf{Aktør} & Depotchefen & \\
     \hline
-    \textbf{Præbetingelser} & Et lager med en addresse, penge til at bestille, lagerbeholding fysisk er det samme som i systemet, having a little bit sales data & \\
+    \textbf{Præbetingelser} & Et lager med en addresse, penge til at bestille, lagerbeholding fysisk er det samme som i systemet og en smule salgsdata & \\
     \hline
-    \textbf{Postbetingelser} & Et lager det er opfylgt med IS & \\
+    \textbf{Postbetingelser} & Et lager tilpas fyldt med is & \\
     \hline
     \textbf{Frekvens} & 1 gang om dagen & \\
     \hline
     \textbf{Main Success Scenario} (Flow of events) & \textbf{Aktørhandling} & \textbf{Systemsvar} \\
     \hline
-    & 1. vis salgs statistik & 2. en hel masse statistik \\
+    & 1. Aktøren trykker på "Vis salgsstatistik" & 2. Viser salgsstatistik \\
     \hline
-    & 3. klikker "generer lagerplan" & 4. fil dialog omkring hvor planen skal gemmes og er automaitsk sendt til plan-fanen \\
+    & 3. Klikker på "generer lagerplan" & 4. Fil dialogboks omkring hvor bestillingsplanen skal gemmes, sendes automatisk til plan-fanen \\
     \hline
-    & 5. klikker "load plan" & 6. en eller anden form for UX feedback \\
+    & 5. Klikker "Åben plan" & 6. Viser bestillingsplanen med mulighed for at kunne rette i den estimerede bestillingsplan. \\
     \hline
-    \textbf{Alternative flows} & 5a. Aktøren vil gerne modificere planen, og gør det i plan-fanen \\
+    & 7. Klikker "Opret bestilling" & 8. Opretter en bestilling af varer ud fra bestillingsplanen. \\
+    \hline
+    & 9. Efter nogle dage registreres de ankomne varer i systemet & 10. Lagerstatus opdateret. \\
+    \textbf{Alternative flows} & 5a. Aktøren vil gerne modificere planen, og gør det i plan-fanen & \\
     \hline
 \end{longtable}
 
@@ -51,7 +54,7 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     \textbf{Præbetingelser} & ingen & \\
     \hline
-    \textbf{Postbetingelser} & bogføring er automatisk færdiggjord i et excel ark & \\
+    \textbf{Postbetingelser} & bogføring er automatisk færdiggjort i et excel ark & \\
     \hline
     \textbf{Frekvens} & 1 gang om dagen & \\
     \hline
