@@ -1,7 +1,7 @@
 \chapter{Forundersøgelse}\label{ch:forundersoegelse}
 Nu hvor virksomheden er blevet undersøgt og hovedproblemerne er opsat, kan der nu laves en undersøgelse af, hvilke use cases der skal integreres i systemet. De opgaver, som er stillet op fra konklusionen på business analysen, er automatisk lagerstyring, integration af ordre i systemet og automatisk bogføring. Af de tre opgaver her fravælges integration af ordre, da der også skulle integreres et ruteplanlægningssystem, hvilket er dømt til at være for stor en opgave. Første prioritet er i stedet automatisk lagerstyring, og anden prioritet er automatisk bogføring.
 
-\section{Workflow Diagrams}
+\section{Workflow Diagrammer}
 Der er lavet workflow diagrammer for de opgaver der bliver udført hos Hjem-IS nu. Disse workflows beskriver i store træk hvilke trin der er i opgaverne. Disse workflows vil også blive brugt til at finde ud af hvilke af opgaverne der skal bruges og laves om, så det kan passe til et nyt system. 
 
 \begin{figure}[H]
@@ -22,9 +22,9 @@ De workflows der skal bruges til at kunne lave automatisk lagerstyring er Bestil
     & Modtager ny ordre & Ordren er registreret som værende solgt. &
     - modtag ordre fra kunde \\
     &&&
-    - Ordren med tilhørende adresse  registreres \\
+    - Ordren med tilhørende adresse registreres \\
     &&&
-    - Adressen på ordren printes ud og lægges i den rigtige kasse til næste dag \\
+    - Ordren med adressen printes ud og lægges i den rigtige kasse til næste dag \\
     &&&
     - Den udprintede ordre tages med i bilen \\
     &&&
@@ -32,12 +32,12 @@ De workflows der skal bruges til at kunne lave automatisk lagerstyring er Bestil
     &&&
     - Kunden underskriver ordren \\
     &&&
-    - Den underskrevene ordre afleveres til chefen \\
+    - Den underskrevne ordre afleveres til chefen efter turen er færdig \\
     \hline
-    Ismand & Annuler ordre & Ordren er annulleret &
+    Ismand & Annuller ordre & Ordren er annulleret &
     - Modtag ordre fra kunde \\
     &&&
-    - under “registrer ordre”, før samtlige trin er gennemført, kontakter kunden depotet og vil have ordre annulleret \\
+    - Under “registrer ordre”, før samtlige trin er gennemført, kontakter kunden depotet og vil have ordre annulleret \\
     &&&
     - Ordren annulleres. \\
     \hline
@@ -117,7 +117,7 @@ De workflows der skal bruges til at kunne lave automatisk lagerstyring er Bestil
     &&&
     - Ordrebekræftelse til kunde, lager og regnskab \\
     \hline
-    Chef & Medarbejderen skal evalueres hver måned &Medarbejderen er evalueret &
+    Chef & Medarbejderen skal evalueres hver måned & Medarbejderen er evalueret &
     - Medarbejderens præstationer ud fra målene læses \\
     &&&
     - Der laves en vurdering af hvilke områder medarbejderen skal fokusere på at gøre bedre \\
@@ -165,19 +165,6 @@ Depotchefen tæller varene op, optæller om salgstallet stemmer overens. Herfra 
 
 \textbf{Print ordrersedler:} \\
 Depotchefen finder ordren og printer den ud. Herfra lægges den udprintede ordre på en hylde, som passer bedst med en af de kommende ruter.
-
-
-\section{Use Case Diagram}
-
-
-Nedenunder ses der et use case diagram for overstående briefs. Use case diagrammet giver et godt overblik over hvilke cases de forskellige aktør står overfor, samt kun noget af forholdet mellem aktør, system og use case \cite{visual-paradigm.com}. For at opnå det et bedre overblik over forholdet mellem system og aktør, bliver det nødvendig at tilføje flere diagrammer, der kigger mere specifikt på dette. Et af dette er fully dressed use case, som viser mere et mere detalieret og struktureret overblik \cite{Larman2004}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{figures/Forundersøgelse/use_case_diagram.png}
-    \caption{Use case diagram}
-    \label{fig:use_case_diagram}
-\end{figure}
 
 \section{Mock ups og designprincipper}
 Når det kommer til at designe en brugergrænseflade til sit system, er der indtil flere overvejelser man skal igennem. Målet er at gøre brugergrænsefladen så brugervenlig, hurtig og intuitiv som mulig. Dette afsnit vil derfor gennemgå hvilke overvejelser der er indgået i beslutningen for designet af de anvendte mock ups.
