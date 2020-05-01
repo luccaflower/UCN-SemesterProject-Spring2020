@@ -93,26 +93,28 @@ Hvis tilfædeldet kommer, hvor tallene ikke stemmer overens, med de givende oply
 \end{longtable}
 
 \section{Kandidattabel}
+Nu hvor de centrale Use Cases er valgt, kan du laves Kandidatklasser. Der vil laves en vurdering af hvilke mulige klasser der skal indeholde hvilke informationer, samt om det skal være klasser eller blot attributter. 
 
-\begin{longtable}{|p{120pt}|p{120pt}|p{120pt}|}
+\begin{longtable}{|p{120pt}|p{120pt}|p{120pt}|}\label{fig:Kandidatklasser}
     \hline
     \textbf{Kandidat Til Klasse} & \textbf{Vurdering} & \textbf{IN/OUT} \\
     \hline
     \hline
-    Cooler & indeholder lager status - varer på lager, bestilte varer, afskrevne varer & \\
+    Cooler & Indeholder lager status - varer på lager, bestilte varer, afskrevne varer & IN \\
     \hline
     Sale & Indeholder salgsoplysninger fra et salg ude ved kunden & IN \\
     \hline
-    Product & Indeholder productoplysninger - pris, ID & \\
+    Product & Indeholder productoplysninger - pris, ID & IN \\
     \hline
-    Customer & Indeholder kundeoplysninger & \\
+    Customer & Indeholder kundeoplysninger & IN \\
     \hline
-    CustomerOrder & En ordre lavet af en kunde som skal leveres til kunden & \\
+    CustomerOrder & En ordre lavet af en kunde som skal leveres til kunden & IN \\
     \hline
-    DepotOrder & En bestilling af is til depotet & \\
+    DepotOrder & En bestilling af is til depotet & IN \\
     \hline
-    Seller & Indeholder sælgeroplysninger, bliver forbundet med Sale & \\
+    Seller & Indeholder sælgeroplysninger, bliver forbundet med Sale & IN \\
     \hline
-    Boss & Indeholder adminstratoroplysninger & \\
+    Boss & Indeholder adminstratoroplysninger & IN \\
     \hline
 \end{longtable}
+Nu er Kandidatklasserne fundet, og det er nu muligt at opstille en domænemodel af systemet, så basisformen af systemet kan designes, samt forholdene mellem klasserne.
