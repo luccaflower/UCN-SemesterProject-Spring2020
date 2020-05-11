@@ -1,6 +1,6 @@
 \section{Funktionelle krav}\label{sec:funktionelle-krav}
 
-\section{Use Case Diagram}
+\subsection{Use Case Diagram}
 Nedenunder ses der et use case diagram lavet ud fra medarbejder-mål tabellen. Use case diagrammet giver et godt overblik over, hvilke opgaver de forskellige aktører udfører mellem aktør og system \cite{visual-paradigm.com}. 
 
 \begin{figure}[H]
@@ -12,7 +12,7 @@ Nedenunder ses der et use case diagram lavet ud fra medarbejder-mål tabellen. U
 
 Use Case diagrammet viser at depotchefen står for næsten alle opgaver i virksomheden. Depotchefen udtrykte en interesse for at kunne bruge mindre tid på de mange opgaver han har i løbet af dagen, for så at kunne bruge tid på at køre salgsruter. Da det også primært er depotchefen, der står for de opgaver, som udføres i systemet, er det de Use Cases der vil blive fokuseret på.
 
-\section{Fully Dressed} \label{fullydressed}
+\subsection{Fully Dressed} \label{fullydressed}
 
 Herunder ses Fully Dressed Use Casen ‘Automatisk lagerstyring’. Use case 'Automatisk Lagerstyring' er bygget på de tidligere use cases: 'Afskriv vare', fordi den påvirker hvor meget der er på lager. 'Optælling af isbil', som er manuelt arbejde og vil nemt kunne erstattes med automatisk optælling. 'Bestil varer', dette ville gå hånd i hånd med automatisk optælling af bilen. Og til sidst use case 'Modtag varer', fordi systemet skal opdateres med de nye varer der kommer på lager. 
 
@@ -33,7 +33,7 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     \textbf{Main Success Scenario} (Flow of events) & \textbf{Aktørhandling} & \textbf{Systemsvar} \\
     \hline
-    & 1. Aktøren trykker på "Lager" & 2. Viser lagbeholdning \\
+    & 1. Aktøren trykker på "Lager" & 2. Viser lagerbeholdning \\
     \hline
     & 3. Klikker på "Generer lagerplan" & 4. Fil-dialogboks omkring hvor bestillingsplanen skal gemmes. \\
     & & 5. Planen gemmes og sendes automatisk til plan-fanen \\
@@ -92,31 +92,35 @@ Hvis tilfædeldet kommer, hvor tallene ikke stemmer overens, med de givende oply
     \hline
 \end{longtable}
 
-Efter en vurdering af begge centrale Use Cases, vælges Automatisk Lagerstyring som 
+Efter en vurdering af begge centrale Use Cases, vælges Automatisk Lagerstyring som den endelige use case der fokuseres på. Dette skyldes at det ikke vil være muligt at kunne gennemføre begge use cases på et tilfredsstillende niveau.
 
-\section{Kandidattabel}
-Nu hvor de centrale Use Cases er valgt, kan der nu laves Kandidatklasser. Der vil laves en vurdering af hvilke mulige klasser, som passer til de "objekter", der indgår i arbejdsopgaverne. 
+\subsection{Kandidattabel}
+Nu hvor den centrale Use Cases er valgt, kan der nu laves Kandidatklasser. 
+Ved opgaven Automatisk lagerstyring skal \textbf{brugeren} kunne se lagerbeholdningen i \textbf{fryseren}. Ud fra \textbf{salgsstatistik} og tilbud kan den optimale mængde \textbf{varer} bestilles hjem. Det skal være muligt at generere en \textbf{lagerplan}, åbne den, og oprette en \textbf{bestilling} med den. Når de bestilte \textbf{varer} er ankommet skal de registreres i systemet.
+
+
+
 
 \begin{longtable}{|p{120pt}|p{120pt}|p{120pt}|}\label{fig:Kandidatklasser}
     %\hline
     \textbf{Kandidat Til Klasse} & \textbf{Vurdering} & \textbf{Konklusion} \\
     \hline
     \hline
-    Køler & Indeholder is - varer på lager, bestilte varer, afskrevne varer & IN \\
+    Fryser & Skal kunne indeholde lageroplysninger &  \\
     \hline
-    Sale & Indeholder salgsoplysninger fra et salg ude ved kunden & IN \\
+    Lagerplan & Skal kunne indeholde bestillingsantal af flere is & \\
     \hline
-    Product & Indeholder productoplysninger - pris, ID & IN \\
+    Is & Skal kunne registrere produktoplysninger og lagerstatus & \\
     \hline
-    Customer & Indeholder kundeoplysninger & IN \\
+    Bruger & Skal kunne tilgå systemet og registrere en bestilling & \\
     \hline
-    CustomerOrder & En ordre lavet af en kunde som skal leveres til kunden & IN \\
+    SalgsDatabase & Skal kunne registrere salg i database & IN \\
     \hline
-    DepotOrder & En bestilling af is til depotet & IN \\
+    Bestilling & Skal kunne indeholde liste med is og antal & IN \\
     \hline
-    Seller & Indeholder sælgeroplysninger, bliver forbundet med Sale & IN \\
-    \hline
-    Boss & Indeholder adminstratoroplysninger & IN \\
+    Salg & Indeholder produkt, antal og kroner betalt & IN \\
     \hline
 \end{longtable}
 Nu er Kandidatklasserne fundet, og det er nu muligt at opstille en domænemodel af systemet, så basisformen af systemet kan designes, samt forholdene mellem klasserne.
+
+%\section{Ikke-funktionelle krav}
