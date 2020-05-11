@@ -1,7 +1,7 @@
 \section{Funktionelle krav}\label{sec:funktionelle-krav}
 
 \section{Use Case Diagram}
-Nedenunder ses der et use case diagram lavet ud fra medarbejder-mål tabellen. Use case diagrammet giver et godt overblik over, hvilke cases de forskellige aktøre står for, samt kun noget af forholdet mellem aktør, system og use case \cite{visual-paradigm.com}. 
+Nedenunder ses der et use case diagram lavet ud fra medarbejder-mål tabellen. Use case diagrammet giver et godt overblik over, hvilke opgaver de forskellige aktører udfører mellem aktør og system \cite{visual-paradigm.com}. 
 
 \begin{figure}[H]
     \centering
@@ -10,7 +10,7 @@ Nedenunder ses der et use case diagram lavet ud fra medarbejder-mål tabellen. U
     \label{fig:use_case_diagram}
 \end{figure}
 
-Use Case diagrammet viser at depotchefen står for næsten alle opgaver i virksomheden. Depotchefen udtrykte en interesse for at kunne bruge mindre tid på de mange use cases han har i løbet af dagen, for så at kunne bruge tid på at køre salgsruter. Da det også primært er depotchefen, der står for de opgaver, som udføres i systemet, er det de Use Cases der vil blive fokuseret på.
+Use Case diagrammet viser at depotchefen står for næsten alle opgaver i virksomheden. Depotchefen udtrykte en interesse for at kunne bruge mindre tid på de mange opgaver han har i løbet af dagen, for så at kunne bruge tid på at køre salgsruter. Da det også primært er depotchefen, der står for de opgaver, som udføres i systemet, er det de Use Cases der vil blive fokuseret på.
 
 \section{Fully Dressed} \label{fullydressed}
 
@@ -92,15 +92,17 @@ Hvis tilfædeldet kommer, hvor tallene ikke stemmer overens, med de givende oply
     \hline
 \end{longtable}
 
+Efter en vurdering af begge centrale Use Cases, vælges Automatisk Lagerstyring som 
+
 \section{Kandidattabel}
-Nu hvor de centrale Use Cases er valgt, kan du laves Kandidatklasser. Der vil laves en vurdering af hvilke mulige klasser der skal indeholde hvilke informationer, samt om det skal være klasser eller blot attributter. 
+Nu hvor de centrale Use Cases er valgt, kan der nu laves Kandidatklasser. Der vil laves en vurdering af hvilke mulige klasser, som passer til de "objekter", der indgår i arbejdsopgaverne. 
 
 \begin{longtable}{|p{120pt}|p{120pt}|p{120pt}|}\label{fig:Kandidatklasser}
     %\hline
-    \textbf{Kandidat Til Klasse} & \textbf{Vurdering} & \textbf{IN/OUT} \\
+    \textbf{Kandidat Til Klasse} & \textbf{Vurdering} & \textbf{Konklusion} \\
     \hline
     \hline
-    Cooler & Indeholder lager status - varer på lager, bestilte varer, afskrevne varer & IN \\
+    Køler & Indeholder is - varer på lager, bestilte varer, afskrevne varer & IN \\
     \hline
     Sale & Indeholder salgsoplysninger fra et salg ude ved kunden & IN \\
     \hline
