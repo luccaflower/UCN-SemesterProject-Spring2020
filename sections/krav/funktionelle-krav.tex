@@ -102,21 +102,23 @@ Nu hvor de centrale Use Cases er valgt, kan der nu laves Kandidatklasser. Der vi
     \textbf{Kandidat Til Klasse} & \textbf{Vurdering} & \textbf{Konklusion} \\
     \hline
     \hline
-    Køler & Indeholder is - varer på lager, bestilte varer, afskrevne varer & IN \\
+    Køler & Er en fysisk ting der køler is & OUT \\
     \hline
-    Sale & Indeholder salgsoplysninger fra et salg ude ved kunden & IN \\
+    Sale & Indeholder salgsoplysninger fra et salg ude ved kunden & klasse \\
     \hline
-    Product & Indeholder productoplysninger - pris, ID & IN \\
+    Product & Indeholder productoplysninger - pris, ID & klasse \\
     \hline
-    Customer & Indeholder kundeoplysninger & IN \\
+    Customer & Indeholder kundeoplysninger & klasse \\
     \hline
-    CustomerOrder & En ordre lavet af en kunde som skal leveres til kunden & IN \\
+    CustomerOrder & En ordre lavet af en kunde som skal leveres til kunden & klasse \\
     \hline
-    DepotOrder & En bestilling af is til depotet & IN \\
+    DepotOrder & En bestilling af is til depotet & klasse \\
     \hline
-    Seller & Indeholder sælgeroplysninger, bliver forbundet med Sale & IN \\
+    Seller & Indeholder sælgeroplysninger, bliver forbundet med Sale & sale \\
     \hline
-    Boss & Indeholder adminstratoroplysninger & IN \\
+    Boss & Indeholder adminstratoroplysninger & klasse \\
+    \hline
+    DepotPlan & Beskriver hvordan debottet skal ændre sig som seasonerne gør & klasse \\
     \hline
 \end{longtable}
 Nu er Kandidatklasserne fundet, og det er nu muligt at opstille en domænemodel af systemet, så basisformen af systemet kan designes, samt forholdene mellem klasserne.
