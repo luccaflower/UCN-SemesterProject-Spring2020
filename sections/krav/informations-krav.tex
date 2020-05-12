@@ -41,6 +41,8 @@ Dernæst skal associationerne laves ud fra om der er tale om 1-til-1, 1-til-mang
 Reglerne for de forskellige relationer og hvordan de skal forbindes er fulgt under udviklingen af den relationelle model, hvilket bl.a. kan ses på 'product_supplier' tabellen. Denne forbinder en mange-til-mange association mellem Product og Supplier. 
 Nu hvor tabellen er lavet, kan den nu normaliseres.
 Efter at have kigget tabellen igennem kan det ses at 1NF allerede er opfyldt, da samtlige værdier er atomiske.
-
+For at opfylde 2NF skal 1NF være opfyldt, og der skal ikke være nogle partial dependencies. Efter endnu en vurdering er der ingen værdier som afhænger af en anden, hvilket betyder at relationalmodellen allerede opfylder 2NF.
+For at opfylde 3NF skal 2NF være opfyldt, samt må der ikke være nogle transitive afhængigheder. Det minder meget om kravet til 2NF, og det kan igen konkluderes at der ingen transitive afhængigheder er.
+For at opfylde BCNF kræves det at 3NF er opfyldt og at samtlige attributter er kandidatnøgler.
 
 
