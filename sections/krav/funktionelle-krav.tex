@@ -101,10 +101,9 @@ Ved opgaven Automatisk lagerstyring skal \textbf{brugeren} kunne se lagerbeholdn
 
 
 
-\begin{longtable}{|p{120pt}|p{120pt}|p{120pt}|}\label{fig:Kandidatklasser}
-    %\hline
+\begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }\label{fig:Kandidatklasser}
+    %\hline %why the fuck doesn't this work?
     \textbf{Kandidat Til Klasse} & \textbf{Vurdering} & \textbf{Konklusion} \\
-    \hline
     \hline
     Køler & Er en fysisk ting der køler is & OUT \\
     \hline
@@ -126,5 +125,16 @@ Ved opgaven Automatisk lagerstyring skal \textbf{brugeren} kunne se lagerbeholdn
     \hline
 \end{longtable}
 Nu er Kandidatklasserne fundet, og det er nu muligt at opstille en domænemodel af systemet, så basisformen af systemet kan designes, samt forholdene mellem klasserne.
+
+
+\subsection{Domænemodel}\label{Domainmodel}
+Domænemodellen beskriver de relationer klasserne har til hinanden, samt hvilke attributter de indeholder. Her laves domænemodellen ud fra Kandidatklasserne og arkitektur principper.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/krav/domain_model.png}
+    \caption{Domænemodel}
+    \label{fig:domain_model}
+\end{figure}
 
 %\section{Ikke-funktionelle krav}
