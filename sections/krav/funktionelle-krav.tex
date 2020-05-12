@@ -106,19 +106,23 @@ Ved opgaven Automatisk lagerstyring skal \textbf{brugeren} kunne se lagerbeholdn
     \textbf{Kandidat Til Klasse} & \textbf{Vurdering} & \textbf{Konklusion} \\
     \hline
     \hline
-    Fryser & Skal kunne indeholde lageroplysninger &  \\
+    Køler & Er en fysisk ting der køler is & OUT \\
     \hline
-    Lagerplan & Skal kunne indeholde bestillingsantal af flere is & \\
+    Sale & Indeholder salgsoplysninger fra et salg ude ved kunden & klasse \\
     \hline
-    Is & Skal kunne registrere produktoplysninger og lagerstatus & \\
+    Product & Indeholder productoplysninger - pris, ID & klasse \\
     \hline
-    Bruger & Skal kunne tilgå systemet og registrere en bestilling & \\
+    Customer & Indeholder kundeoplysninger & klasse \\
     \hline
-    SalgsDatabase & Skal kunne registrere salg i database & IN \\
+    CustomerOrder & En ordre lavet af en kunde som skal leveres til kunden & klasse \\
     \hline
-    Bestilling & Skal kunne indeholde liste med is og antal & IN \\
+    DepotOrder & En bestilling af is til depotet & klasse \\
     \hline
-    Salg & Indeholder produkt, antal og kroner betalt & IN \\
+    Seller & Indeholder sælgeroplysninger, bliver forbundet med Sale & sale \\
+    \hline
+    Boss & Indeholder adminstratoroplysninger & klasse \\
+    \hline
+    DepotPlan & Beskriver hvordan depotet skal ændre sig som sæsonerne gør & klasse \\
     \hline
 \end{longtable}
 Nu er Kandidatklasserne fundet, og det er nu muligt at opstille en domænemodel af systemet, så basisformen af systemet kan designes, samt forholdene mellem klasserne.
