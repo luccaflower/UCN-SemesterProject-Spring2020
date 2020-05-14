@@ -36,11 +36,21 @@ Dernæst skal associationerne laves ud fra om der er tale om 1-til-1, 1-til-mang
     \label{fig:relational_model_0}
 \end{figure}
 
-Reglerne for de forskellige relationer og hvordan de skal forbindes er fulgt under udviklingen af den relationelle model, hvilket bl.a. kan ses på 'product\_supplier' tabellen. Denne forbinder en mange-til-mange association mellem Product og Supplier. 
+Reglerne for de forskellige relationer og hvordan de skal forbindes er fulgt under udviklingen af den relationelle model, hvilket bl.a. kan ses på 'product_supplier' tabellen. Denne forbinder en mange-til-mange association mellem Product og Supplier. 
 Nu hvor tabellen er lavet, kan den nu normaliseres.
 Efter at have kigget tabellen igennem kan det ses at 1NF allerede er opfyldt, da samtlige værdier er atomiske.
-For at opfylde 2NF skal 1NF være opfyldt, og der skal ikke være nogle partial dependencies. Efter endnu en vurdering er der ingen værdier som afhænger af en anden, hvilket betyder at relationalmodellen allerede opfylder 2NF.
-For at opfylde 3NF skal 2NF være opfyldt, samt må der ikke være nogle transitive afhængigheder. Det minder meget om kravet til 2NF, og det kan igen konkluderes at der ingen transitive afhængigheder er.
-For at opfylde BCNF kræves det at 3NF er opfyldt og at samtlige determinanter er kandidatnøgler.
+For at opfylde 2NF skal 1NF være opfyldt, og der skal ikke være nogle partial dependencies. Da der skal bruges en Map mellem product og seasonal_plan laves der en ny tabel: seasonal_plan_product_map. Denne vil også indeholde 'amount'.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/krav/relation_model_1th_normalization.png}
+    \caption{Relationsmodel efter 2NF}
+    \label{fig:relational_model_0}
+\end{figure}
+
+For at opfylde 3NF skal 2NF være opfyldt, samt må der ikke være nogle transitive afhængigheder. Det minder meget om kravet til 2NF, og det kan konkluderes at der ingen transitive afhængigheder er.
+For at opfylde BCNF kræves det at 3NF er opfyldt og at samtlige determinanter er kandidatnøgler. De determinanter, der er I den relationelle model er samtlige attributter med 'id' og '..._id' på nær 'tracking_id'. 'tracking_id' oprettes ud før der laves en sent_date på varen. Der er derfor ingen afhængighed. 
+
+Det kan nu konkluderes at den relationelle model er på BCNF og kan udvikles i Microsoft SQL.
 
 
