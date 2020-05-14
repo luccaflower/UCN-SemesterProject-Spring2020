@@ -1,8 +1,6 @@
 \section{Informationskrav}\label{sec:informations-krav}
 \todo{introduktion og Unified process}
 
-\subsection{Domænemodel}
-
 \subsection{Domænemodel}\label{Domainmodel}
 Domænemodellen beskriver de relationer klasserne har til hinanden, samt hvilke attributter de indeholder. Her laves domænemodellen ud fra Kandidatklasserne og arkitektur principper.
 
@@ -43,6 +41,6 @@ Nu hvor tabellen er lavet, kan den nu normaliseres.
 Efter at have kigget tabellen igennem kan det ses at 1NF allerede er opfyldt, da samtlige værdier er atomiske.
 For at opfylde 2NF skal 1NF være opfyldt, og der skal ikke være nogle partial dependencies. Efter endnu en vurdering er der ingen værdier som afhænger af en anden, hvilket betyder at relationalmodellen allerede opfylder 2NF.
 For at opfylde 3NF skal 2NF være opfyldt, samt må der ikke være nogle transitive afhængigheder. Det minder meget om kravet til 2NF, og det kan igen konkluderes at der ingen transitive afhængigheder er.
-For at opfylde BCNF kræves det at 3NF er opfyldt og at samtlige attributter er kandidatnøgler.
+For at opfylde BCNF kræves det at 3NF er opfyldt og at samtlige determinanter er kandidatnøgler.
 
 
