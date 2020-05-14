@@ -24,14 +24,14 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     & 1. Aktøren trykker på "Lager" & 2. Viser lagerbeholdning \\
     \hline
-    & 3. Klikker på "Generer lagerplan" & 4. Fil-dialogboks omkring hvor bestillingsplanen skal gemmes. \\
-    & & 5. Planen gemmes og sendes automatisk til plan-fanen \\
+    & 3. Klikker på "Generer lagerplan" &  \\
+    & & 4. Planen gemmes og sendes automatisk til plan-fanen \\
     \hline
-    & 6. Klikker "Åben plan" & 7. Viser bestillingsplanen med mulighed for at kunne rette i den estimerede bestillingsplan. \\
+    & 5. Klikker "Åben plan" & 6. Viser bestillingsplanen med mulighed for at kunne rette i den estimerede bestillingsplan. \\
     \hline
-    & 8. Klikker "Opret bestilling" & 9. Opretter en bestilling af varer ud fra bestillingsplanen. \\
+    & 7. Gemmer rettelser ved at klikke "Gem plan" & 8. Opretter bestillinger af varer ud fra bestillingsplanen. \\
     \hline
-    & 10. Efter nogle dage registreres de ankomne varer i systemet & 11. Lagerstatus opdateret. \\
+    & 9. Efter nogle dage registreres de ankomne varer i systemet & 10. Lagerstatus opdateret. \\
     \hline
     \textbf{Alternative flows} & 0.1 Udgåede eller ødelagte varer skal afskrives & \\
     \hline
@@ -39,11 +39,7 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     & 4.1 Aktøren vil gerne modificere planen, retter det i plan-fanen og gemmer planen & \\
     \hline
-    & & 5.1 Der er ikke mere plads på harddisken. \\
-    \hline
-    & 5.2 Aktøren sletter unødvendige filer for at gøre plads til planen. & 5.3 Gentag trin 5.\\
-    \hline
-    & & 9.1 Planen er tom. Der kan ikke oprettes en bestilling. Slut på flow. \\
+    & & 8.1 Planen er tom. Der kan ikke oprettes en bestilling. Giver en fejlbesked. \\
     \hline
 \end{longtable}
 
