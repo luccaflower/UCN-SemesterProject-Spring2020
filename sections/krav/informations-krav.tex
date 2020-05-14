@@ -32,12 +32,20 @@ Dernæst skal associationerne laves ud fra om der er tale om 1-til-1, 1-til-mang
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/krav/relation_model_0th_normalization.png}
-    \caption{Relationsmodel før normalisering}
+    \caption{Relationsmodel 0th normalisering}
     \label{fig:relational_model_0}
 \end{figure}
 
 Reglerne for de forskellige relationer og hvordan de skal forbindes er fulgt under udviklingen af den relationelle model, hvilket bl.a. kan ses på 'product_supplier' tabellen. Denne forbinder en mange-til-mange association mellem Product og Supplier. 
 Nu hvor tabellen er lavet, kan den nu normaliseres.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/krav/relation_model_1th_normalization.png}
+    \caption{Relationsmodel 1th normalisering}
+    \label{fig:relational_model_1}
+\end{figure}
+
 Efter at have kigget tabellen igennem kan det ses at 1NF allerede er opfyldt, da samtlige værdier er atomiske.
 For at opfylde 2NF skal 1NF være opfyldt, og der skal ikke være nogle partial dependencies. Da der skal bruges en Map mellem product og seasonal_plan laves der en ny tabel: seasonal_plan_product_map. Denne vil også indeholde 'amount'.
 
