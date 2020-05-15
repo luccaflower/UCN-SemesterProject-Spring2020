@@ -7,7 +7,16 @@
     \includegraphics[width=\textwidth]{figures/analyse/SSD.png}
     \caption{Systemsekvensdiagram}
     \label{fig:ssd}
-\end{figure}
+\end{figure} 
+
+\section{test til SSD}
+
+SSD-diagrammet adresserer, hvordan brugeren og systemet kommunikerer frem og tilbage. Dette SSD-diagram er lavet ud fra Fully Dressed Use Case, automatisk lagerstyring.
+
+ Her ses det, at depotchef Niels Thomas er såfremt den eneste, som benytter systemet. Som det første åbner Niels Thomas den nuværede plan for lageret, hvorefter vil systemet give den nuværende lager plan. 
+
+Når åbnet, kan Niels Thomas generere en ny lager plan (generateNewStoragePlan(name)), samt navengive planen. Denne funktion generer en plan, basseret på salgsdata, produktets popularitet og kommende produkter. Når planen er genereret, vil den blive ved med at oprette storageOrders, baseret på den oprettede plan. 
+Hvis planen såfremt har brug for ændring, skal du oprette en ny plan, åben den og herefter anvende dine brugerdefinerede ændringer. Et eksempel kunne være, du ville have 20 isbåde istedet for 10, herefter gemmer du planen og storageOrders er oprettet automatisk på ubestemt tid. 
 
 
 \section{Operationskontrakt}
@@ -59,14 +68,5 @@
 
 
 
-
-
-
-SSD-diagrammet adresserer, hvordan brugeren og systemet kommunikerer frem og tilbage. Dette SSD-diagram er lavet ud fra Fully Dressed Use Case, automatisk lagerstyring.
-
- Her ses det, at depotchef Niels Thomas er såfremt den eneste, som benytter systemet. Som det første åbner Niels Thomas den nuværede plan for lageret, hvorefter vil systemet give den nuværende lager plan. 
-
-Når åbnet, kan Niels Thomas generere en ny lager plan (generateNewStoragePlan(name)), samt navengive planen. Denne funktion generer en plan, basseret på salgsdata, produktets popularitet og kommende produkter. Når planen er genereret, vil den blive ved med at oprette storageOrders, baseret på den oprettede plan. 
-Hvis planen såfremt har brug for ændring, skal du oprette en ny plan, åben den og herefter anvende dine brugerdefinerede ændringer. Et eksempel kunne være, du ville have 20 isbåde istedet for 10, herefter gemmer du planen og storageOrders er oprettet automatisk på ubestemt tid. 
 
 
