@@ -4,10 +4,10 @@
 \todo{write stuff about SSD}
 \begin{figure}
     \centering
-    \includegraphics[width=50mm,scale=0.5]{figures/analyse/SSD.png}
+    \includegraphics[width=50mm]{figures/analyse/SSD.png}
     \caption{Systemsekvensdiagram}
     \label{fig:ssd}
-\end{figure} 
+\end{figure}
 
 \section{test til SSD}
 
@@ -76,7 +76,9 @@ Hvis planen såfremt har brug for ændring, skal du oprette en ny plan, åben de
                 Use Case: Modtag Varer \\
                 Præ-betingelser: Produkterne bestilt fra en storageOrder er ankommet til depotet. \\
                 Post-betingelser: \\
-                -
+                - sOrder.sentDate er blevet sat til sentDate \\
+                - sOrder.trackingId er blevet sat til trackingId \\
+                - productLine.amount er blevet opdateret
 
             }%
         }
