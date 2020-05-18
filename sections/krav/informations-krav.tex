@@ -4,12 +4,14 @@
 \subsection{Domænemodel}\label{Domainmodel}
 Domænemodellen beskriver de relationer klasserne har til hinanden, samt hvilke attributter de indeholder. Her laves domænemodellen ud fra Kandidatklasserne og arkitektur principper.
 
-\begin{figure}[H]
+\begin{landscape}
+\begin{figure}[p]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/krav/domain_model_1.png}
+    \includegraphics[width=0.9\hsize]{figures/krav/domain_model_1.png}
     \caption{Domænemodel 1}
     \label{fig:domain_model}
 \end{figure}
+\end{landscape}
 
 Domænemodellen som ses ovenfor viser hvordan klasserne er repræsenteret og hvilke relationer de har til hinanden. SeasonalPlan er planen, som beskriver hvordan lageret skal være hos Hjem-IS. Sæsonplanen for lagerbeholdningen bestemmes af hvilke produkter der er på lager, og hvor meget der bliver solgt. Ud fra dette kan der laves en bestilling (StorageOrder), som indeholder informationer om hvilke produkter der skal bestilles, hvilken Supplier de skal bestilles fra. Disse bestillingsplaner bestemmer sæsonplanen.
 For at kunne gennemføre Use Casen er det ikke nødvendigt endnu at tage højde for Sales og Users, da det kun er Products og Storage ændringer der er relevante. 
