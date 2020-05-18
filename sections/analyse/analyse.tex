@@ -1,7 +1,8 @@
 \chapter{Analyse}\label{sec:analyse}
 
 \section{Systemsekvensdiagram}
-\todo{write stuff about SSD}
+SSD-diagrammet adresserer, hvordan brugeren og systemet kommunikerer frem og tilbage. Dette SSD-diagram er lavet ud fra Fully Dressed Use Case, automatisk lagerstyring.
+
 \begin{figure}
     \centering
     \includegraphics[width=50mm]{figures/analyse/SSD.png}
@@ -9,18 +10,15 @@
     \label{fig:ssd}
 \end{figure}
 
-\section{test til SSD}
+Her ses det, at depotchef Niels Thomas er den eneste, som benytter systemet. Som det første åbner Niels Thomas den nuværede plan for lageret, hvorefter vil systemet give den nuværende lager plan. 
 
-SSD-diagrammet adresserer, hvordan brugeren og systemet kommunikerer frem og tilbage. Dette SSD-diagram er lavet ud fra Fully Dressed Use Case, automatisk lagerstyring.
-
- Her ses det, at depotchef Niels Thomas er såfremt den eneste, som benytter systemet. Som det første åbner Niels Thomas den nuværede plan for lageret, hvorefter vil systemet give den nuværende lager plan. 
-
-Når åbnet, kan Niels Thomas generere en ny lager plan (generateNewStoragePlan(name)), samt navengive planen. Denne funktion generer en plan, basseret på salgsdata, produktets popularitet og kommende produkter. Når planen er genereret, vil den blive ved med at oprette storageOrders, baseret på den oprettede plan. 
-Hvis planen såfremt har brug for ændring, skal du oprette en ny plan, åben den og herefter anvende dine brugerdefinerede ændringer. Et eksempel kunne være, du ville have 20 isbåde istedet for 10, herefter gemmer du planen og storageOrders er oprettet automatisk på ubestemt tid. 
+Når den er åbnet kan Niels Thomas generere en ny lager plan \verb|generateNewStoragePlan(name)|, samt navngive planen. Denne funktion generer en plan, baseret på salgsdata, produkters popularitet og kommende udsalg. Når planen er genereret, vil den blive ved med at oprette storageOrders, baseret på den oprettede plan. 
+Såfremt planen har brug for ændring, skal der genereres en ny plan. Det er muligt at åbne den og foretage ændringer i planen. Et eksempel kunne være, at man ville have 20 isbåde istedet for 10. Herefter gemmes planen og storageOrders oprettes automatisk på ubestemt tid. 
 
 
 \section{Operationskontrakt}
 \todo{write stuff about operationskontrakt}
+Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en operationskontrakt. Operationskontrakten beskriver i flere detaljer hvad der sker af ændringer i programmet under hvert trin i use casen. Noget som ikke fremkommer tydeligt under disse trin er, at så snart en PeriodicPlan er oprettet, vil denne oprette en StorageOrder som er en varebestilling.
 %remember to talk about the autogeneration continuation process thing algorithm stuff :) 
 
 \begin{center}
@@ -79,7 +77,6 @@ Hvis planen såfremt har brug for ændring, skal du oprette en ny plan, åben de
                 - sOrder.sentDate er blevet sat til sentDate \\
                 - sOrder.trackingId er blevet sat til trackingId \\
                 - productLine.amount er blevet opdateret
-
             }%
         }
         
