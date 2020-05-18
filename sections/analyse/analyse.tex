@@ -3,9 +3,9 @@
 \section{Systemsekvensdiagram}
 SSD-diagrammet adresserer, hvordan brugeren og systemet kommunikerer frem og tilbage. Dette SSD-diagram er lavet ud fra Fully Dressed Use Case, automatisk lagerstyring.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=50mm]{figures/analyse/SSD.png}
+    \includegraphics[width=60mm]{figures/analyse/SSD.png}
     \caption{Systemsekvensdiagram}
     \label{fig:ssd}
 \end{figure}
@@ -14,12 +14,11 @@ Her ses det, at depotchef Niels Thomas er den eneste, som benytter systemet. Som
 
 Når den er åbnet kan Niels Thomas generere en ny lager plan \verb|generateNewStoragePlan(name)|, samt navngive planen. Denne funktion generer en plan, baseret på salgsdata, produkters popularitet og kommende udsalg. Når planen er genereret, vil den blive ved med at oprette storageOrders, baseret på den oprettede plan. 
 Såfremt planen har brug for ændring, skal der genereres en ny plan. Det er muligt at åbne den og foretage ændringer i planen. Et eksempel kunne være, at man ville have 20 isbåde istedet for 10. Herefter gemmes planen og storageOrders oprettes automatisk på ubestemt tid. 
+Så snart de varer bestilt med en StorageOrder er ankommet til varehuset, opdateres lageret ud fra hvilke produkter der blev bestilt.
 
- 
 \section{Operationskontrakt}
 \todo{write stuff about operationskontrakt}
-Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en operationskontrakt. Operationskontrakten beskriver i flere detaljer hvad der sker af ændringer i programmet under hvert trin i use casen. Noget som ikke fremkommer tydeligt under disse trin er, at så snart en PeriodicPlan er oprettet, vil denne oprette en StorageOrder som er en varebestilling.
-%remember to talk about the autogeneration continuation process thing algorithm stuff :) 
+Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en operationskontrakt. Operationskontrakten beskriver i flere detaljer hvad der sker af ændringer i programmet under hvert trin i use casen. Noget som ikke fremkommer tydeligt under disse trin er, at så snart en StoragePlan er genereret vil denne indeholde en masse PeriodicPlans. Disse PeriodicPlan er tænkt som værende f.eks. en ugeplan, og der vil derfor være mange PeriodicPlans i en StoragePlan. Når de er oprettet, vil PeriodicPlan oprette en StorageOrder, som er en varebestilling. Såfremt perioden er for en uge, vil der hver uge tages en ny PeriodicPlan som opretter en ny StorageOrder. Dette fortsætter indtil der ikke er flere PeriodicPlans eller starter forfra ved at generere en ny StoragePlan.
 
 \begin{center}
     \begin{longtable}{ |p{360pt}| }
@@ -32,7 +31,7 @@ Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en operationsk
                 
             }%
         }
-
+        \\
         \noindent\fbox{%
             \parbox{4.88in}{%
                 \textbf{Operation:} generateNewStoragePlan(name) \\ 
@@ -50,14 +49,14 @@ Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en operationsk
                 - sOrder blev associeret med supplier og productLine 
             }%
         }
-
+        \\
         \noindent\fbox{%
             \parbox{4.88in}{%
                 \textbf{Operation:} openPlan() \\
                 Den generede plan åbnes i planfanen i programmet
             }%
         }
-        
+        \\
         \noindent\fbox{%
             \parbox{4.88in}{%
                 \textbf{Operation:} savePlan(periodicPlan) \\
@@ -67,7 +66,7 @@ Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en operationsk
                 - De nye periodicPlan instanser gemmes i periodicPlans
             }%
         }
-
+        \\
         \noindent\fbox{%
             \parbox{4.88in}{%
                 \textbf{Operation:} updateStock(storageOrder)
@@ -79,11 +78,12 @@ Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en operationsk
                 - productLine.amount er blevet opdateret
             }%
         }
-        
+        \\
+        \hline
     \end{longtable}
 \end{center}
 
-
+Ud fra operationskontrakten og SSD kan der nu laves interaktionsdiagrammer og herefter designklassediagrammet, som vil være sidste blik for detaljer i design af systemet før det kan kodes.
 
 
 
