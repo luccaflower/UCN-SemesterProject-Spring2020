@@ -185,11 +185,21 @@
 
 \usepackage{pdflscape, float}
 
+\usepackage[toc,title,header]{appendix}
+\renewcommand{\appendixtocname}{Bilag}
+\renewcommand{\appendixname}{Bilag}
+
 \usepackage{titlesec}
+
+\makeatletter
+\newcommand{\setappendix}{Bilag~\thechapter:~}
+
 \titleformat{\chapter}%command
   [display]%shape
   {\normalfont\bfseries}%format
-  {}%label
+  {\ifnum\pdfstrcmp{\@currenvir}{appendices}=0
+    \setappendix
+  \fi}%label
   {0pt}%before-code
   {\Huge}%after-code
-  \titlespacing*{\chapter}{0pt}{0pt}{10pt}
+\titlespacing*{\chapter}{0pt}{0pt}{10pt}
