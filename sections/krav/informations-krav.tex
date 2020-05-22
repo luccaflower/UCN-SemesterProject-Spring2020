@@ -16,6 +16,7 @@ Domænemodellen beskriver de relationer klasserne har til hinanden, samt hvilke 
 Domænemodellen som ses ovenfor viser hvordan klasserne er repræsenteret og hvilke relationer de har til hinanden. SeasonalPlan er planen, som beskriver hvordan lageret skal være hos Hjem-IS. Sæsonplanen for lagerbeholdningen bestemmes af hvilke produkter der er på lager, og hvor meget der bliver solgt. Ud fra dette kan der laves en bestilling (StorageOrder), som indeholder informationer om hvilke produkter der skal bestilles, hvilken Supplier de skal bestilles fra. Disse bestillingsplaner bestemmer sæsonplanen.
 For at kunne gennemføre Use Casen er det ikke nødvendigt endnu at tage højde for Sales og Users, da det kun er Products og Storage ændringer der er relevante. 
 
+\todo{Aggregation StoragePlan <- PeriodicPlan is in the wrong direction}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/krav/domain_model_2.png}
