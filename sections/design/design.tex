@@ -22,9 +22,8 @@ Designklassediagrammet er det tætteste vi kommer på en præcis repræsentation
         \centering
         \includegraphics[width=0.6\hsize]{figures/design/designclassdiagram.png}
         \caption{Designklassediagram}
-        \label{fig:designklassediagram}
+        \label{fig:new_designclassdiagram}
     \end{figure}
 \end{landscape}
-\todo{update version of DCD}
 \todo{write more stuff about architecture and "smart" ideas}
-
+Som det kan ses er der brugt en afslappet lagdelt arkitektur, hvori der indgår et UI lag, et controller lag, et model-og-database lag\cite{Larman2004}. UI laget er brugergrænsefladen og tillader brugeren at interagere med programmet. Controller laget håndterer informationsændringer mv. og er de centrale komponenter til at udføre en Use Case. Model-og-database laget indeholder de klasser, der fremgik i domænemodellen \ref{fig:domain_model_2}, deres attributter og metoder - hvor i database laget sørges for persistens og organisering af data.
