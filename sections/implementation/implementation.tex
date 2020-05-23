@@ -1,20 +1,21 @@
 \chapter{Implementation}\label{ch:implementation}
-\todo{insert code snips, especially the stuff relevant to the database, our architecture, and of course our regression algorithm.}
+I dette afsnit vil der blive vist, hvordan løsningen er blevet implementeret. Koden er skrevet ud fra designklassediagrammet \ref{fig:new_designclassdiagram}, og benytter sig af de designmønstre som er vist i designklassediagrammet. Koden er skrevet i Java. 
+De vigtigste metoder og designmønstre vil blive demonstreret, herunder parallelitet, singleton mønstret, database queries, og relevante algoritmer.
 
-\section{Regression}
-Som nævnt er der i koden brugt regression til at kunne forudsige, hvor mange af hvert produkt, der bliver solgt i fremtiden, så den optimale bestillingsmængde kan beregnes. 
-\todo{write about regression}
+\todo{insert code snips, especially the stuff relevant to the database, our architecture, parallelity, and of course our regression algorithm.}
 
 
-Til dette bruges en formel for at finde den optimale bestillingsmængde ud fra de data som er tilgængelige. Formlen er bedre kendt som Economic Order Quantity (EOQ) model \cite{EOQ}.
 
-\begin{landscape}
-    \begin{figure}[p]
-        \centering
-        \includegraphics[width=\hsize]{figures/implementation/eoq.png}
-        \caption{EOQ formlen - Beregning af den optimale bestillingsmængde}
-        \label{fig:eoq}
-    \end{figure}
-\end{landscape}
+En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvornår det betaler sig bedst, er ved at bruge en formel, bedre kendt som Economic Order Quantity (EOQ) Model \cite{EOQ}. Denne formel beregner bestillingsmængden ud fra efterspørgsel, pris per hjembestilling, kostpris per enhed og gennemsnitlig inventaromkostninger. Denne formel tager dog ikke højde for parametre såsom årstid, temperatur på dagen, antal solgt per dag, osv. For at kunne finde den optimale bestillingsmængde løbende, med et ønske om at altid have nok af alle varer på lager, kan parametre måned, temperatur, og daglige salg, bruges med regression. Regression er en teknik, hvorved man kan bestemme det statistiske forhold mellem to eller flere variabler, hvor ændringer i en dependent-variabel er associeret med, og afhænger af, én eller flere uafhængige variabler. Det bliver i dette projekt brugt til at forudsige f.eks. hvor mange Isbåde\cite{Isbåd} der skal bestilles over de næste uger, eller perioder. Når bestillingsmængden over tid når op til EOQ bestillingsmængden ville bestillingen af varen foretages.
 
-Denne formel er så brugt til at beregne samtlige individuelle produkters optimale bestillingsmængde, som så laves til \verb|ProductLine| objekter, som lægges i \verb|PeriodicPlan| så der kan oprettes \verb|StorageOrder|s. 
+%Shouldn't put in a figure of a formula we aren't using.
+%\begin{landscape}
+%    \begin{figure}[p]
+%        \centering
+%        \includegraphics[width=\hsize]{figures/implementation/eoq.png}
+%        \caption{EOQ formlen - Beregning af den optimale bestillingsmængde}
+%        \label{fig:eoq}
+%    \end{figure}
+%\end{landscape}
+
+I koden kan der så laves \verb|ProductLine| objekter, som lægges i \verb|PeriodicPlan| så der kan oprettes \verb|StorageOrder|s med de optimale bestillingsmængder. 
