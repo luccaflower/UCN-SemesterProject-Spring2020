@@ -4,3 +4,8 @@ Nu hvor koden er designet implementationen er forklaret, kan tests af koden påb
 White-box testing er at teste selve programmet. Altså, at alle delene af programmet er blevet udført. Det gode ved White-box testing er, at det både er en god systematisk metode til at opdage fejl, samt også en hurtig og effektiv metode. Måden det foregår på, er at for hver eneste data input set der bruges, skal der også være et forventet output specifiseret. Herefter vil programmet køre med alle data input set og de givende outputs bliver sammenlignet med de forventede\cite{sestoft2008systematic}.
 
 Black-Box skal sørge for at programmet skal løse det problem, den er sat til at løse. Derfor vil det være en god ide, hvis testeren på forehånd har en ide om hvad et muligt problem kunne være, for at kunne få programmet til at løse det\cite{sestoft2008systematic}. 
+
+\section{Test cases}
+For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Først vil disse tests blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen.
+\todo{Do we actually use JUnit 4?????}
+Der er brugt JUnit 4 \cite{JUnit} til at udføre automatiserede tests. Der er brugt en test-klasse til hvert scenarie, og en metode til hver case. For at sikre, at forudsætningerne for hver test er de samme, gøres der brug af setup-og tearDown-metoder. Testmetoderne i JUnit er annoteret med \verb|Test|. I hver test bruges JUnit’s assert-metoder som viser hvorvidt hver test bestod. Setup og tearDown er annoteret med \verb|BeforeEach| og \verb|AfterEach|, hvilket betyder, at JUnit eksekverer dem henholdsvis før og efter hver test\cite{MiniprojektTest}.
