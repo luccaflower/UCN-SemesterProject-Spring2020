@@ -1,9 +1,13 @@
 \chapter{Tests}\label{ch:tests}
-Nu hvor koden er desginet og implementeret, kan tests af koden påbegyndes. Test er en del af Unified process modellen, hvori den fremgår både under Inception og Elaboration fasen (det gælder også construction og Transistion, men det ikke relevant for dette project). Test er en nødvendig del af Unified process, ikke fordi det program der bliver lavet ikke må have nogle fejl, men fordi det kan give et godt overblik over hvad der kan forbedres\cite{sestoft2008systematic}. Herunder kan det ses, at White-Box testing, samt Black-box testing benyttes. 
+Nu hvor koden er desginet og implementeret, kan tests af koden påbegyndes. Test er en del af Unified process modellen, hvori den fremgår både under Inception og Elaboration fasen (det gælder også construction og Transistion, men det ikke relevant for dette project). Test er en nødvendig del af Unified process, ikke fordi det program der bliver lavet ikke må have nogle fejl, men fordi det kan give et godt overblik over hvad der kan forbedres\cite{sestoft2008systematic}. Der er brugt JUnit 5 til at teste de forskellige metoder. Herunder kan det ganske vidst ses, at White-Box testing, samt Black-box testing benyttes. 
 
- White-box testing er at teste selve programmet. Altså, at alle delene af programmet er blevet udført. Det gode ved White-box testing er, at det både er en god systematisk metode til at opdage fejl, samt også en hurtig og effektiv metode. Måden det foregår på, er at for hver eneste data input set der bruges, skal der også være et forventet output specifiseret. Herefter vil programmet køre med alle data input set og de givende outputs bliver sammenlignet med de forventede\cite{sestoft2008systematic}.
+White-box testing er at teste selve programmet. Altså, at alle delene af programmet er blevet udført. Det gode ved White-box testing er, at det både er en god systematisk metode til at opdage fejl, samt også en hurtig og effektiv metode. Måden det foregår på, er at for hver eneste data input set der bruges, skal der også være et forventet output specifiseret. Herefter vil programmet køre med alle data input set og de givende outputs bliver sammenlignet med de forventede\cite{sestoft2008systematic}.
 
-Black 
+Black-Box skal sørge for at programmet skal love det problem den er sat til at gøre. Derfor vil det være en god ide, hvis testeren på forehånd har en ide om hvilke problemer det er, for at kunne få programmet til at løse det\cite{sestoft2008systematic}. 
+
+\section{Test cases}
+For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen.
+Der er brugt JUnit 5 \cite{JUnit} til at udføre automatiserede tests. Der er brugt en test-klasse til hvert scenarie, og en metode til hver case. For at sikre, at forudsætningerne for hver test er de samme, gøres der brug af setup-og tearDown-metoder. Testmetoderne i JUnit er annoteret med \verb|Test|. I hver test bruges JUnit’s assert-metoder som viser hvorvidt hver test bestod. Setup og tearDown er annoteret med \verb|BeforeEach| og \verb|AfterEach|, hvilket betyder, at JUnit eksekverer dem henholdsvis før og efter hver test\cite{MiniprojektTest}.
 
 \todo{something about setup-act-assert testing pattern and unit testing}
 
@@ -92,4 +96,3 @@ public void testMethod() {
 \end{figure}
 
 \texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
-
