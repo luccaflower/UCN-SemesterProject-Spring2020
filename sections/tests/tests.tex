@@ -4,3 +4,92 @@ Nu hvor koden er desginet og implementeret, kan tests af koden påbegyndes. Test
  White-box testing er at teste selve programmet. Altså, at alle delene af programmet er blevet udført. Det gode ved White-box testing er, at det både er en god systematisk metode til at opdage fejl, samt også en hurtig og effektiv metode. Måden det foregår på, er at for hver eneste data input set der bruges, skal der også være et forventet output specifiseret. Herefter vil programmet køre med alle data input set og de givende outputs bliver sammenlignet med de forventede\cite{sestoft2008systematic}.
 
 Black 
+
+\todo{something about setup-act-assert testing pattern and unit testing}
+
+\section{Implementering af tests}
+Vi gør brug af følgende biblioteker til at køre vores tests:
+\begin{itemize}
+    \item JUnit 5.4
+    \item Mockito 3.3.3
+\end{itemize}
+
+\subsection{JUnit}
+JUnit er et Java testing framework, der bruges til at definere test-klasser med tilhørende test-metoder. Disse test-metoder instantierer og kalder metoder i en klasse i programmet, kaldet SUT eller "System Under Test". En test-klasse, der gør brug af JUnit, vil typisk følge en struktur lignende eksemplet i Figur~\ref{fig:JUnitEksempel}
+
+I dette eksempel bliver følgende annotationer brugt: 
+\begin{description}
+    \item[\texttt{@BeforeAll}:] Denne metode bliver kaldt før alt andet i klassen.
+    \item[\texttt{@BeforeEach}:] Denne metode bliver kaldt før hver enkelt test.
+    \item[\texttt{@Test}:] Test-metode.
+    \item[\texttt{@AfterEach}:] Bliver kaldt efter hver test.
+    \item[\texttt{@AfterAll}:] Bliver kaldt til allersidst.      
+\end{description}
+
+Vi gør brug af JUnit 5.4 grundet kompabilitet med mocking-biblioteket Mockito.
+
+\begin{figure}
+    \begin{lstlisting}[language=Java]
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+
+public class TestClass {
+    
+    @BeforeAll
+    public static void setupAll() {
+    }
+
+    @BeforeEach
+    public void setupEach() {
+    }
+    
+    @Test
+    public void testMethod() {
+    }
+
+    @AfterEach
+    public void tearDownEach() {
+    }
+
+    @AfterAll
+    public static void tearDownAll() {
+    }
+}
+    \end{lstlisting}
+    \caption{Exempel på en JUnit test-klasse\label{fig:JUnitEksempel}}
+\end{figure}
+
+\subsection{Mockito}
+Mockito er et mocking-bibliotek, der bruges i samspil med JUnit. Det tillader os at "mocke", det vil sige, lave stedfortræder-klasser i vores tests. Det har det formål, at vi kan isolere vores SUT fra dets dependencies, så vi kan udføre unit-tests på de metoder, der gør brug af disse dependencies. Dette er specielt brugbart når vi tester vores controller-klasser.
+
+I Figur~\ref{fig:MockEkempel} ses det hvordan mocks bliver defineret som felter i en test-klasse. \texttt{@Mock}-annotationen signalerer, at det er en stedfortræder-klasse. \texttt{@InjectMocks} signalerer, at stedfortræderne skal indsættes i denne klasse.
+
+I Figur~\ref{fig:MockTestEksempel} ses et eksempel på en test-metode, der gør brug af mocks. Nøgleordene \texttt{when} og \texttt{verify} er statiske metoder i Mockito-biblioteket. I eksemplet bruges \texttt{when} sådan, at når \texttt{myMethod} is \texttt{MyClass1} bliver kaldt, så skal den returnere '1' \textit{i stedet for} at kalde den reelle metode. 
+
+\begin{figure}
+    \begin{lstlisting}[language=Java]
+@Mock private MyClass1 myMockedClass1;
+@Mock private MyClass2 myMockedClass2;
+@InjectMocks private ClassUnderTest classUnderTest;
+    \end{lstlisting}
+    \caption{Eksempel på brug af mocks \label{fig:MockEkempel}}
+\end{figure}
+
+\begin{figure}
+    \begin{lstlisting}[language=Java]
+@Test
+public void testMethod() {
+        when(myMockedClass1.myMethod()).thenReturn(1);
+        classUnderTest.methodUnderTest();
+        verify(myMockedClass1, times(1)).myMethod();
+        verify(myMockedClass2, never()).otherMethod();
+}
+    \end{lstlisting}
+    \caption{Eksempel på brug af mocks i en test-metode\label{fig:MockTestEksempel}}
+\end{figure}
+
+\texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
+
