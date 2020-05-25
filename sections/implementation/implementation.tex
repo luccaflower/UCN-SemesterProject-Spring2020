@@ -74,8 +74,8 @@ public void fetchAllTheImages(int index) {
     \caption{Eksempel på ingen brug af parallelitet\label{lst:goodParralelExample}}
 \end{listing}
 
-Et godt brug at parallelitet i koden til dette projekt kan findes i metoden \texttt{save} i klassen \texttt{PeriodicPlanController}~\ref{lst:ourParralelExample}, her er alle 3 \texttt{store.update} samt \texttt{store.delete} utrolig langsomme IO operationer, så denne metode gør som~\ref{lst:goodParralelExample}, sætter op nogle threads, starter dem, og til sidsts venter på dem til at være færdige
-
+Et godt brug at parallelitet i koden til dette projekt kan findes i metoden \texttt{save} i klassen \texttt{PeriodicPlanController}~\ref{lst:ourParralelExample}, her er alle 3 \texttt{store.update} samt \texttt{store.delete} utrolig langsomme IO operationer, så denne metode gør som~\ref{lst:goodParralelExample}, sætter op nogle threads, starter dem, og til sidsts venter på dem til at være færdige.     
+ 
 \begin{listing}
     \begin{minted}
     [
