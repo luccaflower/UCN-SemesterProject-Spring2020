@@ -1,15 +1,20 @@
 \chapter{Tests}\label{ch:tests}
 Nu hvor koden er desginet og implementeret, kan tests af koden påbegyndes. Test er en del af Unified process modellen, hvori den fremgår både under Inception og Elaboration fasen (det gælder også construction og Transistion, men det ikke relevant for dette project). Test er en nødvendig del af Unified process, ikke fordi det program der bliver lavet ikke må have nogle fejl, men fordi det kan give et godt overblik over hvad der kan forbedres\cite{sestoft2008systematic}. Der er brugt JUnit 5 til at teste de forskellige metoder. Herunder kan det ganske vidst ses, at White-Box testing, samt Black-box testing benyttes. 
 
+\section{Fremgangsmåde}
 White-box testing er at teste selve programmet. Altså, at alle delene af programmet er blevet udført. Det gode ved White-box testing er, at det både er en god systematisk metode til at opdage fejl, samt også en hurtig og effektiv metode. Måden det foregår på, er at for hver eneste data input set der bruges, skal der også være et forventet output specifiseret. Herefter vil programmet køre med alle data input set og de givende outputs bliver sammenlignet med de forventede\cite{sestoft2008systematic}.
 
 Black-Box skal sørge for at programmet skal løse det problem den er sat til at løse. Derfor vil det være en god ide, hvis testeren på forehånd har en ide om hvilke problemer det er, for at kunne få programmet til at løse det\cite{sestoft2008systematic}. 
 
-\section{Test cases}
-For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen.
-Der er brugt JUnit 5 \cite{JUnit} til at udføre automatiserede tests. Der er brugt en test-klasse til hvert scenarie, og en metode til hver case. For at sikre, at forudsætningerne for hver test er de samme, gøres der brug af setup-og tearDown-metoder. Testmetoderne i JUnit er annoteret med \verb|Test|. I hver test bruges JUnit’s assert-metoder som viser hvorvidt hver test bestod. Setup og tearDown er annoteret med \verb|BeforeEach| og \verb|AfterEach|, hvilket betyder, at JUnit eksekverer dem henholdsvis før og efter hver test\cite{MiniprojektTest}.
+Vores tests bliver primært unit-tests, der er implementeret efter AAA-mønstret (Arrange, Act, Assert), hvor tests bliver eksekveret i tre skridt\cite{ArrangeActAssert}:
+\begin{description}
+    \item[Arrange:] præ-konditioner for testen sættes op.
+    \item[Act:] metoder, der testes på, bliver eksekveret
+    \item[Assert:] forventede udfald bliver sammenlignet med faktiske udfald 
+\end{description}
 
-\todo{something about arrange-act-assert testing pattern and unit testing}
+\section{Test cases}
+For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test case-skema kan findes i Bilag~\ref{}.
 
 \section{Implementering af tests}
 Vi gør brug af følgende biblioteker til at køre vores tests:
@@ -19,9 +24,9 @@ Vi gør brug af følgende biblioteker til at køre vores tests:
 \end{itemize}
 
 \subsection{JUnit}
-JUnit er et Java testing framework, der bruges til at definere test-klasser med tilhørende test-metoder. Disse test-metoder instantierer og kalder metoder i en klasse i programmet, kaldet SUT eller "System Under Test". En test-klasse, der gør brug af JUnit, vil typisk følge en struktur lignende eksemplet i Figur~\ref{fig:JUnitEksempel}
+JUnit er et Java testing framework, der bruges til at definere test-klasser med tilhørende test-metoder. Disse test-metoder instantierer og kalder metoder i en klasse i programmet, kaldet SUT eller "System Under Test". En test-klasse, der gør brug af JUnit, vil typisk følge en struktur lignende eksemplet i Listing~\ref{lst:JUnitEksempel}
 
-I dette eksempel bliver følgende annotationer brugt: 
+I dette eksempel bliver følgende annotationer brugt\cite{JUnitDocumentation}: 
 \begin{description}
     \item[\texttt{@BeforeAll}:] Denne metode bliver kaldt før alt andet i klassen.
     \item[\texttt{@BeforeEach}:] Denne metode bliver kaldt før hver enkelt test.
@@ -30,60 +35,56 @@ I dette eksempel bliver følgende annotationer brugt:
     \item[\texttt{@AfterAll}:] Bliver kaldt til allersidst.      
 \end{description}
 
+Yderligere gøres der brug af JUnit's assert-metoder. En assert-metode definerer et forventet udfald af en test. Der findes adskillige assert-metoder i JUnit, der definerer forskellige former for forventede udfald, herunder \texttt{assertEquals}, \texttt{assertTrue}/\texttt{assertFalse}, og \texttt{assertArrayEquals} som sammenligner variabler med deres forventede værdier. Yderligere findes \texttt{assertNull}/\texttt{assertNotNull}, som tester om en givet reference er null. Til sidst findes \texttt{assertAll} og \texttt{assertThrows}, som bruges til at teste, at givne funktionskald henholdsvis eksekverer uden fejl og kaster en undtagelse\cite{JUnitDocumentation}.
+
 Vi gør brug af JUnit 5.4 grundet kompabilitet med mocking-biblioteket Mockito.
 
-\begin{figure}
-    \begin{lstlisting}[language=Java]
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-
-public class TestClass {
-    
-    @BeforeAll
-    public static void setupAll() {
-    }
-
-    @BeforeEach
-    public void setupEach() {
-    }
-    
-    @Test
-    public void testMethod() {
-    }
-
-    @AfterEach
-    public void tearDownEach() {
-    }
-
-    @AfterAll
-    public static void tearDownAll() {
-    }
-}
-    \end{lstlisting}
-    \caption{Exempel på en JUnit test-klasse\label{fig:JUnitEksempel}}
-\end{figure}
+\begin{listing}
+    \inputminted[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}{listings/junitExample.java}
+    \caption{Exempel på en JUnit test-klasse\label{lst:JUnitEksempel}}
+\end{listing}
 
 \subsection{Mockito}
 Mockito er et mocking-bibliotek, der bruges i samspil med JUnit. Det tillader os at "mocke", det vil sige, lave stedfortræder-klasser i vores tests. Det har det formål, at vi kan isolere vores SUT fra dets dependencies, så vi kan udføre unit-tests på de metoder, der gør brug af disse dependencies. Dette er specielt brugbart når vi tester vores controller-klasser.
 
-I Figur~\ref{fig:MockEkempel} ses det hvordan mocks bliver defineret som felter i en test-klasse. \texttt{@Mock}-annotationen signalerer, at det er en stedfortræder-klasse. \texttt{@InjectMocks} signalerer, at stedfortræderne skal indsættes i denne klasse.
+I Listing~\ref{lst:MockEkempel} ses det hvordan mocks bliver defineret som felter i en test-klasse. \texttt{@Mock}-annotationen signalerer, at det er en stedfortræder-klasse. \texttt{@InjectMocks} signalerer, at stedfortræderne skal indsættes i denne klasse.
 
-I Figur~\ref{fig:MockTestEksempel} ses et eksempel på en test-metode, der gør brug af mocks. Nøgleordene \texttt{when} og \texttt{verify} er statiske metoder i Mockito-biblioteket. I eksemplet bruges \texttt{when} sådan, at når \texttt{myMethod} is \texttt{MyClass1} bliver kaldt, så skal den returnere '1' \textit{i stedet for} at kalde den reelle metode. 
+I Listing~\ref{lst:MockTestEksempel} ses et eksempel på en test-metode, der gør brug af mocks. Nøgleordene \texttt{when} og \texttt{verify} er statiske metoder i Mockito-biblioteket. I eksemplet bruges \texttt{when} sådan, at når \texttt{myMethod} is \texttt{MyClass1} bliver kaldt, så skal den returnere '1' \textit{i stedet for} at kalde den reelle metode. 
 
-\begin{figure}
-    \begin{lstlisting}[language=Java]
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}
 @Mock private MyClass1 myMockedClass1;
 @Mock private MyClass2 myMockedClass2;
 @InjectMocks private ClassUnderTest classUnderTest;
-    \end{lstlisting}
-    \caption{Eksempel på brug af mocks \label{fig:MockEkempel}}
-\end{figure}
+    \end{minted}
+    \caption{Eksempel på brug af mocks \label{lst:MockEkempel}}
+\end{listing}
 
-\begin{figure}
-    \begin{lstlisting}[language=Java]
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}
 @Test
 public void testMethod() {
         when(myMockedClass1.myMethod()).thenReturn(1);
@@ -91,8 +92,8 @@ public void testMethod() {
         verify(myMockedClass1, times(1)).myMethod();
         verify(myMockedClass2, never()).otherMethod();
 }
-    \end{lstlisting}
-    \caption{Eksempel på brug af mocks i en test-metode\label{fig:MockTestEksempel}}
-\end{figure}
+    \end{minted}
+    \caption{Eksempel på brug af mocks i en test-metode\label{lst:MockTestEksempel}}
+\end{listing}
 
 \texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
