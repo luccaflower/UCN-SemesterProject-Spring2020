@@ -21,3 +21,113 @@ En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvo
 %\end{landscape}
 
 I koden kan der så laves \verb|ProductLine| objekter, som lægges i \verb|PeriodicPlan| så der kan oprettes \verb|StorageOrder|s med de optimale bestillingsmængder. 
+
+\section{Parallelitet}\label{ch:parallelitet}
+Parallelitet er processen hvorved at dele af et program kan køres på samme tid, dele af programmer som køres parallelt kalles \texttt{Threads}, threads af en abstraction som bruges i high-level programmerings sprog, som fx java, threads er meget ofte ydeevne optimerende eftersom at moderne CPU meget ofte har flere kerner, hvilket resultere i at koden fra en thread ikke er afhængig af eksekveringen af koden fra en anden thread. Dette scenerie er det dog kun relevant hvis at der eksekveres en compotationssvær algoritme, dog er threads også utrolig ydeevne optimerende når det kommer til IO, eftersom at IO operationer er ofte utrolig langsomt relativt til læsning fra ram eller læsning fra CPU cache, et scenerie hvor at et program henter mange forskellige billeder fra internettet~\ref{lst:badParralelExample}, i dette eksempel er \texttt{fetchImage(n)} henter billedet med id n fra en remote server, dette er ikke smart eftersom at vores metode \texttt{fetchAllTheImages} først venter på den første \texttt{fetchImage} før den starter den næste. I dette eksempel her resultat af den første \texttt{fetchImage} ikke nogen effekt på den næste \texttt{fetchImage}, dette betyder at den her metode kunne blive paralleliseret~\ref{lst:goodParralelExample} og alle \texttt{fetchImage} metoder som bruger ~100\% at deres eksekveringenstid på at vente på et IO svar, kan køre på samme tid. I denne nye version har vi stadig det samme loop, der er dog nogle ændringer \texttt{finalI} er lavet eftersom at \texttt{i} kan ændre sig før at thread'en bliver kaldt, hvilket ville resulterer i \texttt{fetchImage} metoder der henter forkerte billeder, i stedet for at bare klade \texttt{fetchImage} metoden, så laver vi en thread der kalder den, og dernest starter threaden, og dernest lægger den i \texttt{threads} listen, og til sidst kalder vi \texttt{join} metoden på alle threads'ne for at sikre os at de er færdig føre at vi returnere
+
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}
+public void fetchAllTheImages(int index) {
+    for(int i = 0; i < index; i++) {
+        fetchImage(i + 1);
+    }
+}
+    \end{minted}
+    \caption{Eksempel på ingen brug af parallelitet\label{lst:badParralelExample}}
+\end{listing}
+
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}
+public void fetchAllTheImages(int index) {
+    List<Thread> threads = new ArrayList<>();
+    for(int i = 0; i < index; i++) {
+        final int finalI = i + 1;
+        Thread thread = new Thread(() -> fetchImage(finalI));
+        thread.start();
+        threads.add(threads);
+    }
+    for(Thread thread : threads){
+        try {
+            thread.join();
+        } catch (InterruptedException ignored) {
+
+        }
+    }
+}
+    \end{minted}
+    \caption{Eksempel på ingen brug af parallelitet\label{lst:goodParralelExample}}
+\end{listing}
+
+Et godt brug at parallelitet i koden til dette projekt kan findes i metoden \texttt{save} i klassen \texttt{PeriodicPlanController}~\ref{lst:ourParralelExample}, her er alle 3 \texttt{store.update} samt \texttt{store.delete} utrolig langsomme IO operationer, så denne metode gør som~\ref{lst:goodParralelExample}, sætter op nogle threads, starter dem, og til sidsts venter på dem til at være færdige
+
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}
+    public void save() {
+        Thread deleteThread = new Thread(() -> {
+            try {
+                store.delete(toDelete);
+            } catch (DataAccessException ignored) {
+
+            }
+        });
+        Thread update1Thread = new Thread(() -> {
+            try {
+                store.update(left, false);
+            } catch (DataAccessException ignored) {
+
+            }
+        });
+        Thread update2Thread = new Thread(() -> {
+            try {
+                store.update(current);
+            } catch (DataAccessException ignored) {
+
+            }
+        });
+        Thread update3Thread = new Thread(() -> {
+            try {
+                store.update(right, false);
+            } catch (DataAccessException ignored) {
+
+            }
+        });
+        deleteThread.start();
+        update1Thread.start();
+        update2Thread.start();
+        update3Thread.start();
+        try {
+            deleteThread.join();
+            update1Thread.join();
+            update2Thread.join();
+            update3Thread.join();
+        } catch (InterruptedException ignored) {
+
+        }
+    }}
+    \end{minted}
+    \caption{Eksempel på ingen brug af parallelitet\label{lst:ourParralelExample}}
+\end{listing}
