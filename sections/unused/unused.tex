@@ -1,0 +1,43 @@
+
+Understående ses use case Automatisk bogføring, som er valgt på baggrund af, at førhen skulle depotchefen sidde og kopiere salgsoplysningerne ned i excel manuelt. Så for at gøre arbejdsgangen nemmere, kan dette gøre automatisk, således at man ikke længere behøver at bruge udnødvendig tid, der kunne have været brugt på andet. 
+
+Nedenfor i fully dressed use casen kan det ses, at selve handlingerne ikke kræver meget tid, hvis det gjort automatisk. Det en relativ hurtig proces, der kun kræver 4-5 nemme steps. 
+Hvis tilfædeldet kommer, hvor tallene ikke stemmer overens, med de givende oplysninger, rettes fejlene og trin 1 gentages. 
+
+\begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }
+    \hline
+    \textbf{Use case navn} & Automatisk bogføring & \\
+    \hline
+    \textbf{Aktør} & Depotchefen & \\
+    \hline
+    \textbf{Præbetingelser} & ingen & \\
+    \hline
+    \textbf{Postbetingelser} & bogføring er automatisk færdiggjort i et excel ark & \\
+    \hline
+    \textbf{Frekvens} & 1 gang om dagen & \\
+    \hline
+    \textbf{Main Success Scenario} (Flow of events) & \textbf{Aktørhandling} & \textbf{Systemsvar} \\
+    \hline
+    & 1. Aktøren trykker på "Dashboard" & 2. Viser salgsstatistik \\
+    \hline
+    & 3. Klikker "Eksporter bogføring" & 4. Systemet exporter en Excel fil med bogføringsdata \\
+    \hline
+    & 5. Aktøren dobbelttjekker at tallene stemmer overens. & \\
+    \hline
+    \textbf{Alternative flows} & 5.1 Tallene stemmer ikke overens. & \\
+    \hline 
+    & 5.2 Ret fejl i registrering og opdater lagerstatus. & \\
+    \hline
+    & 5.3 Gentag trin 1. & \\
+    \hline
+\end{longtable}
+
+Efter en vurdering af begge centrale Use Cases, vælges Automatisk Lagerstyring som den endelige use case der fokuseres på. Dette skyldes at det ikke vil være muligt at kunne gennemføre begge use cases på et tilfredsstillende niveau.
+
+
+
+
+Use case automatisk Lagerstyring:
+
+\hline
+& 9. Efter nogle dage registreres de ankomne varer i systemet & 10. Lagerstatus opdateret. \\

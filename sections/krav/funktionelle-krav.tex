@@ -30,8 +30,6 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     & 7. Gemmer rettelser ved at klikke "Gem plan" & 8. Opretter bestillinger af varer ud fra bestillingsplanen. \\
     \hline
-    & 9. Efter nogle dage registreres de ankomne varer i systemet & 10. Lagerstatus opdateret. \\
-    \hline
     \textbf{Alternative flows} & 0.1 Udgåede eller ødelagte varer skal afskrives & \\
     \hline
     & 0.2 Afskrevne varer registreres i systemet. & 0.3 Lager status opdateret. \\
@@ -42,51 +40,15 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
 \end{longtable}
 
-
-Understående ses use case Automatisk bogføring, som er valgt på baggrund af, at førhen skulle depotchefen sidde og kopiere salgsoplysningerne ned i excel manuelt. Så for at gøre arbejdsgangen nemmere, kan dette gøre automatisk, således at man ikke længere behøver at bruge udnødvendig tid, der kunne have været brugt på andet. 
-
-Nedenfor i fully dressed use casen kan det ses, at selve handlingerne ikke kræver meget tid, hvis det gjort automatisk. Det en relativ hurtig proces, der kun kræver 4-5 nemme steps. 
-Hvis tilfædeldet kommer, hvor tallene ikke stemmer overens, med de givende oplysninger, rettes fejlene og trin 1 gentages. 
-
-\begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }
-    \hline
-    \textbf{Use case navn} & Automatisk bogføring & \\
-    \hline
-    \textbf{Aktør} & Depotchefen & \\
-    \hline
-    \textbf{Præbetingelser} & ingen & \\
-    \hline
-    \textbf{Postbetingelser} & bogføring er automatisk færdiggjort i et excel ark & \\
-    \hline
-    \textbf{Frekvens} & 1 gang om dagen & \\
-    \hline
-    \textbf{Main Success Scenario} (Flow of events) & \textbf{Aktørhandling} & \textbf{Systemsvar} \\
-    \hline
-    & 1. Aktøren trykker på "Dashboard" & 2. Viser salgsstatistik \\
-    \hline
-    & 3. Klikker "Eksporter bogføring" & 4. Systemet exporter en Excel fil med bogføringsdata \\
-    \hline
-    & 5. Aktøren dobbelttjekker at tallene stemmer overens. & \\
-    \hline
-    \textbf{Alternative flows} & 5.1 Tallene stemmer ikke overens. & \\
-    \hline 
-    & 5.2 Ret fejl i registrering og opdater lagerstatus. & \\
-    \hline
-    & 5.3 Gentag trin 1. & \\
-    \hline
-\end{longtable}
-
-Efter en vurdering af begge centrale Use Cases, vælges Automatisk Lagerstyring som den endelige use case der fokuseres på. Dette skyldes at det ikke vil være muligt at kunne gennemføre begge use cases på et tilfredsstillende niveau.
-
 \subsection{Kandidattabel}
-Nu hvor den centrale Use Cases er valgt, kan der nu laves Kandidatklasser. 
-Ved opgaven Automatisk lagerstyring skal \textbf{brugeren} kunne se lagerbeholdningen i \textbf{fryseren}. Ud fra \textbf{salgsstatistik} og tilbud kan den optimale mængde \textbf{varer} bestilles hjem. Det skal være muligt at generere en \textbf{lagerplan}, åbne den, og oprette en \textbf{bestilling} med den. Når de bestilte \textbf{varer} er ankommet skal de registreres i systemet.
+Nu hvor den centrale Use Case er valgt, kan der nu laves Kandidatklasser. 
+Ved opgaven Automatisk lagerstyring skal \textbf{brugeren} kunne se lagerbeholdningen i \textbf{fryseren}. Ud fra \textbf{salgsstatistik} og tilbud kan den optimale mængde \textbf{varer} bestilles hjem. Det skal være muligt at generere en \textbf{lagerplan}, åbne den, og oprette en eller flere \textbf{bestilling} med den.
 
 \begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }\label{fig:Kandidatklasser}
     %\hline %why the fuck doesn't this work?
     \textbf{Kandidat Til Klasse} & \textbf{Vurdering} & \textbf{Konklusion} \\
     \hline
-    Køler & Er en fysisk ting der køler is & OUT \\
+    Fryser & Er en fysisk ting der køler is & OUT \\
     \hline
     Sale & Indeholder salgsoplysninger fra et salg ude ved kunden & klasse \\
     \hline
