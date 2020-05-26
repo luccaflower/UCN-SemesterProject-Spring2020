@@ -3,16 +3,14 @@ Nu hvor der både er taget højde for de informationer og funktioner der skal v�
 
 \section{Kommunikationsdiagram}
 Kommunikationsdiagrammet\cite{Larman2004} på figur \ref{fig:Kommunikationsdiagram} viser de centrale trin fra Use Casen Automatisk Lagerstyring, som også er vist i SSD på figur \ref{fig:ssd}. Kommunikationsdiagrammet bruges til at vise hvilke klasser, der laver hvilke metodekald og hvordan klasserne kommunikerer med hinanden. 
-Som det fremgår på Kommunikationsdiagrammet figur \ref{fig:Kommunikationsdiagram}. Heri beskriver StoragePLanListUI hvordan en ny lagerplan genereres. Når den nye lager plan er fremkaldt, kan brugeren navngive planen og så oprette den. Herfra kan brugeren tilpasse planen til behovene, dette gælder både under StrageplanUI og PeriodicPLanUI. 
+Som det fremgår på Kommunikationsdiagrammet figur \ref{fig:Kommunikationsdiagram}. Heri beskriver StoragePLanListUI hvordan en ny lagerplan genereres. Når den nye lager plan er fremkaldt, kan brugeren navngive planen og så oprette den. Herfra kan brugeren tilpasse planen til behovene, dette gælder både under StoragePlanUI og PeriodicPlanUI. 
 
 Der er brugt flere UI paneler, som vinduer og undermenuer, hvori de hver har deres egene funktion. 
-F.eks, så har PeriodicPLanUI som funktion, at oprette, redigere perioder, samt oprette, tilføje og fjerne produkter. 
+F.eks, så har PeriodicPlanUI som funktion, at oprette, redigere perioder, samt oprette, tilføje og fjerne produkter. 
 
 Under observation af Kommunikationsdiagrammet, kan det ses, at det meste af arbejdet udføres af StoragePlanController, derfor den mest komplekse. Herunder kan det observeres at Sales er med i Kommunikationsdiagrammet. Grundet for dette, er at Sale har indflydelse på, hvor meget der bestilles hjem til lageret, hvor meget der er på lageret og hvilken periode der bliver solgt flere af en bestemt variant. 
 Sale blev dog prioriteret væk, fordi der kun var tid til at teste om det kunne virke med eksempel salgsdata.
-Idéelt ville Sale være implementeret, sådan at Sales blev brugt til at lave lagerplanerne ud fra.
-
-
+Idéelt ville Sale være implementeret, sådan at Sales blev brugt til at lave lagerplanerne ud fra. For at vise hvordan systemet er designet skal det også vises i et designklassediagram.
 
 \begin{landscape}
     \begin{figure}[p]
