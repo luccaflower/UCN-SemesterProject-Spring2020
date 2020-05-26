@@ -1,5 +1,5 @@
 \chapter{Implementation}\label{ch:implementation}
-I det kommende afsnit, er løsningen blevwet implementeret. Nu hvor planlægningen af kode (Analyse og design) er blevet færdiggjort er det muligt, at gå videre til næste aktivtitet under Unified Procces, implementation\cite{UnifiedProcess}. 
+I det kommende afsnit, er løsningen blevet implementeret. Nu med planlægningen af kode (Analyse og design) er det muligt, at gå igang med næste aktivtitet under Unified Procces, implementation\cite{UnifiedProcess}. 
 
 Koden er skrevet ud fra designklassediagrammet \ref{fig:designclassdiagram}, og benytter sig af de designmønstre som er vist i designklassediagrammet. Koden er skrevet i Java. 
 De vigtigste metoder og designmønstre vil blive demonstreret, herunder parallelitet, singleton mønstret, database queries, og relevante algoritmer.
@@ -21,3 +21,120 @@ En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvo
 %\end{landscape}
 
 I koden kan der så laves \verb|ProductLine| objekter, som lægges i \verb|PeriodicPlan| så der kan oprettes \verb|StorageOrder|s med de optimale bestillingsmængder. 
+
+\section{Parallelitet}\label{ch:parallelitet}
+Parallelitet er processen hvorved at dele af et program, kan køres på samme tid. Dele af programmer, som køres parallelt kaldes \texttt{Threads}\cite{JavaThreads}. Threads af en abstraktion, som benyttes i high-level programmerings sprog, som f.eks Java\cite{HighLevel}. Threads er meget ofte ydeevne-optimerende, eftersom at en moderne CPU meget ofte har flere kerner, hvilket resultere i at koden fra en thread ikke er afhængig af eksekveringen af koden fra en anden thread. Dette scenarie er det dog kun relevant, hvis der eksekveres en svær algoritme. Threads er også ydeevne-optimerende når det kommer til IO, eftersom at IO operationer ofte er langsommere, ift. læsning fra RAM eller læsning fra CPU cache\cite{OperatingSystems}. Et scenerie hvor et program henter mange forskellige billeder fra internettet~\ref{lst:badParralelExample}, er i dette eksempel \texttt{fetchImage(n)} som ses på kodeeksempel \ref{lst:badParralelExample}. Den henter billedet med ID fra en remote server, hvilket ikke er optimalt, fordi metoden \texttt{fetchAllTheImages} først venter på det første kald af \texttt{fetchImage} før den starter det næste. I dette eksempel har resultatet af første \texttt{fetchImage} kald ingen effekt på det næste. Det vil sige at metoden kunne blive paralleliseret~\ref{lst:goodParralelExample} og alle \texttt{fetchImage} metoder, som bruger ~100\% af eksekveringenstiden på at vente på et IO svar, kan køre på samtidigt. I denne nye version har vi stadig det samme loop, der er dog nogle ændringer: \texttt{finalI} er lavet fordi \texttt{i} kan ændre sig før Thread'en bliver kaldt. Dette resulterer i \texttt{fetchImage} metoder, der henter de forkerte billeder. I stedet for at kalde \texttt{fetchImage} metoden, så laves en Thread, som kalder den. 
+Dernest lægges den i \texttt{threads} listen, og til sidst kaldes \texttt{join} metoden på alle threads for at sikre de er færdige før \texttt{fetchAllTheImages} afsluttes.
+
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}
+public void fetchAllTheImages(int index) {
+    for(int i = 0; i < index; i++) {
+        fetchImage(i + 1);
+    }
+}
+    \end{minted}
+    \caption{Eksempel på ingen brug af parallelitet\label{lst:badParralelExample}}
+\end{listing}
+
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}
+public void fetchAllTheImages(int index) {
+    List<Thread> threads = new ArrayList<>();
+    for(int i = 0; i < index; i++) {
+        final int finalI = i + 1;
+        Thread thread = new Thread(() -> fetchImage(finalI));
+        thread.start();
+        threads.add(threads);
+    }
+    for(Thread thread : threads){
+        try {
+            thread.join();
+        } catch (InterruptedException ignored) {
+
+        }
+    }
+}
+    \end{minted}
+    \caption{Eksempel på ingen brug af parallelitet\label{lst:goodParralelExample}}
+\end{listing}
+
+Et godt brug at parallelitet i dette projekt kan findes i metoden \texttt{save()} i klassen \texttt{PeriodicPlanController}~\ref{lst:ourParralelExample}, her er alle 3 \texttt{store.update()} samt \texttt{store.delete()} langsomme IO operationer, så denne metode gør som~\ref{lst:goodParralelExample}, laver parallelitet med threads, starter dem, og til sidsts venter på de er færdige.     
+ 
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+    ]{java}
+    public void save() {
+        Thread deleteThread = new Thread(() -> {
+            try {
+                store.delete(toDelete);
+            } catch (DataAccessException ignored) {
+
+            }
+        });
+        Thread update1Thread = new Thread(() -> {
+            try {
+                store.update(left, false);
+            } catch (DataAccessException ignored) {
+
+            }
+        });
+        Thread update2Thread = new Thread(() -> {
+            try {
+                store.update(current);
+            } catch (DataAccessException ignored) {
+
+            }
+        });
+        Thread update3Thread = new Thread(() -> {
+            try {
+                store.update(right, false);
+            } catch (DataAccessException ignored) {
+
+            }
+        });
+        deleteThread.start();
+        update1Thread.start();
+        update2Thread.start();
+        update3Thread.start();
+        try {
+            deleteThread.join();
+            update1Thread.join();
+            update2Thread.join();
+            update3Thread.join();
+        } catch (InterruptedException ignored) {
+
+        }
+    }}
+    \end{minted}
+    \caption{Eksempel på ingen brug af parallelitet\label{lst:ourParralelExample}}
+\end{listing}
+
+\section{UI}
+%Skriv lidt om UI
+%Vi prioriterede funktionalitet meget i 1. iteration
+%UI er "barebones" fordi funktionalitet > brugervenlighed i starten
+%Kan det den skal ud fra Diagrammer
