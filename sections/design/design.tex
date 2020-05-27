@@ -10,7 +10,7 @@ F.eks, så har PeriodicPlanUI som funktion, at oprette, redigere perioder, samt 
 
 Under observation af Kommunikationsdiagrammet, kan det ses, at det meste af arbejdet udføres af StoragePlanController, derfor den mest komplekse. Herunder kan det observeres at Sales er med i Kommunikationsdiagrammet. Grundet for dette, er at Sale har indflydelse på, hvor meget der bestilles hjem til lageret, hvor meget der er på lageret og hvilken periode der bliver solgt flere af en bestemt variant. 
 Sale blev dog prioriteret væk, fordi der kun var tid til at teste om det kunne virke med eksempel salgsdata.
-Idéelt ville Sale være implementeret, sådan at Sales blev brugt til at lave lagerplanerne ud fra. For at vise hvordan systemet er designet skal det også vises i et designklassediagram.
+Idéelt ville Sale være implementeret, sådan at Sales blev brugt til at lave lagerplanerne ud fra.
 
 \begin{landscape}
     \begin{figure}[p]
@@ -27,7 +27,7 @@ Designklassediagrammet er det tætteste vi kommer på en præcis repræsentation
 Som det kan ses på figur \ref{fig:designclassdiagram} er der brugt en afslappet lagdelt arkitektur, hvori der indgår et UI lag, et controller lag, et model-og-database lag\cite{Larman2004}. UI laget er brugergrænsefladen og tillader brugeren at interagere med programmet. Controller laget håndterer informationsændringer mv. og er de centrale komponenter til at udføre en Use Case. Model-og-database laget indeholder de klasser, der fremgik i domænemodellen \ref{fig:domain_model_2}, deres attributter og metoder - i database-delen sørges der for persistens og organisering af data. 
 For at kunne gennemføre en god lagdelt struktur, kræves der forskellige design mønstre. Det kan ses at DBConnection er en Singleton mønster\cite{Larman2004}, som sørger for at der kun oprettes én instans af DBConnection. DBConnection benyttes af alle \verb|SqlStore| klasserne for at kunne gemme data i databasen. Udover det ses det også, at der er benyttet et DAO mønster\cite{DAO} med alle Controller klasser. Dette ses ud fra at all controllers har en interface til database operationer, og ved forholdet til modelklasserne.
 I forhold til UI, ses det at Myframe er en superklasse, som vil indeholde de tre UI subklasser, så det bliver nemmere at skifte mellem faner i brugergrænsefladen.
-Diagrammet kan nu oversættes til kode, så arkitekturen, attributter og metoder kan implementeres.
+Diagrammet kan oversættes til kode, så arkitekturen, attributter og metoder kan implementeres.
 
 \begin{landscape}
     \begin{figure}

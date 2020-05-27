@@ -14,8 +14,23 @@ Vores tests bliver primært unit-tests, der er implementeret efter AAA-mønstret
 \end{description}
 
 \section{Test cases}
-For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test case-skema kan findes i Bilag~\ref{} \todo{This needs a ref}.
+For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test case-skemaer ses herunder:
 
+\subsection{Unit tests}
+
+
+\subsection{Integration tests}
+
+
+\subsection{System tests}
+For at gå endnu et niveau op, blev der også lavet system tests\
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.8\hsize]{figures/tests/delete_existing_plan.png}
+    \caption{Scenarie: En lagerplan skal slettes}
+    \label{fig:testdelete}
+\end{figure}
 
 \section{Implementering af tests}
 Vi gør brug af følgende biblioteker til at køre vores tests:
@@ -98,4 +113,5 @@ public void testMethod() {
 \end{listing}
 
 \texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
+
 
