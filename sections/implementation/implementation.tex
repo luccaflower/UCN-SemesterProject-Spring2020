@@ -34,7 +34,60 @@ Mark Gaynor's github repo kaldet "Multiple linear regression in Java" \cite{Mark
 
 \section{Singleton og SQL queries}
 For at kunne snakke sammen med databasen kræves der både en database forbindelse (DBConnection), samt SQL queries eller statements som kan sendes til databasen. Som vist i designklassediagrammet\ref{fig:designclassdiagram} er der brugt en interface klasse til alle SQL klasserne. Dette er en del af DAO mønstret\cite{DAO}. SQL klasserne, såsom \texttt{StoragePlanSqlStore} står for at oprette og sende \texttt{PreparedStatement} til databasen for at kommunikere med den. Sådan kan data hentes, ændres, slettes og lagres i en database. 
-%insert Alex' stuff 
+
+\subsection{PeriodicPlanSqlStore.getByStoragePlan}
+Et godt eksempel på en DAO metode der bruget mange sql principper er PeriodicPlanSqlStore.getByStoragePlan \ref{lst:getByStoragePlan}, denne metode er brugt til at hente alle \texttt{PeriodicPlan} fra som en specific \texttt{StoragePlan} indeholder
+
+Metoden starter med at sende en simpel \texttt{SELECT} query som henter rows'ne fra \texttt{periodic\_plans} hvor \texttt{storage\_plan\_id} er den givne \texttt{StoragePlan}, alle planerne bliver lagt i et map, med deres id som key, dette gøres eftersom at den følgene query finder all producterne for alle produkterne tilsvarende de her \texttt{PeriodicPlan}s
+
+Enden af querien for \texttt{Product}s er dynamaisk generede eftersom at mængden af \texttt{PeriodicPlan}s i en \texttt{StoragePlan} ikke er fixed, for at generer enden a \texttt{WHERE} clausen laves en ny \texttt{String} array med størelsen som er lig mængden af \texttt{PeridicPlan}s som vi hentede fra første query, den array er så directe lavet om til en stream, hvor vi kalder map metoden til at lave alle entries indtil en \texttt{"periodic\_plan\_id = ?"}, de her bliver så joined sammen med \texttt{" OR "}, alt dette betyder at vi har $n$ \texttt{"periodic\_plan\_id = ?"} hvor $n$ er hvor mange \texttt{PeriodicPlan}s vi har, og mellem hver 2 af dem er der \texttt{" OR "}.
+
+fx, hvis der var 5 \texttt{PeriodicPlan}s vil querien så sådan ud \texttt{"SELECT product\_id, amount, periodic\_plan\_id, cost, name FROM plan\_lines INNER JOIN products ON plan\_lines.product\_id = products.id WHERE periodic\_plan\_id = ? OR periodic\_plan\_id = ? OR periodic\_plan\_id = ? OR periodic\_plan\_id = ? OR periodic\_plan\_id = ?"}
+
+Når \texttt{Product} objekterne konstrures ud fra rows'ne lægges de i directe i den korrespondent \texttt{PeriodicPlan}, hvilket kan nemt gøres pga. Map'en fra tidligerer, til sidst laves value'sne fra mappen om til en liste som bliver lags i \texttt{StoragePlan}'en fra argumentet og returneret
+
+\begin{listing}
+    \begin{minted}
+    [
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos,
+        breaklines
+    ]{java}
+@Override
+public List<PeriodicPlan> getByStoragePlan(StoragePlan storagePlan) throws DataAccessException {
+    try {
+        PreparedStatement stmt = DBConnection.getInstance().getConnection().prepareStatement("SELECT start_period, end_period, id FROM periodic_plans WHERE storage_plan_id = ?");
+        stmt.setInt(1, storagePlan.getId());
+        NullableResultSet result = new NullableResultSet(stmt.executeQuery());
+        Map<Integer, PeriodicPlan> plans = new HashMap<>();
+        while (result.next()) {
+            int id = result.getInt("id");
+            plans.put(id, new PeriodicPlan(new HashMap<>(), new Period(result.getInt("start_period"), result.getInt("end_period")), null, id));
+        }
+        stmt = DBConnection.getInstance().getConnection().prepareStatement("SELECT product_id, amount, periodic_plan_id, cost, name FROM plan_lines INNER JOIN products ON plan_lines.product_id = products.id WHERE " + Arrays.stream(new String[plans.size()]).map(x -> "periodic_plan_id = ?").collect(Collectors.joining(" OR ")));
+        int i = 1;
+        for (Integer key : plans.keySet()) {
+            stmt.setInt(i++, key);
+        }
+        result = new NullableResultSet(stmt.executeQuery());
+        while (result.next()) {
+            plans.get(result.getInt("periodic_plan_id")).getProductMap().put(new Product(result.getInt("cost"), result.getString("name"), null, result.getInt("product_id")), result.getInt("amount"));
+        }
+
+        List<PeriodicPlan> plansList = new ArrayList<>(plans.values());
+        storagePlan.setPeriodicPlans(plansList);
+        return plansList;
+    } catch (SQLException e) {
+        throw new DataAccessException(e.getMessage(), e);
+    }
+}
+    \end{minted}
+    \caption{Eksempel på ingen brug af parallelitet\label{lst:getByStoragePlan}}
+\end{listing}
 
 
 
