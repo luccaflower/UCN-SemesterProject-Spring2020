@@ -109,20 +109,20 @@ For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels
 
 
 
-Under "Figur 9.1" er første iretation af test af UI blevet testest. Herunder det det blevet testet, om det muligt for en lagerplan at blive oprettet. Det viser sig, at ja det muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan man implementere det sådan, at den gemte lagerplan også bliver vist frem. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå navneændring.
+Under figur \ref{fig:_fig:testgenerate} er første iretation af test af UI blevet testest. Herunder det det blevet testet, om det muligt for en lagerplan at blive oprettet. Det viser sig, at ja det muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan man implementere det sådan, at den gemte lagerplan også bliver vist frem. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå navneændring.
 \begin{figure}[p]
     \centering
     \includegraphics[width=0.8\hsize]{figures/tests/test_generer_plan.png}
     \caption{Scenarie: En lagerplan skal genereres}
-    \label{fig:testdelete}
+    \label{fig:testgenerate}
 \end{figure}
 
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.8\hsize]{figures/tests/delete_existing_plan.png}
+    \includegraphics[width=0.8\hsize]{figures/tests/edit_existing_plan.png}
     \caption{Scenarie: En lagerplan skal rettes}
-    \label{fig:testdelete}
+    \label{fig:testedit}
 \end{figure}
 
 Det skulle være muligt at generere en plan, rette i planen ved fx at tilføje et produkt, og så gemme planen igen. Ud fra tests kan det se at til trods for gem metoderne er testet, så fungerede det ikke samme med UI på dette tidspunkt. Det skal evalueres sådan at det kan virke ordenligt.
@@ -130,7 +130,7 @@ Det skulle være muligt at generere en plan, rette i planen ved fx at tilføje e
     \centering
     \includegraphics[width=0.8\hsize]{figures/tests/test_ret_plan.png}
     \caption{Scenarie: En periode i lagerplanen rettes}
-    \label{fig:testdelete}
+    \label{fig:testeditperiod}
 \end{figure}
 
 Det skulle være muligt at slette en lagerplan, som allerede er oprettet. Som testen viser var det på det tidspunkt ikke muligt at vise planerne så man kunne tilgå "slet" knappen. Derfor fejler begge tests. For at løse det skulle planerne selvfølgelig vises, sådan det er muligt at rette og slette dem.
