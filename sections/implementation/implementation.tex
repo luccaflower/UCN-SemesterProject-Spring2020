@@ -140,7 +140,8 @@ public void fetchAllTheImages(int index) {
     \caption{Eksempel på brug af parallelitet\label{lst:goodParralelExample}}
 \end{listing}
 
-Et godt brug at parallelitet i dette projekt kan findes i metoden \texttt{save()} i klassen \texttt{PeriodicPlanController}~\ref{lst:ourParralelExample}, her er alle 3 \texttt{store.update()} samt \texttt{store.delete()} langsomme IO operationer, så denne metode gør som~\ref{lst:goodParralelExample}, laver parallelitet med threads, starter dem, og til sidsts venter på de er færdige.     
+Et godt eksempel på brug af parallelitet i dette projekt, kan findes i metoden \texttt{save()} i klassen 
+\texttt{PeriodicPlanController}~\ref{lst:ourParralelExample}, her er alle 3 \texttt{store.update()} samt \texttt{store.delete()} langsomme IO operationer, så denne metode gør som~\ref{lst:goodParralelExample}, laver parallelitet med threads, starter dem, og til sidsts venter på de er færdige.     
  
 \begin{listing}
     \begin{minted}
@@ -199,38 +200,55 @@ Et godt brug at parallelitet i dette projekt kan findes i metoden \texttt{save()
 \end{listing}
 
 \section{UI} 
-\todo{all figures are in fucky places}
-%Skriv lidt om UI
-%Vi prioriterede funktionalitet meget i 1. iteration
-%Brugte skrifttype valgt fra \ref{skrifttype}
-%UI er "barebones" fordi funktionalitet > brugervenlighed i starten
-%Kan det den skal ud fra Diagrammer
-
-Når programmet åbnes, åbnes vinduet Lagerplaner som viser en liste over nuværende lagerplaner, og en knap "Generer ny lagerplan" som fører brugeren videre til endnu et vindue. Dette vindue er baseret på mock up figur \ref{fig:3storage} fra bilag \ref{app:mockups}. Vinduet er vist på figur \ref{fig:lagerplaner}.
+Når programmet åbnes, åbnes vinduet Lagerplaner som viser en liste over nuværende lagerplaner, og en knap "Generer ny lagerplan" som fører brugeren videre til endnu et vindue. Dette vindue er baseret på mock up figur \ref{fig:3storage} fra bilag \ref{app:mockups}. Vinduet er vist på figur \ref{fig:lagerplaner}. 
 
 "Nuværende lagerplaner:" er tom fra starten, men som man tilføjer nye lagerplaner, kommer de oprettede lagerplaner frem på listen. Dette er til forskel fra figuren, der i stedet viser enkelte varer. Det var besluttet at være bedre med enkelte lagerplaner, sådan man derinde kunne se de forskellige produkter. 
 Når der er oprettet en lagerplan på listen, kan man trykke på planen for at gå ind og redigere den. 
 
-Knappen "Generer ny lagerplan" åbner vinduet Periodeplaner som ses på figur \ref{fig:periodeplaner}, som viser brugeren en periodeplan-liste for den genererede plan, samt et tekstfelt, hvor man kan navngive sin plan. 
+Knappen "Generer ny lagerplan" åbner vinduet Periodeplaner som ses på figur \ref{fig:periodeplaner}, som viser brugeren en periodeplan-liste for den genererede plan, samt et tekstfelt, hvor man kan navngive sin plan. Her er 3 handlingsknapper, "Aktiv", "Gem", og "Slet". 
+"Aktiv" er speciel, fordi den har 2 stadier. Den kan være være "on" eller "off". Den er "off" fra start. Denne knap er til for at bestemme om planen er nuværende aktiv eller ikke. "Gem" knappen er ret simpel. Den gemmer alle de ændringer og tilføjelser der er lavet til den nye plan. "Slet" knappen sletter den nuværende lagerplan, som brugeren er inde at redigerere i. 
+Der ses også "Periode planer for <navn>:" har en liste over udvalgte perioder. Her vælger man en bestemt periode som så åbner Periodeplan vinduet som ses på figur \ref{fig:periodeplan}. Her kan man finpudse perioden til eget behov, og tilføje eller fjerne is produkter.   
 
-"Periode planer for navn:" har en liste over udvalgte perioder. Her vælger man en bestemt periode som så åbner endnu et lille vindue op. Her kan man finpudse perioden til eget behov, og tilføje eller fjerne is produkter.   
+"TIlføj produkt" knappen åbner op for vinduet på figur \ref{fig:addprodukt}, hvori der er en liste over de is man kan vælge at tilføje. Derefter trykker man enten "OK" eller "Cancel". Den udvalgte is kommer frem på listen under "Produkter:". Når brugeren er færdig trykker man på "Gem" knappen, og lukker vinduet. 
+"Fjern Produkt" knappen fungerer på samme måde og åbner vinduet på figur \ref{fig:fjernprodukt}. Den eneste forskel er, at der kun kan vælges blandt de produkter, der allerede er tilføjet til periodeplanen.
 
-"TIlføj produkt" knappen åbner op for et lille vindue, hvori der er en liste over de is man kan vælge. derefter trykker man enden "OK" eller "Cancel". Den udvalgte is kommer frem på listen under "Produkter:" Når brugeren er færdig trykker man på "Gem" knappen, og lukker vinduet.  
-
-Der er 3 handlingsknapper, "Aktiv", "Gem", og "Slet". 
-"Aktiv" er speciel, fordi den har 2 stadier. Den kan være være "on" eller "off". Den er "off" fra start. Denne knap er til for at bestemme om planen er nuværende aktiv eller ikke. "Gem" knappen er ret simpel. Den gemmer alle de ændringer og tilføjelser der er lavet til den nye plan. "Slet" knappen sletter den nuværende lagerplan, som brugeren er inde at redigerere i.
-
-\todo{this figure is missing}
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.7\hsize]{figures/implementation/UI/lagerplaner.png}
     \caption{Lagerplaner vinduet}
     \label{fig:lagerplaner}
 \end{figure}
 
-\begin{figure}
+\begin{figure*}
     \centering
-    \includegraphics[width=0.7\hsize]{figures/implementation/UI/periodeplaner.png}
-    \caption{Periodeplaner vinduet}
-    \label{fig:periodeplaner}
-\end{figure}
+    \begin{subfigure}[b]{0.475\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/implementation/UI/periodeplaner.png}
+        \caption{Periodeplaner vinduet}
+        \label{fig:periodeplaner}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.475\textwidth}
+        \centering 
+        \includegraphics[width=\textwidth]{figures/implementation/UI/periodeplan.png}
+        \caption{Periodeplan vinduet}
+        \label{fig:periodeplan}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.475\textwidth}
+        \centering 
+        \includegraphics[width=\textwidth]{figures/implementation/UI/addprodukt.png}
+        \caption{Tilføj produkt vinduet}
+        \label{fig:addprodukt}
+    \end{subfigure}
+    \quad
+    \begin{subfigure}[b]{0.475\textwidth}
+        \centering 
+        \includegraphics[width=\textwidth]{figures/implementation/UI/fjernprodukt.png}
+        \caption{Fjern produkt vinduet}
+        \label{fig:fjernprodukt}
+    \end{subfigure}
+    \caption[ GUI for automatisk lagerstyringssystem ]
+    {\small GUI for automatisk lagerstyringssystem } 
+    \label{fig:GUI}
+\end{figure*}
