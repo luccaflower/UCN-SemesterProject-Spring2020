@@ -99,7 +99,14 @@ public void testMethod() {
 For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test case-skemaer ses herunder:
 
 \subsection{Unit tests}
+\subsubsection{Regression Tests}
+Disse tests beskriver vores regressions algorithme, for at teste dette skal der bruges et massivt mængde data, vi bruger derfor en csv-fil som beskriver relationerne mellem en helt masse forskellige typer cement, denne csv-fil kan findes på \texttt{res/concrete.csv}, og selve test koden kan findes på \texttt{src/hjem/is/test/RegressionTest.java}. I de her test bruges en custom assert som vi selv har lavet, kaldet \texttt{assertApproxEquals}, dette bruges eftersom at regression halder ikke om at være 100\% perfect, men bare godt nok til det punkt at de er brugbart
 
+først hentes concrete.csv filen ind i en \texttt{@BeforeAll} eftersom at alle test bruger den samme data, data'en er lavet om til \texttt{Observation} objekter, eftersom at det er den type som vores implementation bruger som argument
+
+begge tests tester at algoritmet kan forudsige at \texttt{compressivestrength} på index 30 passer index for en delta af 20 af den faktiske værdi, bægger test printer også deres $r^{2}$ værdi og deres precision
+
+den første test tester \texttt{GradientDescentFit} implementation, der bruges en alpha af 0.0001, den anden tester \texttt{NormalEquationFit}
 
 \subsection{Integration tests}
 
@@ -109,7 +116,7 @@ For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels
 
 
 
-Under figur \ref{fig:_fig:testgenerate} er første iretation af test af UI blevet testest. Herunder det det blevet testet, om det muligt for en lagerplan at blive oprettet. Det viser sig, at ja det muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan man implementere det sådan, at den gemte lagerplan også bliver vist frem. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå navneændring.
+Under figur \ref{fig:testgenerate} er første iretation af test af UI blevet testest. Herunder det det blevet testet, om det muligt for en lagerplan at blive oprettet. Det viser sig, at ja det muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan man implementere det sådan, at den gemte lagerplan også bliver vist frem. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå navneændring.
 \begin{figure}[p]
     \centering
     \includegraphics[width=0.8\hsize]{figures/tests/test_generer_plan.png}
