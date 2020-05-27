@@ -24,16 +24,17 @@ En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvo
 Der kan så laves en \verb|productMap|, som lægges i \verb|PeriodicPlan| så der kan oprettes \verb|StorageOrder|s med de optimale bestillingsmængder. Desværre blev denne feature ikke implementeret færdig.
 
 \section{Regression algoritme}
-For at kunne forudsige salget af produkter i forskellige tids perioder skal vi have et eller andet form for algoritme der kan leve op til kravet om at forudsige tendenser ud fra data og heraf estimere en optimal bestillingsmængde.
+For at kunne forudsige salget af produkter i forskellige tidsperioder skal en algoritme, der kan leve op til kravet om, at forudsige tendenser ud fra data og heraf estimere en optimal bestillingsmængde.
 
-Simplelt matematisk regression var metoden vi valgte, eftersom at det er simplelt at implementere og vi tidligerer har half erfaring med regression, både, dog mest de praktisk use-cases som regression kan bruges til og ikke meget teori.
+Simpel matematisk regression var metoden vi valgte, eftersom det er simpelt at implementere og vi har tidligere erfaring med regression. Det er brugt til Use Cases, hvor regression giver mening at bruge. Der blev antaget at implementationen af vores egen regressions algoritme 100\% bunden ville være ekstremt tidkrævende, og beslutningen om at basere vores logik på andet kode blev truffet.
 
-Der blev antaget at implementationen af vores egen regressions algoritme 100\% bunden ville være ekstrems tidkrævende, og beslutningen om at baserer vores logik på andet kodet var truffet.
+Mark Gaynor's Github repository kaldet "Multiple linear regression in Java" \cite{MarkGaynorRegressin} bruges som bunden i vores algoritme, dog har vi lavet ændringer som f.eks. at brugen af strategy pattern \cite{Larman2004}, og forsøget på at understøtte regression som kan være flere-dimensionelt. 
 
-Mark Gaynor's github repo kaldet "Multiple linear regression in Java" \cite{MarkGaynorRegressin} bruges som bunden i vores algoritme, dog har vi lavet ændringer som fx brugen af strategy pattern \cite{Larman2004}, og forsøget på at supporte regression som er non-linear
+I \texttt{Main} ses det at der tilføjes tre features til \texttt{Observation}, heat, price og sold. Når der udføres regression over disse features, vil der blive udarbejdet en regressionsmodel med 3 dimensioner. For hver ny feature man vil måle ud fra, bliver den tilføjet som feature, og tilføjer endnu en dimension på regressionsmodellen. Dog bliver det også en tungere process hurtigt jo flere dimensioner der tilføjes. 
 
 \section{Singleton og SQL queries}
-For at kunne snakke sammen med databasen kræves der både en database forbindelse (DBConnection), samt SQL queries eller statements som kan sendes til databasen. Som vist i designklassediagrammet\ref{fig:designclassdiagram} er der brugt en interface klasse til alle SQL klasserne. Dette er en del af DAO mønstret\cite{DAO}. SQL klasserne, såsom \texttt{StoragePlanSqlStore} står for at oprette og sende \texttt{PreparedStatement} til databasen for at kommunikere med den. Sådan kan data hentes, ændres, slettes og lagres i en database. 
+For at kunne snakke sammen med databasen kræves der både en database forbindelse (DBConnection), samt SQL queries eller statements som kan sendes til databasen. \texttt{DBConnection} klassen er som sagt en singleton, der indeholder en private constructor, som opretter én statisk instans af sig selv, kaldet dbConnection. Det er smart at have klassen som Singleton, da der kun skal bruges forbindelse til én database.
+Som vist i designklassediagrammet\ref{fig:designclassdiagram} er der brugt en interface klasse til alle SQL klasserne. Dette er en del af DAO mønstret\cite{DAO}. SQL klasserne, såsom \texttt{StoragePlanSqlStore} står for at oprette og sende \texttt{PreparedStatement} til databasen for at kommunikere med den. Sådan kan data hentes, ændres, slettes og lagres i en database. 
 %insert Alex' stuff 
 
 

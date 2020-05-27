@@ -104,10 +104,14 @@ Test-klassen \texttt{RegressionTest} tester vores regressions algoritme, og for 
 
 Ved udførslen af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle test bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer index for en delta af 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
 
-Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implementation, hvor der bruges en alpha af 0.0001, den anden tester \texttt{NormalEquationFit}\cite{NormalEquation}. Begge tests består
+Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implementation, hvor der bruges en alpha af 0.0001, den anden tester \texttt{NormalEquationFit}\cite{NormalEquation}. Begge tests består her. 
 
 \subsection{Integration tests}
-
+\todo{write stuff here about our integration tests}
+%most important tests
+%What it tests
+%how it works
+%did it pass?
 
 \subsection{System tests}
 For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde vores Fully Dressed Use Case fra kapitel\ref{fullydressed}.
