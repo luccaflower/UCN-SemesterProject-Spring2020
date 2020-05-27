@@ -155,3 +155,17 @@ Et godt brug at parallelitet i dette projekt kan findes i metoden \texttt{save()
 %Brugte skrifttype valgt fra \ref{skrifttype}
 %UI er "barebones" fordi funktionalitet > brugervenlighed i starten
 %Kan det den skal ud fra Diagrammer
+
+UI er bygget sådan, at når programmet åbnes, kommer der et vindue frem som viser en liste over nuværende lagerplaner, og en knap "Generer ny lagerplan" som fører brugeren videre til endnu et vindue.
+"Nuværende lagerplaner:" er tom fra starten, men som man tilføjer nye lagerplaner, kommer de oprettede lagerplaner frem på listen.
+Når der er oprettet en lagerplan på listen, kan man trykke på planen for at gå ind og redigere den.
+
+Det nye vindue som "Generer ny lagerplan" åbner, viser brugeren en periodeplansliste for den navngivede plan, samt et tekstfelt, hvor man kan navngive sin plan.
+
+"Periode planer for navn:" har en liste over udvalgte perioder. Her vælger man en bestemt periode som så åbner endnu et lille vindue op. Her kan man finpudse perioden til eget behov, og tilføje eller fjerne is produkter. 
+
+"TIlføj produkt" knappen åbner op for et lille vindue, hvori der er en liste over de is man kan vælge. derefter trykker man enden "OK" eller "Cancel". Den udvalgte is kommer frem på listen under "Produkter:"
+Når brugeren er færdig trykker man på "Gem" knappen, og lukker vinduet.
+
+Der er 3 handlingsknapper, "Aktiv", "Gem", og "Slet".
+"Aktiv" er speciel, fordi den har 2 stadier. Den kan være være "on" eller "off". Den er "off" fra start. Denne knap er til for at bestemme om planen er nuværende aktiv eller ikke. "Gem" knappen er ret simpel. Den gemmer alle de ændringer og tilføjelser der er lavet til den nye plan. "Slet" knappen sletter den nuværende lagerplan, som brugeren er inde at redigerere i.
