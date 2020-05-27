@@ -137,7 +137,7 @@ public void fetchAllTheImages(int index) {
     }
 }
     \end{minted}
-    \caption{Eksempel på ingen brug af parallelitet\label{lst:goodParralelExample}}
+    \caption{Eksempel på brug af parallelitet\label{lst:goodParralelExample}}
 \end{listing}
 
 Et godt brug at parallelitet i dette projekt kan findes i metoden \texttt{save()} i klassen \texttt{PeriodicPlanController}~\ref{lst:ourParralelExample}, her er alle 3 \texttt{store.update()} samt \texttt{store.delete()} langsomme IO operationer, så denne metode gør som~\ref{lst:goodParralelExample}, laver parallelitet med threads, starter dem, og til sidsts venter på de er færdige.     
@@ -195,10 +195,11 @@ Et godt brug at parallelitet i dette projekt kan findes i metoden \texttt{save()
         }
     }}
     \end{minted}
-    \caption{Eksempel på ingen brug af parallelitet\label{lst:ourParralelExample}}
+    \caption{Eksempel på brug af parallelitet\label{lst:ourParralelExample}}
 \end{listing}
 
 \section{UI} 
+\todo{all figures are in fucky places}
 %Skriv lidt om UI
 %Vi prioriterede funktionalitet meget i 1. iteration
 %Brugte skrifttype valgt fra \ref{skrifttype}
@@ -206,8 +207,6 @@ Et godt brug at parallelitet i dette projekt kan findes i metoden \texttt{save()
 %Kan det den skal ud fra Diagrammer
 
 Når programmet åbnes, åbnes vinduet Lagerplaner som viser en liste over nuværende lagerplaner, og en knap "Generer ny lagerplan" som fører brugeren videre til endnu et vindue. Dette vindue er baseret på mock up figur \ref{fig:3storage} fra bilag \ref{app:mockups}. Vinduet er vist på figur \ref{fig:lagerplaner}.
-
-
 
 "Nuværende lagerplaner:" er tom fra starten, men som man tilføjer nye lagerplaner, kommer de oprettede lagerplaner frem på listen. Dette er til forskel fra figuren, der i stedet viser enkelte varer. Det var besluttet at være bedre med enkelte lagerplaner, sådan man derinde kunne se de forskellige produkter. 
 Når der er oprettet en lagerplan på listen, kan man trykke på planen for at gå ind og redigere den. 

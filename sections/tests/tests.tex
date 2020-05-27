@@ -100,9 +100,9 @@ For at gå systematisk til værks, skal der opsættes et skema med test cases\ci
 
 \subsection{Unit tests}
 \subsubsection{Regression Tests}
-Test-klassen \texttt{RegressionTest} tester vores regressions algoritme, og for at teste dette skal der bruges en massivt mængde data. Derfor bruges en csv-fil, som beskriver relationerne mellem forskellige typer cement, denne csv-fil kan findes på \texttt{res/concrete.csv}, og selve test koden kan findes på \texttt{src/hjem/is/test/RegressionTest.java}. I disse tests bruges en assert metode, som vi selv har lavet, kaldet \texttt{assertApproxEquals}. Denne bruges eftersom at regression ikke handler om at lave et 100\% perfekt estimat, men bare godt nok til at det er brugbart.
+Test-klassen \texttt{RegressionTest} tester vores regressions algoritme, og for at teste dette skal der bruges en massiv mængde data. Derfor bruges en csv-fil, som beskriver relationerne mellem forskellige typer cement, denne csv-fil kan findes på \texttt{res/concrete.csv}, og selve test koden kan findes på \texttt{src/hjem/is/test/RegressionTest.java}. I disse tests bruges en assert metode, som vi selv har lavet, kaldet \texttt{assertApproxEquals}. Denne bruges eftersom at regression ikke handler om at lave et 100\% perfekt estimat, men bare godt nok til at det er brugbart.
 
-Ved udførslen af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle test bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer index for en delta af 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
+Ved udførsel af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle test bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer index for en delta af 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
 
 Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implementation, hvor der bruges en alpha af 0.0001, den anden tester \texttt{NormalEquationFit}\cite{NormalEquation}. Begge tests består her. 
 
@@ -114,9 +114,9 @@ Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implem
 %did it pass?
 
 \subsection{System tests}
-For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde vores Fully Dressed Use Case fra kapitel\ref{fullydressed}.
+For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde vores Fully Dressed Use Case fra kapitel \ref{fullydressed}.
 
-Under figur \ref{fig:testgenerate} er første iteration af test af UI blevet testest. Herunder det det blevet testet, om det muligt for en lagerplan at blive oprettet. Det viser sig, at ja det muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan man implementere det sådan, at den gemte lagerplan også bliver vist frem. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå navneændring.
+Under figur \ref{fig:testgenerate} er første iteration af test af UI blevet testest. Herunder det det blevet testet, om det muligt for en lagerplan at blive oprettet. Det viser sig, at det er muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan det implementeres, at den gemte lagerplan også bliver vist frem. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå navneændring.
 
 \begin{figure}[p]
     \centering
@@ -125,7 +125,7 @@ Under figur \ref{fig:testgenerate} er første iteration af test af UI blevet tes
     \label{fig:testgenerate}
 \end{figure}
 
-Det skulle herunder gerne være muligt, at rette en eksisterende lagerplan. Når inde på lagerplanen, skulle det være muligt at redigere mængden af varer. Dette er dog ikke muligt at gøre, når display af lagerplanen ikke eksisterer. Heri blivet test evalueret og derefter skal det impelmeteres således, at det muligt at klikke ind på en lagerplan og rette den. 
+Det skulle herunder gerne være muligt, at rette en eksisterende lagerplan. Testskemaet på figur \ref{fig:testedit} tester, at når man er inde på lagerplanen, skulle det være muligt at redigere mængden af varer, om planen er aktiv eller ej, og hvilken periode man redigerer.  Dette er dog ikke muligt at gøre, når display af lagerplanen ikke eksisterer. Heri blivet test evalueret og derefter skal det impelmeteres således, at det muligt at klikke ind på en lagerplan og rette den. 
 
 \begin{figure}[p]
     \centering
@@ -134,14 +134,16 @@ Det skulle herunder gerne være muligt, at rette en eksisterende lagerplan. Når
     \label{fig:testedit}
 \end{figure}
 
-Det skulle være muligt at generere en plan, rette i planen ved fx at tilføje et produkt, og så gemme planen igen. Ud fra tests kan det se at til trods for gem metoderne er testet, så fungerede det ikke samme med UI på dette tidspunkt. Det skal evalueres sådan at det kan virke ordenligt.
+Det skulle være muligt at generere en plan, rette i planen ved fx at tilføje et produkt, og så gemme planen igen. Ud fra testskemaet på figur \ref{fig:testeditperiod} kan det ses, at til trods for at gem-metoderne er testet, så fungerede det ikke samme med UI på dette tidspunkt. Det skal evalueres sådan at det kan virke ordenligt.
+
 \begin{figure}[p]
     \centering
     \includegraphics[width=0.8\hsize]{figures/tests/test_ret_plan.png}
     \caption{Scenarie: En periode i lagerplanen rettes}
     \label{fig:testeditperiod}
 \end{figure}
-Det skulle være muligt at slette en lagerplan, som allerede er oprettet. Som testen viser var det på det tidspunkt ikke muligt at vise planerne så man kunne tilgå "slet" knappen. Derfor fejler begge tests. For at løse det skulle planerne selvfølgelig vises, sådan det er muligt at rette og slette dem.
+
+Det skulle være muligt at slette en lagerplan, som allerede er oprettet. Som testskemaet på figur \ref{fig:testdelete} viser, så var det på det tidspunkt ikke muligt at vise planerne så man kunne tilgå "slet" knappen. Derfor fejler begge tests. For at løse det skulle planerne selvfølgelig vises, sådan det er muligt at rette og slette dem. UI for lagerplanen var eller implementeret og virkede, men under testen her fejlede det.
 
 \begin{figure}[p]
     \centering
