@@ -1,10 +1,10 @@
 \section{Funktionelle krav}\label{sec:funktionelle-krav}
-Dette afsnit vil behandle de funktionelle krav der skal være til systemet. De funktionelle krav omhandler de krav, der stilles til funktionaliteten af programmet gennem use cases\cite{Larman2004}. 
+Dette afsnit vil behandle de funktionelle krav der skal være til systemet. De funktionelle krav omhandler de krav, der stilles til funktionaliteten af programmet gennem use cases\cite{Larman2004}. Derfor vil der laves Fully Dressed\cite{Larman2004} diagrammer af de mest centrale Use Cases, som beskriver trinene i opgaven, samt alternative flows. Ud fra denne kan der laves en Kandidattabel\cite{Larman2004}.
 
 \subsection{Fully Dressed} \label{fullydressed}
-Herunder ses Fully Dressed Use Casen Automatisk lagerstyring. Use case Automatisk Lagerstyring er bygget på de tidligere use cases: Afskriv vare, fordi den påvirker hvor meget der er på lager. Optælling af isbil, som er manuelt arbejde og vil nemt kunne erstattes med automatisk optælling. Bestil varer, ville gå hånd i hånd med automatisk optælling af bilen. Og til sidst Use Case Modtag varer, fordi systemet skal opdateres med de nye varer der kommer på lager. 
+Herunder ses Fully Dressed Use Casen Automatisk lagerstyring. Fully Dressed Automatisk Lagerstyring er bygget på de tidligere Use Cases: Afskriv vare, fordi den påvirker hvor meget der er på lager. Optælling af isbil, som er manuelt arbejde, kunne erstattes med automatisk optælling. Bestil varer, ville harmonere med automatisk optælling af bilen. Og til sidst Use Case Modtag varer, fordi systemet skal opdateres med de nye varer der kommer på lager. 
 
-De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor mulige fejl eller forhindringer kan opstå under flowet af handlinger. De alternative flows beskriver, hvordan et system kan fejle undervejs, hvad der er nødvendigt at være forberedt på, og hvordan disse alternative flows kan behandles så systemet ikke stopper, men kan fortsætte Use Casen til ende. Sker det at systemet eller kunden ikke opfører sig som forventet, skal de mulige udfald udtænkes, og sådanne scenarier skal kunne behandles af systemet så vidt muligt.
+De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor mulige fejl eller forhindringer kan opstå under flowet af handlinger. De alternative flows beskriver, hvordan et system kan fejle undervejs, hvad der er nødvendigt at være forberedt på, og hvordan disse alternative flows kan behandles så systemet ikke stopper. Det sikrer at systemet altid kan køre Use Casen til slut. Sker det at systemet eller kunden ikke opfører sig som forventet, skal de mulige udfald udtænkes, og sådanne scenarier skal kunne behandles af systemet så vidt muligt.
 
 \begin{longtable}{ |p{120pt}|p{120pt}|p{120pt}| }
     \hline
@@ -33,7 +33,7 @@ De alternative flows beskrevet i diagrammet er fundet gennem en diskussion, hvor
     \hline
     \textbf{Alternative flows} & 0.1 Udgåede eller ødelagte varer skal afskrives & \\
     \hline
-    & 0.2 Afskrevne varer registreres i systemet. & 0.3 Lager status opdateret. \\
+    & 0.2 Afskrevne varer registreres i systemet. & 0.3 Lagerstatus opdateret. \\
     \hline
     & 4.1 Aktøren vil gerne modificere planen, retter det i plan-fanen og gemmer planen & \\
     \hline
