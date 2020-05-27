@@ -6,7 +6,7 @@ De vigtigste metoder og designmønstre vil blive demonstreret, herunder regressi
 
 \todo{insert code snips, especially the stuff relevant to the database, our architecture, parallelity, and of course our regression algorithm.}
 
-
+\section{Regression}
 En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvornår det betaler sig bedst, er ved at bruge en formel, bedre kendt som Economic Order Quantity (EOQ) Model \cite{EOQ}. Denne formel beregner bestillingsmængden ud fra efterspørgsel, pris per hjembestilling, kostpris per enhed og gennemsnitlig inventaromkostninger. Denne formel tager dog ikke højde for parametre såsom årstid, temperatur på dagen, antal solgt per dag, osv. For at kunne finde den optimale bestillingsmængde løbende, med et ønske om at altid have nok af alle varer på lager, kan parametre måned, temperatur, og daglige salg, bruges med regression. Regression er en teknik, hvorved man kan bestemme det statistiske forhold mellem to eller flere variabler, hvor ændringer i en dependent-variabel er associeret med, og afhænger af, én eller flere uafhængige variabler. Det bliver i dette projekt brugt til at forudsige f.eks. hvor mange Isbåde\cite{Isbåd} der skal bestilles over de næste uger, eller perioder. Når bestillingsmængden over tid når op til EOQ bestillingsmængden ville bestillingen af varen foretages.
 
 %Shouldn't put in a figure of a formula we aren't using.
@@ -20,6 +20,9 @@ En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvo
 %\end{landscape}
 
 Der kan så laves en \verb|productMap|, som lægges i \verb|PeriodicPlan| så der kan oprettes \verb|StorageOrder|s med de optimale bestillingsmængder. Desværre blev denne feature ikke implementeret færdig.
+
+\section{Singleton og SQL queries}
+
 
 \section{Parallelitet}\label{ch:parallelitet}
 Parallelitet er processen hvorved at dele af et program, kan køres på samme tid. Dele af programmer, som køres parallelt kaldes \texttt{Threads}\cite{JavaThreads}. Threads af en abstraktion, som benyttes i high-level programmerings sprog, som f.eks Java\cite{HighLevel}. Threads er meget ofte ydeevne-optimerende, eftersom at en moderne CPU meget ofte har flere kerner, hvilket resultere i at koden fra en thread ikke er afhængig af eksekveringen af koden fra en anden thread. Dette scenarie er det dog kun relevant, hvis der eksekveres en svær algoritme. Threads er også ydeevne-optimerende når det kommer til IO, eftersom at IO operationer ofte er langsommere, ift. læsning fra RAM eller læsning fra CPU cache\cite{OperatingSystems}. Et scenerie hvor et program henter mange forskellige billeder fra internettet~\ref{lst:badParralelExample}, er i dette eksempel \texttt{fetchImage(n)} som ses på kodeeksempel \ref{lst:badParralelExample}. Den henter billedet med ID fra en remote server, hvilket ikke er optimalt, fordi metoden \texttt{fetchAllTheImages} først venter på det første kald af \texttt{fetchImage} før den starter det næste. I dette eksempel har resultatet af første \texttt{fetchImage} kald ingen effekt på det næste. Det vil sige at metoden kunne blive paralleliseret~\ref{lst:goodParralelExample} og alle \texttt{fetchImage} metoder, som bruger ~100\% af eksekveringenstiden på at vente på et IO svar, kan køre på samtidigt. I denne nye version har vi stadig det samme loop, der er dog nogle ændringer: \texttt{finalI} er lavet fordi \texttt{i} kan ændre sig før Thread'en bliver kaldt. Dette resulterer i \texttt{fetchImage} metoder, der henter de forkerte billeder. I stedet for at kalde \texttt{fetchImage} metoden, så laves en Thread, som kalder den. 
