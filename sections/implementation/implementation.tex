@@ -19,7 +19,7 @@ En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvo
 
 Der kan så laves en \verb|productMap|, som lægges i \verb|PeriodicPlan| så der kan oprettes \verb|StorageOrder|s med de optimale bestillingsmængder. Desværre blev denne feature ikke implementeret færdig.
 
-\section{Regression algoritme}
+\subsection{Regression algoritme}
 For at kunne forudsige salget af produkter i forskellige tidsperioder skal en algoritme, der kan leve op til kravet om, at forudsige tendenser ud fra data og heraf estimere en optimal bestillingsmængde.
 
 Simpel matematisk regression var metoden vi valgte, eftersom det er simpelt at implementere og vi har tidligere erfaring med regression. Det er brugt til Use Cases, hvor regression giver mening at bruge. Der blev antaget at implementationen af vores egen regressions algoritme 100\% bunden ville være ekstremt tidkrævende, og beslutningen om at basere vores logik på andet kode blev truffet.
