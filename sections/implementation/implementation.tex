@@ -22,6 +22,9 @@ En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvo
 Der kan så laves en \verb|productMap|, som lægges i \verb|PeriodicPlan| så der kan oprettes \verb|StorageOrder|s med de optimale bestillingsmængder. Desværre blev denne feature ikke implementeret færdig.
 
 \section{Singleton og SQL queries}
+For at kunne snakke sammen med databasen kræves der både en database forbindelse (DBConnection), samt SQL queries eller statements som kan sendes til databasen. Som vist i designklassediagrammet\ref{fig:designclassdiagram} er der brugt en interface klasse til alle SQL klasserne. Dette er en del af DAO mønstret\cite{DAO}. SQL klasserne, såsom \texttt{StoragePlanSqlStore} står for at oprette og sende \texttt{PreparedStatement} til databasen for at kommunikere med den. Sådan kan data hentes, ændres, slettes og lagres i en database. 
+%insert Alex' stuff 
+
 
 
 \section{Parallelitet}\label{ch:parallelitet}
