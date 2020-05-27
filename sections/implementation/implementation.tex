@@ -4,10 +4,6 @@ I det kommende afsnit, er løsningen blevet implementeret. Nu med planlægningen
 Koden er skrevet ud fra designklassediagrammet \ref{fig:designclassdiagram}, og benytter sig af de designmønstre som er vist i designklassediagrammet. Udover det er der også udviklet en GUI ud fra kravene oplyst i \ref{sec:mockup}. Koden er skrevet i Java. 
 De vigtigste metoder og designmønstre vil blive demonstreret, herunder regression, parallelitet, singleton mønstret og database queries.
 
-\todo{insert code snips, especially the stuff relevant to the database, our architecture, parallelity}
-
-
-
 \section{Regression}
 En måde at beregne den optimale bestillingsmængde af en given vare, ud fra hvornår det betaler sig bedst, er ved at bruge en formel, bedre kendt som Economic Order Quantity (EOQ) Model \cite{EOQ}. Denne formel beregner bestillingsmængden ud fra efterspørgsel, pris per hjembestilling, kostpris per enhed og gennemsnitlig inventaromkostninger. Denne formel tager dog ikke højde for parametre såsom årstid, temperatur på dagen, antal solgt per dag, osv. For at kunne finde den optimale bestillingsmængde løbende, med et ønske om at altid have nok af alle varer på lager, kan parametre måned, temperatur, og daglige salg, bruges med regression. Regression er en teknik, hvorved man kan bestemme det statistiske forhold mellem to eller flere variabler, hvor ændringer i en dependent-variabel er associeret med, og afhænger af, én eller flere uafhængige variabler. Det bliver i dette projekt brugt til at forudsige f.eks. hvor mange Isbåde\cite{Isbåd} der skal bestilles over de næste uger, eller perioder. Når bestillingsmængden over tid når op til EOQ bestillingsmængden ville bestillingen af varen foretages.
 
@@ -202,23 +198,40 @@ Et godt brug at parallelitet i dette projekt kan findes i metoden \texttt{save()
     \caption{Eksempel på ingen brug af parallelitet\label{lst:ourParralelExample}}
 \end{listing}
 
-\section{UI}
+\section{UI} 
 %Skriv lidt om UI
 %Vi prioriterede funktionalitet meget i 1. iteration
 %Brugte skrifttype valgt fra \ref{skrifttype}
 %UI er "barebones" fordi funktionalitet > brugervenlighed i starten
 %Kan det den skal ud fra Diagrammer
 
-UI er bygget sådan, at når programmet åbnes, kommer der et vindue frem som viser en liste over nuværende lagerplaner, og en knap "Generer ny lagerplan" som fører brugeren videre til endnu et vindue.
-"Nuværende lagerplaner:" er tom fra starten, men som man tilføjer nye lagerplaner, kommer de oprettede lagerplaner frem på listen.
-Når der er oprettet en lagerplan på listen, kan man trykke på planen for at gå ind og redigere den.
+Når programmet åbnes, åbnes vinduet Lagerplaner som viser en liste over nuværende lagerplaner, og en knap "Generer ny lagerplan" som fører brugeren videre til endnu et vindue. Dette vindue er baseret på mock up figur \ref{fig:3storage} fra bilag \ref{app:mockups}. Vinduet er vist på figur \ref{fig:lagerplaner}.
 
-Det nye vindue som "Generer ny lagerplan" åbner, viser brugeren en periodeplansliste for den navngivede plan, samt et tekstfelt, hvor man kan navngive sin plan.
 
-"Periode planer for navn:" har en liste over udvalgte perioder. Her vælger man en bestemt periode som så åbner endnu et lille vindue op. Her kan man finpudse perioden til eget behov, og tilføje eller fjerne is produkter. 
 
-"TIlføj produkt" knappen åbner op for et lille vindue, hvori der er en liste over de is man kan vælge. derefter trykker man enden "OK" eller "Cancel". Den udvalgte is kommer frem på listen under "Produkter:"
-Når brugeren er færdig trykker man på "Gem" knappen, og lukker vinduet.
+"Nuværende lagerplaner:" er tom fra starten, men som man tilføjer nye lagerplaner, kommer de oprettede lagerplaner frem på listen. Dette er til forskel fra figuren, der i stedet viser enkelte varer. Det var besluttet at være bedre med enkelte lagerplaner, sådan man derinde kunne se de forskellige produkter. 
+Når der er oprettet en lagerplan på listen, kan man trykke på planen for at gå ind og redigere den. 
 
-Der er 3 handlingsknapper, "Aktiv", "Gem", og "Slet".
+Knappen "Generer ny lagerplan" åbner vinduet Periodeplaner som ses på figur \ref{fig:periodeplaner}, som viser brugeren en periodeplan-liste for den genererede plan, samt et tekstfelt, hvor man kan navngive sin plan. 
+
+"Periode planer for navn:" har en liste over udvalgte perioder. Her vælger man en bestemt periode som så åbner endnu et lille vindue op. Her kan man finpudse perioden til eget behov, og tilføje eller fjerne is produkter.   
+
+"TIlføj produkt" knappen åbner op for et lille vindue, hvori der er en liste over de is man kan vælge. derefter trykker man enden "OK" eller "Cancel". Den udvalgte is kommer frem på listen under "Produkter:" Når brugeren er færdig trykker man på "Gem" knappen, og lukker vinduet.  
+
+Der er 3 handlingsknapper, "Aktiv", "Gem", og "Slet". 
 "Aktiv" er speciel, fordi den har 2 stadier. Den kan være være "on" eller "off". Den er "off" fra start. Denne knap er til for at bestemme om planen er nuværende aktiv eller ikke. "Gem" knappen er ret simpel. Den gemmer alle de ændringer og tilføjelser der er lavet til den nye plan. "Slet" knappen sletter den nuværende lagerplan, som brugeren er inde at redigerere i.
+
+\todo{this figure is missing}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\hsize]{figures/implementation/UI/lagerplaner.png}
+    \caption{Lagerplaner vinduet}
+    \label{fig:lagerplaner}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\hsize]{figures/implementation/UI/periodeplaner.png}
+    \caption{Periodeplaner vinduet}
+    \label{fig:periodeplaner}
+\end{figure}
