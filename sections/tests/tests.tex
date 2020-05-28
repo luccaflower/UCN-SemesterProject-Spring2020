@@ -96,14 +96,17 @@ public void testMethod() {
 \texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
 
 \section{Test cases}
-For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden, som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Tests er foretaget på version: 'c0a7600a9f7b3b14893784f472f9b77ceba3b58a' af programmet, og vores test cases kan ses i Bilag~\ref{app:testcases}.
+For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier, som først bliver sat op i skemaet, og så testet i programmet. Til sidst vil der foretages ændringer i koden, som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test cases kan ses i Bilag~\ref{app:testcases}.
+
+System tests er foretaget på version: '5963d381d40797741fe5340dd65bc07e01857b8f'.
+
+Unit og integration tests er foretaget på version: 'c0a7600a9f7b3b14893784f472f9b77ceba3b58a'.
 
 \subsection{Unit tests}
 \subsubsection{Regression Tests}
-\todo{insert unit test skema}
 Test-klassen \texttt{RegressionTest} tester vores regressions algoritme, og for at teste dette skal der bruges en massiv mængde data. Derfor bruges en csv-fil, som beskriver relationerne mellem forskellige typer cement, og denne csv-fil kan findes på \texttt{res/concrete.csv}, og selve test koden kan findes på \texttt{src/hjem/is/test/RegressionTest.java}. \texttt{concrete.csv} består af test data hentet online~\cite{ExampleSales}. I disse tests bruges en assert metode, som vi selv har lavet, kaldet \texttt{assertApproxEquals}. Denne bruges eftersom at regression ikke handler om at lave et 100\% perfekt estimat, men bare godt nok til at det er brugbart.
 
-Ved udførsel af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle test bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer med index for en delta (forskel)på 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
+Ved udførsel af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle tests bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer med index for en delta (forskel)på 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
 
 Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implementation, hvor der bruges en alpha af 0.0001, den anden tester \texttt{NormalEquationFit}\cite{NormalEquation}. Begge tests består her. 
 
@@ -126,7 +129,7 @@ I disse tests har vi mocket \texttt{IStoragePlanStore} og \texttt{PeriodicPlanCo
 
 \texttt{generatesNew}-tests, som kan ses i Listing~\ref{lst:generatesNewEksempel}, tester, at en plan med et givet navn bliver oprettet i systemet. Det assertes, at \texttt{spc.get()} returnerer en \texttt{StoragePlan} med det angivne navn, og at der er oprettet en liste, der kan indeholde \texttt{PeriodicPlan}-objekter. 
 
-I \texttt{tellsDatabase}-tests, som ses i Listing~\ref{lst:tellsDatabaseEksempel}, tester vi, om vores controller-klasse sender de korrekte funktionskald til DAO. I setup-fasen sørger vi for, at det \texttt{StoragePlan}-objekt, som er oprettet til testen eksisterer i systemet. Da \texttt{StoragePlanController} ikke har en simpel \texttt{setCurrent()}-metode, bruger vi \texttt{select()} i stedet, som giver besked til DAO om at returnere en \texttt{StoragePlan} med det navn. DAO er i testen en stedfortræder, som er sat til at returnere det objekt, vi bruger i testen. \texttt{select()} setter dernæst det returnerede objekt til \texttt{current}. Betingelsen for, om en plan allerede eksisterer i databasen eller ej er, at \texttt{StoragePlanObjektet}'s \texttt{id}-felt er sat til en værdi. Hvis det er, skal den gemmes som eksisterende, ellers skal der gemmes en ny. Dette tester vi med \texttt{verify}, hvor vi asserter at den korrekte metode i DAO bliver kaldt.
+I \texttt{tellsDatabase}-tests, som ses i Listing~\ref{lst:tellsDatabaseEksempel}, tester vi, om vores controller-klasse sender de korrekte funktionskald til DAO. I setup-fasen sørger vi for, at det \texttt{StoragePlan}-objekt, som er oprettet til testen eksisterer i systemet. Da \texttt{StoragePlanController} ikke har en simpel \texttt{setCurrent()}-metode, bruger vi \texttt{select()} i stedet, som giver besked til DAO om at returnere en \texttt{StoragePlan} med det navn. DAO er i testen en stedfortræder, som er sat til at returnere det objekt, vi bruger i testen. \texttt{select()} angiver dernæst det returnerede objekt til \texttt{current}. Betingelsen for, om en plan allerede eksisterer i databasen eller ej, er at \texttt{StoragePlanObjektet}'s \texttt{id}-felt er sat til en værdi. Såfremt \texttt{id} har en værdi, skal den gemmes som eksisterende, ellers skal der gemmes en ny. Dette tester vi med \texttt{verify}, hvor vi asserter at den korrekte metode i DAO bliver kaldt.
 
 \begin{listing}[h]
     \begin{minted}[
@@ -210,7 +213,7 @@ public void failsToSetProductAmountToNegativeValue() {
     assertThrows(IllegalArgumentException.class, () -> ppc.setProductAmount("Isbåd", -2));
 }
     \end{minted}
-    \caption{\texttt{setsProductAmount} og \texttt{failsToSetProductAmount}-tests \label{lst:savesPeriodicPlanToDatabase}}
+    \caption{\texttt{setsProductAmount} og \texttt{failsToSetProductAmount}-tests \label{lst:setProductAmountTests}}
 \end{listing}
 
 \begin{listing}[h]
@@ -235,7 +238,7 @@ public void savesPeriodicPlanToDatabase() {
     }
 }
     \end{minted}
-    \caption{\texttt{setsProductAmount} og \texttt{failsToSetProductAmount}-tests \label{lst:savesPeriodicPlanToDatabase}}
+    \caption{\texttt{savesPeriodicPlanToDatabase}-test \label{lst:savesPeriodicPlanToDatabase}}
 \end{listing}
 
 Resultater for alle unit tests findes i Figur~\ref{fig:unittestresults}.
@@ -247,12 +250,20 @@ Resultater for alle unit tests findes i Figur~\ref{fig:unittestresults}.
 \end{figure}
 
 \subsection{Integration tests}
-Integration tests er tests som beskriver og tester, hvordan lagene i programmet interager med hinanden. Et godt eksempel er test af DAO \cite{DAO}, eftersom både metoden på DA objektet, og dens interaktion med databasen bliver testest i disse test cases.
+Integration tests er tests, som beskriver og tester, hvordan lagene i programmet interager med hinanden. Et godt eksempel er test af DAO \cite{DAO}, eftersom både metoden på DAO, og dens interaktion med databasen bliver testet i disse test cases.
 
 \subsection{System tests}
-For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde vores tages der udgangspunkt i Fully Dressed Use Case fra kapitel \ref{fullydressed}.
+For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde tages der udgangspunkt i Fully Dressed Use Case fra kapitel \ref{fullydressed}.
 
 Under figur \ref{fig:testgenerate} ses første iteration af test af UI. Herunder blev det testet, om det var muligt for en lagerplan at blive oprettet. Det viser sig, at det er muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan det implementeres, at den gemte lagerplan også bliver vist frem i UI. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå at man foretager en navneændring.
+
+Det skulle herunder gerne være muligt, at rette en eksisterende lagerplan. Testskemaet på figur \ref{fig:testedit} tester, at når man er inde på lagerplanen, skulle det være muligt at redigere mængden af varer, om planen er aktiv eller ej, og at se hvilken periode man redigerer. Dette var dog ikke muligt at gøre, eftersom den eksisterende lagerplan ikke blev vist. Testen viser at det skal implementeres således, at det er muligt at klikke ind på en lagerplan og rette den. 
+
+Det skulle være muligt at generere en plan, rette i planen ved f.eks. at tilføje et produkt, og så gemme planen igen. Ud fra testskemaet på figur \ref{fig:testeditperiod} kan det ses, at til trods for at gem-metoderne er testet, så fungerede det ikke sammen med UI på dette tidspunkt. Det skal evalueres sådan at det kan virke ordenligt.
+
+Der blev testet om det var muligt at slette en lagerplan, som allerede var oprettet. Som testskemaet på figur \ref{fig:testdelete} viser, så var det på det tidspunkt ikke muligt at vise planerne, så man kunne tilgå "slet" knappen. Derfor fejler begge tests. For at løse det skulle planerne selvfølgelig vises, sådan at det er muligt at rette og slette dem. UI for lagerplanen var ellers implementeret og virkede, men under testen her fejlede det.
+
+Samlet set viser vores system tests at UI ikke fungerer som den skal, og i næste iteration vil dette evalueres og laves om, sådan at det kan komme til at virke.
 
 \begin{figure}[p]
     \centering
@@ -261,16 +272,12 @@ Under figur \ref{fig:testgenerate} ses første iteration af test af UI. Herunder
     \label{fig:testgenerate}
 \end{figure}
 
-Det skulle herunder gerne være muligt, at rette en eksisterende lagerplan. Testskemaet på figur \ref{fig:testedit} tester, at når man er inde på lagerplanen, skulle det være muligt at redigere mængden af varer, om planen er aktiv eller ej, og at se hvilken periode man redigerer. Dette var dog ikke muligt at gøre, eftersom display af lagerplanen ikke eksisterer. Ud fra testen bliver der evalueret og derefter skal det implementeres således, at det er muligt at klikke ind på en lagerplan og rette den. 
-
 \begin{figure}[p]
     \centering
     \includegraphics[width=0.7\hsize]{figures/tests/edit_existing_plan.png}
     \caption{Scenarie: En lagerplan skal rettes}
     \label{fig:testedit}
 \end{figure}
-
-Det skulle være muligt at generere en plan, rette i planen ved f.eks. at tilføje et produkt, og så gemme planen igen. Ud fra testskemaet på figur \ref{fig:testeditperiod} kan det ses, at til trods for at gem-metoderne er testet, så fungerede det ikke samme med UI på dette tidspunkt. Det skal evalueres sådan at det kan virke ordenligt.
 
 \begin{figure}[p]
     \centering
@@ -279,16 +286,9 @@ Det skulle være muligt at generere en plan, rette i planen ved f.eks. at tilfø
     \label{fig:testeditperiod}
 \end{figure}
 
-Det skulle være muligt at slette en lagerplan, som allerede er oprettet. Som testskemaet på figur \ref{fig:testdelete} viser, så var det på det tidspunkt ikke muligt at vise planerne, så man kunne tilgå "slet" knappen. Derfor fejler begge tests. For at løse det skulle planerne selvfølgelig vises, sådan at det er muligt at rette og slette dem. UI for lagerplanen var ellers implementeret og virkede, men under testen her fejlede det.
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\hsize]{figures/tests/test_slet_lagerplan.png}
     \caption{Scenarie: En lagerplan skal slettes}
     \label{fig:testdelete}
 \end{figure}
-
-
-
-
-
