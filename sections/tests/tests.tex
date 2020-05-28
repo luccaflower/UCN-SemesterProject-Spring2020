@@ -100,6 +100,7 @@ For at gå systematisk til værks, skal der opsættes et skema med test cases\ci
 
 \subsection{Unit tests}
 \subsubsection{Regression Tests}
+\todo{insert unit test skema}
 Test-klassen \texttt{RegressionTest} tester vores regressions algoritme, og for at teste dette skal der bruges en massiv mængde data. Derfor bruges en csv-fil, som beskriver relationerne mellem forskellige typer cement, og denne csv-fil kan findes på \texttt{res/concrete.csv}, og selve test koden kan findes på \texttt{src/hjem/is/test/RegressionTest.java}. \texttt{concrete.csv} består af test data hentet online~\cite{ExampleSales}. I disse tests bruges en assert metode, som vi selv har lavet, kaldet \texttt{assertApproxEquals}. Denne bruges eftersom at regression ikke handler om at lave et 100\% perfekt estimat, men bare godt nok til at det er brugbart.
 
 Ved udførsel af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle test bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer med index for en delta (forskel)på 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
@@ -110,7 +111,7 @@ Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implem
 \texttt{StoragePlanControllerTest} og \texttt{PeriodicPlanControllerTest} er unit test-klasser for henholdsvis \texttt{StoragePlanController} og \texttt{PeriodicPlanController}. Disse tests er lavet ud fra vores test cases - vi har kigget på hver enkelt test case og vurderet, hvad den enkelte controller-klasses ansvar er i et givet scenarie, og så har vi skrevet en test, der tester for dét.
 
 \subsection{Integration tests}
-Integration tests er tests som beskriver og tester hvordan 2 lag interager med hinanden. Et godt eksempel er test af DAO objekter\cite{DAO}, eftersom både metoden på DAO objektet, og dens interaktion med databasen bliver testest i disse test cases.
+Integration tests er tests som beskriver og tester, hvordan lagene i programmet interager med hinanden. Et godt eksempel er test af DAO \cite{DAO}, eftersom både metoden på DA objektet, og dens interaktion med databasen bliver testest i disse test cases.
 \todo{write stuff here about our integration tests}
 %most important tests
 %What it tests
@@ -149,7 +150,7 @@ Det skulle være muligt at generere en plan, rette i planen ved f.eks. at tilfø
 
 Det skulle være muligt at slette en lagerplan, som allerede er oprettet. Som testskemaet på figur \ref{fig:testdelete} viser, så var det på det tidspunkt ikke muligt at vise planerne, så man kunne tilgå "slet" knappen. Derfor fejler begge tests. For at løse det skulle planerne selvfølgelig vises, sådan at det er muligt at rette og slette dem. UI for lagerplanen var ellers implementeret og virkede, men under testen her fejlede det.
 
-\begin{figure}[p]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.7\hsize]{figures/tests/test_slet_lagerplan.png}
     \caption{Scenarie: En lagerplan skal slettes}
