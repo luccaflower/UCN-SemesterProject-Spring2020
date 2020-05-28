@@ -40,7 +40,6 @@
 
 %Create danish project info
 \newcommand{\danishprojectinfo}[9]{%
-  \parbox[t]{\titlepageleftcolumnwidth}{
     \textbf{Titel:}\\ #1\bigskip\par
     \textbf{Projektperiode:}\\ #2\bigskip\par
     \textbf{Projektgruppe:}\\ #3\bigskip\par
@@ -49,10 +48,11 @@
     \textbf{Anslag:} #6\bigskip\par
     \textbf{Normalsider}: #7\bigskip\par
     \textbf{Sti til kildekode}:\\ #8 \bigskip\par
-    \textbf{Afleveringsdato:}\\ #9
-  }
+    \textbf{Revision ved aflevering:} \\ #9 \bigskip\par
 }
-
+\newcommand{\danishprojectinfocont}[1]{%
+  \textbf{Afleveringsdato:}\\ #1
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % An example environment
