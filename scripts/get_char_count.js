@@ -22,5 +22,3 @@ new pdfreader.PdfReader().parseFileItems(path.resolve(__dirname, "../master.pdf"
     i += item.text.length +1;
 
 })
-
-setTimeout(()=>{},100000000)
