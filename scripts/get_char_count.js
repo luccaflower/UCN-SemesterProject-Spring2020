@@ -8,19 +8,10 @@ pdflatex.args = pdflatex.args.map(x=>{
     }
     return x;
 })
-new Promise((resolve, reject)=>{
-    childProcess.exec("pdflatex -synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error small_master.tex", {
-    cwd: path.resolve(__dirname, "../")
-}, (err, stdin, stderr)=>{
-    console.log(err)
-    console.log(stdin)
-    console.log(stderr)
-})})
-/*
 
 let i = -1;
 
-new pdfreader.PdfReader().parseFileItems("master.pdf", (err, item)=>{
+new pdfreader.PdfReader().parseFileItems(path.resolve(__dirname, "../master.pdf"), (err, item)=>{
     if(!item){
         console.log(i);
         return;
@@ -30,6 +21,6 @@ new pdfreader.PdfReader().parseFileItems("master.pdf", (err, item)=>{
     }    
     i += item.text.length +1;
 
-})*/
+})
 
 setTimeout(()=>{},100000000)
