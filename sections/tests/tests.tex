@@ -96,7 +96,7 @@ public void testMethod() {
 \texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
 
 \section{Test cases}
-For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test cases kan ses i Bilag~\ref{app:testcases}.
+For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test cases, som vi har designet vores tests ud fra, kan ses i Bilag~\ref{app:testcases}.
 
 \subsection{Unit tests}
 \subsubsection{Regression Tests}
@@ -107,7 +107,143 @@ Ved udførsel af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, 
 Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implementation, hvor der bruges en alpha af 0.0001, den anden tester \texttt{NormalEquationFit}\cite{NormalEquation}. Begge tests består her. 
 
 \subsubsection{Controller tests}
-\texttt{StoragePlanControllerTest} og \texttt{PeriodicPlanControllerTest} er unit test-klasser for henholdsvis \texttt{StoragePlanController} og \texttt{PeriodicPlanController}. Disse tests er lavet ud fra vores test cases - vi har kigget på hver enkelt test case og vurderet, hvad den enkelte controller-klasses ansvar er i et givet scenarie, og så har vi skrevet en test, der tester for dét.
+\texttt{StoragePlanControllerTest} og \texttt{PeriodicPlanControllerTest} er unit test-klasser for henholdsvis \texttt{StoragePlanController} og \texttt{PeriodicPlanController}. Disse tests er lavet ud fra vores test cases - vi har kigget på hver enkelt test case og vurderet, hvad den enkelte controller-klasses ansvar er i et givet scenarie, og så har vi skrevet en test, der tester for dét. 
+
+I \texttt{StoragePLanControllerTest} har vi defineret følgende tests:
+\begin{itemize}
+    \item generatesNewPlanWithNameJuni
+    \item generatesNewPlanWithNameJuli
+    \item generatesNewPlanWithName100
+    \item tellsDatabaseToSaveNewStoragePlan
+    \item tellsDataBaseToUpdateExistingStoragePlan
+    \item setsCurrentPlanActive
+    \item tellsDatabaseToDeletePlanByName
+\end{itemize}
+Disse tests er navngivet efter det forventede udfald.
+
+I disse tests har vi mocket \texttt{IStoragePlanStore} og \texttt{PeriodicPlanController}, da disse begge indeholder kompleks funktionalitet, som \texttt{StoragePlanController} er afhængig af. Vi mocker ikke model-klasser, da disse kun indeholder data og simpel funktionalitet.
+
+\texttt{generatesNew}-tests, som kan ses i Listing~\ref{lst:generatesNewEksempel}, tester, at en plan med et givet navn bliver oprettet i systemet. Det assertes, at \texttt{spc.get()} returnerer en \texttt{StoragePlan} med det angivne navn, og at der er oprettet en liste, der kan indeholde \texttt{PeriodicPlan}-objekter. 
+
+I \texttt{tellsDatabase}-tests, som ses i Listing~\ref{lst:tellsDatabaseEksempel}, tester vi, om vores controller-klasse sender de korrekte funktionskald til DAO. I setup-fasen sørger vi for, at det \texttt{StoragePlan}-objekt, som er oprettet til testen eksisterer i systemet. Da \texttt{StoragePlanController} ikke har en simpel \texttt{setCurrent()}-metode, bruger vi \texttt{select()} i stedet, som giver besked til DAO om at returnere en \texttt{StoragePlan} med det navn. DAO er i testen en stedfortræder, som er sat til at returnere det objekt, vi bruger i testen. \texttt{select()} setter dernæst det returnerede objekt til \texttt{current}. Betingelsen for, om en plan allerede eksisterer i databasen eller ej er, at \texttt{StoragePlanObjektet}'s \texttt{id}-felt er sat til en værdi. Hvis det er, skal den gemmes som eksisterende, ellers skal der gemmes en ny. Dette tester vi med \texttt{verify}, hvor vi asserter at den korrekte metode i DAO bliver kaldt.
+
+\begin{listing}[h]
+    \begin{minted}[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos,
+        breaklines
+    ]{java}
+@Test
+public void generatesNewPlanWithNameJuni() {
+    String planName = "Juni";
+    spc.generateNew(planName);
+    assertEquals(planName,spc.get().getName());
+    assertNotNull(spc.get().getPeriodicPlans());
+}
+    \end{minted}
+    \caption{Eksempel på en \texttt{generatesNew}-test\label{lst:generatesNewEksempel}}
+\end{listing}
+
+\begin{listing}[h]
+    \begin{minted}[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos,
+        breaklines
+    ]{java}
+@Test
+public void tellsDatabaseToSaveNewStoragePlan() {
+    StoragePlan sp = new StoragePlan("June", false, new StorageMetaData(100f), new ArrayList<PeriodicPlan>());
+    try {
+        when(spsMock.getByName("June")).thenReturn(sp);
+    } catch (DataAccessException ignored) {
+    }
+    spc.select("June");
+    spc.save();
+
+    try {
+        verify(spsMock, times(1)).add(sp);
+        verify(spsMock, never()).update(sp);
+    } catch (DataAccessException ignored) {
+    }
+}
+    \end{minted}
+    \caption{Eksempel på en \texttt{tellsDatabase}-test\label{lst:tellsDatabaseEksempel}}
+\end{listing}
+
+\texttt{PeriodicPlanControllerTest} har følgende tests:
+\begin{itemize}
+    \item setsProductAmountFrom50To40
+    \item failsToSetProductAmountToNegativeValue
+    \item failsToSetProductAmountToZero
+    \item setsProductAmountFrom50To9999
+    \item savesPeriodicPlanToDatabase
+\end{itemize}
+Her ses det, at vi har to former for \texttt{setsProductAmount}-tests. Eksempler på disse findes i Listing~\ref{lst:setProductAmountTests}. I disse test assertes det, at \texttt{amount} af et \texttt{Product}-objekt enten sættes til den angivne værdi eller bliver afvist. Dernæst har vi \texttt{savesPeriodicPlanToDatabase}, som ses i Listing~\ref{lst:savesPeriodicPlanToDatabase}. Her bruges Mockito's \texttt{InOrder}-klasse til at bekræfte, at de \texttt{PeriodicPlan}-objekter, der bliver gemt, er korrekte og i korrekt rækkefølge.
+
+\begin{listing}[h]
+    \begin{minted}[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos,
+        breaklines
+    ]{java}
+@Test
+    public void setsProductAmountFrom50To40() {
+        ppc.setProductAmount("Isbåd", 40);
+        assertEquals(40, ppc.getAmountByName("Isbåd"));
+}
+    
+@Test
+public void failsToSetProductAmountToNegativeValue() {
+    assertThrows(IllegalArgumentException.class, () -> ppc.setProductAmount("Isbåd", -2));
+}
+    \end{minted}
+    \caption{\texttt{setsProductAmount} og \texttt{failsToSetProductAmount}-tests \label{lst:savesPeriodicPlanToDatabase}}
+\end{listing}
+
+\begin{listing}[h]
+    \begin{minted}[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos,
+        breaklines
+    ]{java}
+@Test
+public void savesPeriodicPlanToDatabase() {
+    InOrder inOrder = inOrder(ppsMock);
+    ppc.save();
+    try {
+        inOrder.verify(ppsMock).update(argThat((PeriodicPlan ppArg) -> ppArg.getProductMap().containsKey(leftProduct)), eq(false));
+        inOrder.verify(ppsMock).update(argThat((PeriodicPlan ppArg) -> ppArg.getProductMap().containsKey(product)));
+        inOrder.verify(ppsMock).update(argThat((PeriodicPlan ppArg) -> ppArg.getProductMap().containsKey(rightProduct)), eq(false));
+    } catch (DataAccessException ignored) {
+    }
+}
+    \end{minted}
+    \caption{\texttt{setsProductAmount} og \texttt{failsToSetProductAmount}-tests \label{lst:savesPeriodicPlanToDatabase}}
+\end{listing}
+
+Resultater for alle unit tests findes i Figur~\ref{fig:unittestresults}.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=1]{figures/tests/unittestresults}
+    \caption{Unit test-resultater \label{fig:unittestresults}}
+\end{figure}
 
 \subsection{Integration tests}
 Integration tests er tests som beskriver og tester hvordan 2 lag interager med hindanden, et godt eksempel er test af DAO objekter, eftersom at både metoden på DAO objektet, og om dens interaktion med databasen bliver testest i denne test case
