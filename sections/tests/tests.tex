@@ -96,7 +96,7 @@ public void testMethod() {
 \texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
 
 \section{Test cases}
-For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Tests er foretaget på version: 57a8dfa af programmet, og vores test case-skemaer ses herunder.
+For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Tests er foretaget på version: 57a8dfa af programmet, og vores test cases kan ses i Bilag~\ref{app:testcases}.
 
 \subsection{Unit tests}
 \subsubsection{Regression Tests}
@@ -105,6 +105,9 @@ Test-klassen \texttt{RegressionTest} tester vores regressions algoritme, og for 
 Ved udførsel af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle test bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer med index for en delta (forskel)på 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
 
 Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implementation, hvor der bruges en alpha af 0.0001, den anden tester \texttt{NormalEquationFit}\cite{NormalEquation}. Begge tests består her. 
+
+\subsubsection{Controller tests}
+\texttt{StoragePlanControllerTest} og \texttt{PeriodicPlanControllerTest} er unit test-klasser for henholdsvis \texttt{StoragePlanController} og \texttt{PeriodicPlanController}. Disse tests er lavet ud fra vores test cases - vi har kigget på hver enkelt test case og vurderet, hvad den enkelte controller-klasses ansvar er i et givet scenarie, og så har vi skrevet en test, der tester for dét.
 
 \subsection{Integration tests}
 Integration tests er tests som beskriver og tester hvordan 2 lag interager med hinanden. Et godt eksempel er test af DAO objekter\cite{DAO}, eftersom både metoden på DAO objektet, og dens interaktion med databasen bliver testest i disse test cases.
