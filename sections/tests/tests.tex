@@ -1,5 +1,5 @@
 \chapter{Tests}\label{ch:tests}
-Med koden designet og implementeret, kan tests af koden påbegyndes. Test er en del af Unified process modellen, hvori den fremgår både under Inception og Elaboration fasen (det gælder også construction og Transistion, men det ikke relevant for dette project). Test er en nødvendig del af Unified process, ikke fordi det program der bliver lavet ikke må have nogle fejl, men fordi det kan give et godt overblik over hvad der kan forbedres\cite{sestoft2008systematic}. Der er brugt JUnit 5 til at teste de forskellige metoder. Herunder kan det ganske vidst ses, at White-Box testing, samt Black-box testing benyttes. 
+Med koden designet og implementeret, kan tests af koden påbegyndes. Test er en del af Unified process modellen, hvori den fremgår både under Inception og Elaboration fasen (det gælder også construction og Transistion, men det ikke relevant for dette project). Test er en nødvendig del af Unified process, ikke fordi det program der bliver lavet ikke må have nogle fejl, men fordi det kan give et godt overblik over hvad der kan forbedres\cite{sestoft2008systematic}. Der er brugt JUnit 5 til at teste de forskellige metoder. Herunder ses det også, at White-Box testing, samt Black-box testing benyttes. 
 
 \section{Fremgangsmåde}
 White-box testing er at teste selve programmet. Altså, at alle delene af programmet er blevet udført. Det gode ved White-box testing er, at det både er en god systematisk metode til at opdage fejl, samt også en hurtig og effektiv metode. Måden det foregår på, er at for hver eneste data input sæt der bruges, skal der også være et forventet output specifiseret. Herefter vil programmet køre med alle data input sæt og de givende outputs bliver sammenlignet med de forventede\cite{sestoft2008systematic}.
@@ -96,18 +96,18 @@ public void testMethod() {
 \texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
 
 \section{Test cases}
-For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test case-skemaer ses herunder.
+For at gå systematisk til værks, skal der opsættes et skema med test cases\cite{Heumann}. Der bliver altså lavet flere scenarier som først blive sat op i skemaet, så testet i programmet, og til sidst vil der foretages ændringer i koden som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Tests er foretaget på version: 57a8dfa af programmet, og vores test case-skemaer ses herunder.
 
 \subsection{Unit tests}
 \subsubsection{Regression Tests}
-Test-klassen \texttt{RegressionTest} tester vores regressions algoritme, og for at teste dette skal der bruges en massiv mængde data. Derfor bruges en csv-fil, som beskriver relationerne mellem forskellige typer cement, denne csv-fil kan findes på \texttt{res/concrete.csv}, og selve test koden kan findes på \texttt{src/hjem/is/test/RegressionTest.java}. I disse tests bruges en assert metode, som vi selv har lavet, kaldet \texttt{assertApproxEquals}. Denne bruges eftersom at regression ikke handler om at lave et 100\% perfekt estimat, men bare godt nok til at det er brugbart.
+Test-klassen \texttt{RegressionTest} tester vores regressions algoritme, og for at teste dette skal der bruges en massiv mængde data. Derfor bruges en csv-fil, som beskriver relationerne mellem forskellige typer cement, og denne csv-fil kan findes på \texttt{res/concrete.csv}, og selve test koden kan findes på \texttt{src/hjem/is/test/RegressionTest.java}. \texttt{concrete.csv} består af test data hentet online\cite{ExampleSales}. I disse tests bruges en assert metode, som vi selv har lavet, kaldet \texttt{assertApproxEquals}. Denne bruges eftersom at regression ikke handler om at lave et 100\% perfekt estimat, men bare godt nok til at det er brugbart.
 
-Ved udførsel af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle test bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer index for en delta af 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
+Ved udførsel af testen hentes concrete.csv filen ind i en \texttt{@BeforeAll}, eftersom at alle test bruger den samme data. Data'en laves om til \texttt{Observation} objekter, eftersom at det er den type objekt vores implementation bruger som argument. Begge tests tester at algoritmen kan forudsige at \texttt{compressivestrength} på index 30 passer med index for en delta (forskel)på 20 af den faktiske værdi, begge tests printer også deres $r^{2}$ værdi og deres præcision.
 
 Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implementation, hvor der bruges en alpha af 0.0001, den anden tester \texttt{NormalEquationFit}\cite{NormalEquation}. Begge tests består her. 
 
 \subsection{Integration tests}
-Integration tests er tests som beskriver og tester hvordan 2 lag interager med hindanden, et godt eksempel er test af DAO objekter, eftersom at både metoden på DAO objektet, og om dens interaktion med databasen bliver testest i denne test case
+Integration tests er tests som beskriver og tester hvordan 2 lag interager med hinanden. Et godt eksempel er test af DAO objekter\cite{DAO}, eftersom både metoden på DAO objektet, og dens interaktion med databasen bliver testest i disse test cases.
 \todo{write stuff here about our integration tests}
 %most important tests
 %What it tests
@@ -115,9 +115,9 @@ Integration tests er tests som beskriver og tester hvordan 2 lag interager med h
 %did it pass?
 
 \subsection{System tests}
-For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde vores Fully Dressed Use Case fra kapitel \ref{fullydressed}.
+For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde vores tages der udgangspunkt i Fully Dressed Use Case fra kapitel \ref{fullydressed}.
 
-Under figur \ref{fig:testgenerate} er første iteration af test af UI blevet testest. Herunder det det blevet testet, om det muligt for en lagerplan at blive oprettet. Det viser sig, at det er muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan det implementeres, at den gemte lagerplan også bliver vist frem. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå navneændring.
+Under figur \ref{fig:testgenerate} ses første iteration af test af UI. Herunder blev det testet, om det var muligt for en lagerplan at blive oprettet. Det viser sig, at det er muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan det implementeres, at den gemte lagerplan også bliver vist frem i UI. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå at man foretager en navneændring.
 
 \begin{figure}[p]
     \centering
@@ -126,7 +126,7 @@ Under figur \ref{fig:testgenerate} er første iteration af test af UI blevet tes
     \label{fig:testgenerate}
 \end{figure}
 
-Det skulle herunder gerne være muligt, at rette en eksisterende lagerplan. Testskemaet på figur \ref{fig:testedit} tester, at når man er inde på lagerplanen, skulle det være muligt at redigere mængden af varer, om planen er aktiv eller ej, og hvilken periode man redigerer.  Dette er dog ikke muligt at gøre, når display af lagerplanen ikke eksisterer. Heri blivet test evalueret og derefter skal det impelmeteres således, at det muligt at klikke ind på en lagerplan og rette den. 
+Det skulle herunder gerne være muligt, at rette en eksisterende lagerplan. Testskemaet på figur \ref{fig:testedit} tester, at når man er inde på lagerplanen, skulle det være muligt at redigere mængden af varer, om planen er aktiv eller ej, og at se hvilken periode man redigerer. Dette var dog ikke muligt at gøre, eftersom display af lagerplanen ikke eksisterer. Ud fra testen bliver der evalueret og derefter skal det implementeres således, at det er muligt at klikke ind på en lagerplan og rette den. 
 
 \begin{figure}[p]
     \centering
@@ -135,7 +135,7 @@ Det skulle herunder gerne være muligt, at rette en eksisterende lagerplan. Test
     \label{fig:testedit}
 \end{figure}
 
-Det skulle være muligt at generere en plan, rette i planen ved fx at tilføje et produkt, og så gemme planen igen. Ud fra testskemaet på figur \ref{fig:testeditperiod} kan det ses, at til trods for at gem-metoderne er testet, så fungerede det ikke samme med UI på dette tidspunkt. Det skal evalueres sådan at det kan virke ordenligt.
+Det skulle være muligt at generere en plan, rette i planen ved f.eks. at tilføje et produkt, og så gemme planen igen. Ud fra testskemaet på figur \ref{fig:testeditperiod} kan det ses, at til trods for at gem-metoderne er testet, så fungerede det ikke samme med UI på dette tidspunkt. Det skal evalueres sådan at det kan virke ordenligt.
 
 \begin{figure}[p]
     \centering
@@ -144,7 +144,7 @@ Det skulle være muligt at generere en plan, rette i planen ved fx at tilføje e
     \label{fig:testeditperiod}
 \end{figure}
 
-Det skulle være muligt at slette en lagerplan, som allerede er oprettet. Som testskemaet på figur \ref{fig:testdelete} viser, så var det på det tidspunkt ikke muligt at vise planerne så man kunne tilgå "slet" knappen. Derfor fejler begge tests. For at løse det skulle planerne selvfølgelig vises, sådan det er muligt at rette og slette dem. UI for lagerplanen var eller implementeret og virkede, men under testen her fejlede det.
+Det skulle være muligt at slette en lagerplan, som allerede er oprettet. Som testskemaet på figur \ref{fig:testdelete} viser, så var det på det tidspunkt ikke muligt at vise planerne, så man kunne tilgå "slet" knappen. Derfor fejler begge tests. For at løse det skulle planerne selvfølgelig vises, sådan at det er muligt at rette og slette dem. UI for lagerplanen var ellers implementeret og virkede, men under testen her fejlede det.
 
 \begin{figure}[p]
     \centering
