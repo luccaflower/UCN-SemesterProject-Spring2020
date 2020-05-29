@@ -1,7 +1,9 @@
 require "json"
 require "pdf-reader"
 
-if ENV["EXEC"] == "Y"
+if ARGV.include?("--fast")
+    Process.detach(Process.spawn("ruby " + __FILE__))
+else
     latex_file = "small_master"
 
     command = JSON.parse(File.read(".vscode/settings.json"))["latex-workshop.latex.tools"].find {|x| x["name"] == "pdflatex"}
@@ -14,6 +16,5 @@ if ENV["EXEC"] == "Y"
     char_count = pdf.pages.map {|x| x.text}.join(" ").gsub(/\s+/, " ").length
     File.write("current_char_count.tmp", char_count)
     File.write("current_page_count.tmp", (char_count / 2400).round)
-else
-    Process.detach(Process.spawn({"EXEC" => "Y"}, "ruby " + __FILE__))
 end
+exit
