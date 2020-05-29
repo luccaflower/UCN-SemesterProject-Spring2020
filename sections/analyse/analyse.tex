@@ -1,9 +1,9 @@
 \chapter{Analyse}\label{ch:analyse}
 
-Kravene for systemet er nu sat, og analyse og design aktiviteten under Unified Process\cite{UnifiedProcess}. Under analysen er SSD-diagrammet blevet konstrueret, samt en operationskontrakt. Derefter kan systemet designes. 
+Kravene for systemet er nu sat, og analyse og design aktiviteten under Unified Process \cite{UnifiedProcess}. Under analysen er SSD-diagrammet blevet konstrueret, samt en operationskontrakt. Derefter kan systemet designes. 
 
 \section{Systemsekvensdiagram}
-Systensekvensdiagrammet\cite{Larman2004} adresserer, hvordan brugeren og systemet kommunikerer frem og tilbage. Dette SSD-diagram er lavet ud fra Fully Dressed Use Case, automatisk lagerstyring.
+Systensekvensdiagrammet \cite{Larman2004} adresserer, hvordan brugeren og systemet kommunikerer frem og tilbage. Dette SSD-diagram er lavet ud fra Fully Dressed Use Case, automatisk lagerstyring.
 
 \begin{figure}[H]
     \centering
@@ -18,7 +18,7 @@ Såfremt lagerplanen har brug for ændringer, skal der genereres en ny lagerplan
 Så snart de varer bestilt med en StorageOrder er ankommet til varehuset, opdateres lageret ud fra hvilke produkter der blev bestilt.
 
 \section{Operationskontrakt}
-Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en Operationskontrakt\cite{Larman2004}. Operationskontrakten beskriver i flere detaljer, hvad der sker af ændringer i programmet under hvert trin i Use Casen. Noget som ikke fremkommer tydeligt under disse trin er, at så snart en StoragePlan er genereret vil denne indeholde en masse PeriodicPlans. Disse PeriodicPlan objekter er tænkt som værende f.eks. en ugeplan, og der vil derfor være mange PeriodicPlans i en StoragePlan. Når de er oprettet, vil PeriodicPlan oprette en StorageOrder, som er en varebestilling. Såfremt perioden er for en uge, vil der hver uge tages en ny PeriodicPlan fra StoragePlan, som opretter en ny StorageOrder. Dette fortsætter indtil der ikke er flere PeriodicPlans eller starter forfra ved at generere en ny StoragePlan.
+Ud fra SSD diagrammet og Fully Dressed Use Casen kan der udvikles en Operationskontrakt \cite{Larman2004}. Operationskontrakten beskriver i flere detaljer, hvad der sker af ændringer i programmet under hvert trin i Use Casen. Noget som ikke fremkommer tydeligt under disse trin er, at så snart en StoragePlan er genereret vil denne indeholde en masse PeriodicPlans. Disse PeriodicPlan objekter er tænkt som værende f.eks. en ugeplan, og der vil derfor være mange PeriodicPlans i en StoragePlan. Når de er oprettet, vil PeriodicPlan oprette en StorageOrder, som er en varebestilling. Såfremt perioden er for en uge, vil der hver uge tages en ny PeriodicPlan fra StoragePlan, som opretter en ny StorageOrder. Dette fortsætter indtil der ikke er flere PeriodicPlans eller starter forfra ved at generere en ny StoragePlan.
 
 \begin{center}
     \begin{longtable}{ |p{360pt}| }
