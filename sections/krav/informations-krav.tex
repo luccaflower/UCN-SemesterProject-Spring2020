@@ -3,7 +3,7 @@ Informationskravene omhandler hvilke informationer systemet skal registrere, så
 kan designes, som binder konceptuelle klasser sammen.
 
 \subsection{Domænemodel}\label{Domainmodel}
-Domænemodellen\cite{Larman2004} beskriver de relationer klasserne har til hinanden, samt hvilke attributter de indeholder. Her laves Domænemodellen ud fra Kandidatklasserne og tilhørende arkitekturprincipper.
+Domænemodellen \cite{Larman2004} beskriver de relationer klasserne har til hinanden, samt hvilke attributter de indeholder. Her laves Domænemodellen ud fra Kandidatklasserne og tilhørende arkitekturprincipper.
 
 \begin{landscape}
 \begin{figure}[p]
@@ -14,7 +14,7 @@ Domænemodellen\cite{Larman2004} beskriver de relationer klasserne har til hinan
 \end{figure}
 \end{landscape}
 
-Domænemodellen som ses ovenfor på figur \ref{fig:domain_model} viser, hvordan klasserne er repræsenteret og hvilke relationer de har til hinanden. SeasonalPlan er planen, som beskriver hvordan lageret skal være hos Hjem-IS. Sæsonplanen for lagerbeholdningen bestemmes af hvilke produkter der er på lager, og hvor meget der bliver solgt. Ud fra dette kan der laves en bestilling (StorageOrder), som indeholder informationer om, hvilke produkter der skal bestilles, hvor mange, og hvilken Supplier de skal bestilles fra. Disse bestillingsplaner bestemmer sæsonplanen.
+Domænemodellen som ses ovenfor på Figur \ref{fig:domain_model} viser, hvordan klasserne er repræsenteret og hvilke relationer de har til hinanden. SeasonalPlan er planen, som beskriver hvordan lageret skal være hos Hjem-IS. Sæsonplanen for lagerbeholdningen bestemmes af hvilke produkter der er på lager, og hvor meget der bliver solgt. Ud fra dette kan der laves en bestilling (StorageOrder), som indeholder informationer om, hvilke produkter der skal bestilles, hvor mange, og hvilken Supplier de skal bestilles fra. Disse bestillingsplaner bestemmer sæsonplanen.
 For at kunne gennemføre Use Casen er det ikke nødvendigt endnu at tage højde for Sales og Users, da det kun er Products og Storage ændringer, der er relevante. 
 
 \begin{figure}[H]
@@ -27,9 +27,9 @@ For at kunne gennemføre Use Casen er det ikke nødvendigt endnu at tage højde 
 Domænemodellen ovenfor forholder sig kun til de relevante klasser for at kunne gennemføre Use Casen Automatisk Lagerstyring. Det er ud fra denne at databasen vil blive designet.
 
 \subsection{Relationelle modeller}
-Domænemodellen er på plads og der kan udvikles en Relational model af databasen\cite{DatabaseSystems}. Der vil først tages udgangspunkt i at mappe hver klasse til en tabel, hvor der tages højde for klassenavn og attributter.
-Da der ingen nedarvning er mellem nogen af klasserne, er det ikke relevant at tænke i pull-up og pull-down\cite{Larman2004}. Hver klasse får derfor sin egen tabel.
-Dernæst skal associationerne laves ud fra, om der er tale om 1-til-1, 1-til-mange eller mange-til-mange relationer\cite{DatabaseSystems}. 
+Domænemodellen er på plads og der kan udvikles en Relational model af databasen \cite{DatabaseSystems}. Der vil først tages udgangspunkt i at mappe hver klasse til en tabel, hvor der tages højde for klassenavn og attributter.
+Da der ingen nedarvning er mellem nogen af klasserne, er det ikke relevant at tænke i pull-up og pull-down \cite{Larman2004}. Hver klasse får derfor sin egen tabel.
+Dernæst skal associationerne laves ud fra, om der er tale om 1-til-1, 1-til-mange eller mange-til-mange relationer \cite{DatabaseSystems}. 
 
 \begin{figure}[H]
     \centering
@@ -39,7 +39,7 @@ Dernæst skal associationerne laves ud fra, om der er tale om 1-til-1, 1-til-man
 \end{figure}
 
 Reglerne for de forskellige relationer og hvordan de skal forbindes er fulgt under udviklingen af den Relationelle model, hvilket bl.a. kan ses på 'product\_supplier' tabellen. Denne forbinder en mange-til-mange association mellem Product og Supplier. 
-Nu hvor tabellen er lavet, kan den normaliseres. Der vil blive normaliseret ud fra 4 normalformer: 1NF, 2NF, 3NF og Boyce-Codd Normalform (BCNF)\cite{DatabaseSystems}.
+Nu hvor tabellen er lavet, kan den normaliseres. Der vil blive normaliseret ud fra 4 normalformer: 1NF, 2NF, 3NF og Boyce-Codd Normalform (BCNF) \cite{DatabaseSystems}.
 
 Efter at have kigget tabellen igennem kan det ses, at 1NF er opfyldt da alle værdier er atomiske.
 For at opfylde 2NF skal 1NF være opfyldt, og der skal ikke være nogle partial dependencies. Da der skal bruges en Map mellem 'products' og 'seasonal\_plans' laves der en ny tabel: 'seasonal\_plan\_product\_maps'. Denne vil også indeholde 'amount'.
@@ -51,7 +51,7 @@ For at opfylde 2NF skal 1NF være opfyldt, og der skal ikke være nogle partial 
     \label{fig:relational_model_1}
 \end{figure}
 
-For at opfylde 3NF skal 2NF være opfyldt, og der må ikke være nogle transitive afhængigheder\cite{DatabaseSystems}. Det minder meget om kravet til 2NF, og det kan konkluderes at der ingen transitive afhængigheder er.
+For at opfylde 3NF skal 2NF være opfyldt, og der må ikke være nogle transitive afhængigheder \cite{DatabaseSystems}. Det minder meget om kravet til 2NF, og det kan konkluderes at der ingen transitive afhængigheder er.
 For at opfylde BCNF kræves det at 3NF er opfyldt og at samtlige determinanter er kandidatnøgler. De determinanter, der er I den relationelle model er samtlige attributter med 'id' og '...\_id' på nær 'tracking\_id'. 'tracking\_id' og 'sent\_date' kan være null når tuplen oprettes, og opdateres senere. Der er derfor kun kandidatnøgler.
-Det kan nu konkluderes at den relationelle model er på BCNF og kan udvikles i Microsoft SQL med Microsoft SQL Server Management Studio\cite{MSSQL}. Først skal der laves en analyse over systemet ud fra de funktionelle krav og informationskrav der er stillet op indtil videre. 
+Det kan nu konkluderes at den relationelle model er på BCNF og kan udvikles i Microsoft SQL med Microsoft SQL Server Management Studio \cite{MSSQL}. Først skal der laves en analyse over systemet ud fra de funktionelle krav og informationskrav der er stillet op indtil videre. 
 
