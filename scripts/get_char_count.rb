@@ -13,6 +13,7 @@ if ENV["EXEC"] == "Y"
     pdf = PDF::Reader.new(latex_file + ".pdf")
     char_count = pdf.pages.map {|x| x.text}.join(" ").gsub(/\s+/, " ").length
     File.write("current_char_count.tmp", char_count)
+    File.write("current_page_count.tmp", (char_count / 2400).round)
 else
-    Process.spawn({"EXEC" => "Y"}, "ruby " + __FILE__)
+    Process.detach(Process.spawn({"EXEC" => "Y"}, "ruby " + __FILE__))
 end
