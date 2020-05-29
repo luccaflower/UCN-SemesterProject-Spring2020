@@ -2,6 +2,13 @@
 \input{setup/hyphenations.tex}% 
 \input{setup/macros.tex}% my new macros
 
+\immediate\write18{ruby scripts/get_char_count.rb}
+\openin 1="current_char_count.tmp"
+\read 1 to \charactercount
+\closein 1
+
+
+
 \begin{document}
 %frontmatter
 \pagestyle{empty} %disable headers and footers
