@@ -3,21 +3,19 @@ Nu hvor virksomheden er blevet undersøgt og hovedproblemerne er opsat, kan der 
 
 \section{Workflow Diagrammer}
 
-Der er lavet Workflow diagrammer\cite{Workflow} for de opgaver der bliver udført hos Hjem-IS Aalborg depotet nu. Disse workflows beskriver i store træk, hvilke trin der er i opgaverne. Disse workflows vil også blive brugt til at finde ud af, hvilke af opgaverne der skal bruges og laves om, så det kan passe til et nyt system. Eftersom salg af is ude ved kunderne ikke er en Use Case på selve depotet, tages den ikke med her.
+Der er lavet Workflow diagrammer \cite{Workflow} for de opgaver der bliver udført hos Hjem-IS Aalborg depotet nu. Disse diagrammer kan ses i Figur~\ref{fig:workflows}. Disse workflows beskriver i store træk, hvilke trin der er i opgaverne. Disse workflows vil også blive brugt til at finde ud af, hvilke af opgaverne der skal bruges og laves om, så det kan passe til et nyt system. Eftersom salg af is ude ved kunderne ikke er en Use Case på selve depotet, tages den ikke med her.
 
-\begin{figure}[H]
+\begin{figure}[p]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/Forundersøgelse/workflows.png}
     \caption{Workflow diagram}
     \label{fig:workflows}
 \end{figure}
 
-
-
 De workflows der skal bruges til at kunne lave automatisk lagerstyring er Bestil Vare, Modtag Vare, Optælling af isbilen og Afskriv vare. Alle disse trin er nødvendige for at der kan laves en forudsigelse af, hvor mange varer der skal bestilles hjem. For at det kan lade sig gøre at lave et estimat for hvor mange af hvert produkt, der skal bestilles hjem, kræves det at der i forvejen er et lager med varer, og mindst én dags salgsstatistik tilgængelig. Det er vigtigt at lave optælling af isbilen for at dobbelttjekke at lageret passer - det er trods alt den data der bruges, til at bedømme hvor meget der skal bestilles hjem. Såfremt en vare skal afskrives, så skal lageret også opdateres så det stemmer. Til sidst skal der selvfølgelig bestilles varer, som så skal modtages og registreres som værende på lager. For at udpensle trinene i opgaverne laves der en medarbejder-mål-tabel over de workflows, der er opstillet i figur \ref{fig:workflows}.
 
 \section{Medarbejder-mål Tabel}
-Ud fra Workflowet er der opstillet en medarbejder-mål tabel\cite{Larman2004}. Dens formål er at belyse de arbejdsopgaver, der er hos Hjem-IS, samt give et indblik i, hvilke behov der skal opfyldes for, at finde krav til et automatisk lagerstyringssystem.
+Ud fra Workflowet er der opstillet en medarbejder-mål tabel \cite{Larman2004}. Dens formål er at belyse de arbejdsopgaver, der er hos Hjem-IS, samt give et indblik i, hvilke behov der skal opfyldes for, at finde krav til et automatisk lagerstyringssystem.
 Nedenfor er der udarbejdet medarbejder-mål tabellen. Den er opdelt i fire rækker som består af; "Medarbejder", "Opgave", "Mål", og "Trin".
 "Medarbejder" er rækken hvor man beskriver, hvilken aktør, der skal udføre en eller flere handlinger (f.eks. Ismand). Der er ikke kun én rolle hos Hjem-IS, så det er vigtigt at få udpeget hvem, der udfører hvad.
 "Opgave" rækken viser de opgaver, som skal udføres af aktøren på samme linje. Det er som regel meget vigtige opgaver, som er relevante for Hjem-IS' drift.
@@ -150,9 +148,9 @@ Nedenfor er der udarbejdet medarbejder-mål tabellen. Den er opdelt i fire rækk
 \end{center}
 
 \section{Use Case Diagram}\label{usecase}
-Nedenunder ses der et use case diagram lavet ud fra medarbejder-mål tabellen. Use case diagrammet giver et godt overblik over, hvilke opgaver de forskellige aktører udfører mellem aktør og system \cite{visual-paradigm.com}. 
+I Figure~\ref{fig:usecasediagram} ses der et use case diagram lavet ud fra medarbejder-mål tabellen. Use case diagrammet giver et godt overblik over, hvilke opgaver de forskellige aktører udfører mellem aktør og system \cite{visual-paradigm.com}. 
 
-\begin{figure}[H]
+\begin{figure}[p]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/Forundersøgelse/use_case_diagram.png}
     \caption{Use Case diagram}
