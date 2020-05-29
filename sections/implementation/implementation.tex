@@ -108,7 +108,7 @@ public List<PeriodicPlan> getByStoragePlan(StoragePlan storagePlan) throws DataA
 Parallelitet er processen hvorved dele af et program, kan køres på samme tid, eller parallelt. Dele af programmer, som køres parallelt kaldes \texttt{Threads} \cite{JavaThreads}. Threads af en abstraktion, som benyttes i high-level programmeringssprog, som f.eks Java\cite{HighLevel}. Threads er meget ofte ydeevne-optimerende, eftersom en moderne CPU meget ofte har flere kerner \cite{MultiCores}, hvilket resulterer i at koden fra en Thread ikke er afhængig af eksekveringen af koden fra en anden thread. Dette scenarie er det dog kun relevant, hvis der eksekveres en svær algoritme. Threads er også ydeevne-optimerende når det kommer til IO, eftersom at IO operationer ofte er langsommere, ift. læsning fra RAM eller læsning fra CPU cache \cite{OperatingSystems}. Et scenerie hvor et program henter mange forskellige billeder fra internettet (se listing \ref{lst:badParralelExample}), er i dette eksempel \texttt{fetchImage(n)} som ses på listing \ref{lst:badParralelExample}. Den henter billedet med ID fra en remote server, hvilket ikke er optimalt, fordi metoden \texttt{fetchAllTheImages} først venter på det første kald af \texttt{fetchImage} før den starter det næste. I dette eksempel har resultatet af første \texttt{fetchImage} kald ingen effekt på det næste. Det vil sige at metoden kunne blive paralleliseret (se listing \ref{lst:goodParralelExample}) og alle \texttt{fetchImage} metoder, som bruger ~100\% af eksekveringenstiden på at vente på et IO svar, kan køre på parallelt i stedet. I denne nye version har vi stadig det samme loop, der er dog nogle ændringer: \texttt{finalI} er lavet fordi \texttt{i} kan ændre sig før Thread'en bliver kaldt. Dette resulterer i \texttt{fetchImage} metoder, der henter de forkerte billeder. I stedet for at kalde \texttt{fetchImage} metoden, så laves en Thread, som kalder den. 
 Dernest lægges den i \texttt{threads} listen, og til sidst kaldes \texttt{join} metoden på alle threads for at sikre de er færdige før \texttt{fetchAllTheImages} afsluttes.
 
-\begin{listing}[tb]
+\begin{listing}[h]
     \begin{minted}
     [
         frame=lines,
@@ -127,7 +127,7 @@ public void fetchAllTheImages(int index) {
     \caption{Eksempel på ingen brug af parallelitet\label{lst:badParralelExample}}
 \end{listing}
 
-\begin{listing}[tb]
+\begin{listing}[h]
     \begin{minted}
     [
         frame=lines,
@@ -160,7 +160,7 @@ public void fetchAllTheImages(int index) {
 Et godt eksempel på brug af parallelitet i dette projekt, kan findes i metoden \texttt{save()} i klassen 
 \texttt{PeriodicPlanController} på Listing \ref{lst:ourParralelExample}. Her er alle 3 \texttt{store.update()} samt \texttt{store.delete()} langsomme IO operationer, så denne metode gør som Listing \ref{lst:goodParralelExample}, laver parallelitet med threads, starter dem, og til sidst venter på de er færdige.     
  
-\begin{listing}[p]
+\begin{listing}[h]
     \begin{minted}
     [
         frame=lines,

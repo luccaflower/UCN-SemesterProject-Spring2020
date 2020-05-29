@@ -1,10 +1,10 @@
 \chapter{Tests}\label{ch:tests}
-Med koden designet og implementeret, kan tests af koden påbegyndes. Tests er en del af Unified Process modellen \cite{UnifiedProcess}, hvori den fremgår både under Inception og Elaboration fasen (det gælder også Construction og Transistion, men det ikke relevant for dette projekt). Tests er en nødvendig del af Unified Process, ikke fordi det program der bliver lavet ikke må have nogle fejl, men fordi det kan give et godt overblik over hvad der kan forbedres \cite{sestoft2008systematic}. Der er brugt JUnit 5\cite{JUnit} til at teste de forskellige metoder. Herunder ses det også, at White-Box testing, samt Black-box testing benyttes. 
+Med koden designet og implementeret, kan tests af koden påbegyndes. Tests er en del af Unified Process modellen \cite{UnifiedProcess}, hvori den fremgår både under Inception og Elaboration fasen (det gælder også Construction og Transistion, men det ikke relevant for dette projekt). Tests er en nødvendig del af Unified Process, ikke fordi det program der bliver lavet ikke må have nogle fejl, men fordi det kan give et godt overblik over, hvad der kan forbedres \cite{sestoft2008systematic}. Der er brugt JUnit 5\cite{JUnit} til at teste de forskellige metoder. Herunder ses det også, at White-Box testing, samt Black-box testing benyttes. 
 
 \section{Fremgangsmåde}
 White-box testing er at teste funktionaliteten af selve programmet. Altså, at alle delene internt i programmet er blevet udført. Under White-box testing laves der en test-miljø, og ud fra bestemte inputs undersøges det om de forventede outputs kommer tilbage. Det gode ved White-box testing er, at det både er en god systematisk metode til at opdage fejl, og viser samtidig alle dele af programmet virker. Måden det foregår på, er at for hver eneste data input sæt der bruges, skal der også være et forventet output specificeret. Herefter vil programmet køre med alle data input-sæt og de givende outputs bliver sammenlignet med de forventede \cite{sestoft2008systematic}.
 
-Black-Box testing skal sørge for at programmet løser det cetrale problem den er sat til at løse. Her laves igen et test-datasæt med inputs og forventede outputs, men her omhandler det mere om problemet kan løses for almindelige og ekstreme inputs. Derfor vil det være en god ide, hvis testeren på forhånd har en idé om hvilke problemer der skal testes, for at kunne få programmet til at løse det\cite{sestoft2008systematic}. 
+Black-Box testing skal sørge for, at programmet løser det centrale problem, den er sat til at løse. Her laves igen et test-datasæt med inputs og forventede outputs, men her omhandler det mere om problemet kan løses for almindelige og ekstreme inputs. Derfor vil det være en god ide, hvis testeren på forhånd har en idé om hvilke problemer der skal testes, for at kunne få programmet til at løse det\cite{sestoft2008systematic}. 
 
 Vores tests bliver primært unit-tests, der er implementeret efter AAA-mønstret (Arrange, Act, Assert), hvor tests bliver eksekveret i tre skridt \cite{ArrangeActAssert}:
 \begin{description}
@@ -96,7 +96,7 @@ public void testMethod() {
 \texttt{verify} fungerer som en assertion: den tester i bund og grund, om en givet metode bliver kaldt, hvor mange gange den bliver kaldt, og hvilke argumenter den bliver kaldt med. I eksemplet bliver det først asserted, at \texttt{myMethod} i \texttt{MyClass1} bliver kaldt én gang med en tom parameterliste. Dernæst bliver det asserted, at \texttt{otherMethod} i \texttt{MyClass2} aldrig bliver kaldt. Dermed kan vi teste på, hvilke beskeder bliver sendt til andre klasser.
 
 \section{Test cases}
-For at gå systematisk til værks, skal der opsættes et skema med test cases \cite{Heumann}. Der bliver altså lavet flere scenarier, som først bliver sat op i skemaet, og så testet i programmet. Til sidst vil der foretages ændringer i koden, som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test cases kan ses i Bilag~\ref{app:testcases}.
+For at gå systematisk til værks, skal der opsættes et skema med test cases~\cite{Heumann}. Der bliver altså lavet flere scenarier, som først bliver sat op i skemaet, og så testet i programmet. Til sidst vil der foretages ændringer i koden, som kan fikse de opståede problemer, hvorefter de samme tests køres igen. Vores test cases kan ses i Bilag~\ref{app:testcases}.
 
 System tests er foretaget på version: '5963d381d40797741fe5340dd65bc07e01857b8f'.
 
@@ -113,7 +113,7 @@ Den første test tester \texttt{GradientDescentFit}\cite{GradientDescent} implem
 \subsubsection{Controller tests}
 \texttt{StoragePlanControllerTest} og \texttt{PeriodicPlanControllerTest} er unit test-klasser for henholdsvis \texttt{StoragePlanController} og \texttt{PeriodicPlanController}. Disse tests er lavet ud fra vores test cases - vi har kigget på hver enkelt test case og vurderet, hvad den enkelte controller-klasses ansvar er i et givet scenarie, og så har vi skrevet en test, der tester for dét. 
 
-I \texttt{StoragePLanControllerTest} har vi defineret følgende tests:
+I \texttt{StoragePlanControllerTest} har vi defineret følgende tests:
 \begin{itemize}
     \item generatesNewPlanWithNameJuni
     \item generatesNewPlanWithNameJuli
@@ -250,10 +250,10 @@ Resultater for alle unit tests findes i Figur~\ref{fig:unittestresults}. Vores \
 \end{figure}
 
 \subsection{Integration tests}
-Integration tests er tests, som beskriver og tester, hvordan lagene i programmet interager med hinanden. Et godt eksempel er test af DAO \cite{DAO}, eftersom både metoden på DAO, og dens interaktion med databasen bliver testet i disse test cases.
+Integration tests er tests, som beskriver og tester, hvordan lagene i programmet interager med hinanden. Et godt eksempel er test af DAO~\cite{DAO}, eftersom både metoden på DAO, og dens interaktion med databasen bliver testet i disse test cases.
 
 \subsection{System tests}
-For at gå endnu et niveau op, blev der også lavet system tests\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde tages der udgangspunkt i Fully Dressed Use Case fra Sektion~\ref{fullydressed}.
+For at gå endnu et niveau op, blev der også lavet system tests~\cite{TestLevels}. Under system testing afprøves forskellige flows af den centrale use case, i dette tilfælde tages der udgangspunkt i Fully Dressed Use Case fra Sektion~\ref{fullydressed}.
 
 Under figur \ref{fig:testgenerate} ses første iteration af test af UI. Herunder blev det testet, om det var muligt for en lagerplan at blive oprettet. Det viser sig, at det er muligt at oprette lagerplanen med både forskellige navne og tal. Dog bliver den gemte lagerplan ikke vist. Stadig en succes, eftersom målet var at få lagerplanen gemt, herefter kan det implementeres, at den gemte lagerplan også bliver vist frem i UI. På den anden side blev test case nr. 4 ikke en succes, da den gemte navnet "navn", hvilket ikke skulle være meningen. I stedet skulle den foreslå at man foretager en navneændring.
 
