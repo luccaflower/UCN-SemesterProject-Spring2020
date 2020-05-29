@@ -41,7 +41,7 @@ Enden af querien for \texttt{Product}s er dynamaisk generet, eftersom mængden a
 
 Hvis der var 5 \texttt{PeriodicPlan}s vil querien se ud som på Listing \ref{lst:shitquery}:
 %SELECT product\_id, amount, periodic\_plan\_id, cost, name FROM plan\_lines INNER JOIN products ON plan\_lines.product\_id = products.id WHERE periodic\_plan\_id = ? OR periodic\_plan\_id = ? OR periodic\_plan\_id = ? OR periodic\_plan\_id = ? OR periodic\_plan\_id = ?
-\begin{listing}[tb]
+\begin{listing}[h]
     \begin{minted}
     [
         frame=lines,
@@ -102,10 +102,9 @@ public List<PeriodicPlan> getByStoragePlan(StoragePlan storagePlan) throws DataA
     \caption{PeriodicPlanSqlStore.getByStoragePlan\label{lst:getByStoragePlan}}
 \end{listing}
 
-
-
 \section{Parallelitet}\label{ch:parallelitet}
-Parallelitet er processen hvorved dele af et program, kan køres på samme tid, eller parallelt. Dele af programmer, som køres parallelt kaldes \texttt{Threads} \cite{JavaThreads}. Threads af en abstraktion, som benyttes i high-level programmeringssprog, som f.eks Java\cite{HighLevel}. Threads er meget ofte ydeevne-optimerende, eftersom en moderne CPU meget ofte har flere kerner \cite{MultiCores}, hvilket resulterer i at koden fra en Thread ikke er afhængig af eksekveringen af koden fra en anden thread. Dette scenarie er det dog kun relevant, hvis der eksekveres en svær algoritme. Threads er også ydeevne-optimerende når det kommer til IO, eftersom at IO operationer ofte er langsommere, ift. læsning fra RAM eller læsning fra CPU cache \cite{OperatingSystems}. Et scenerie hvor et program henter mange forskellige billeder fra internettet (se listing \ref{lst:badParralelExample}), er i dette eksempel \texttt{fetchImage(n)} som ses på listing \ref{lst:badParralelExample}. Den henter billedet med ID fra en remote server, hvilket ikke er optimalt, fordi metoden \texttt{fetchAllTheImages} først venter på det første kald af \texttt{fetchImage} før den starter det næste. I dette eksempel har resultatet af første \texttt{fetchImage} kald ingen effekt på det næste. Det vil sige at metoden kunne blive paralleliseret (se listing \ref{lst:goodParralelExample}) og alle \texttt{fetchImage} metoder, som bruger ~100\% af eksekveringenstiden på at vente på et IO svar, kan køre på parallelt i stedet. I denne nye version har vi stadig det samme loop, der er dog nogle ændringer: \texttt{finalI} er lavet fordi \texttt{i} kan ændre sig før Thread'en bliver kaldt. Dette resulterer i \texttt{fetchImage} metoder, der henter de forkerte billeder. I stedet for at kalde \texttt{fetchImage} metoden, så laves en Thread, som kalder den. 
+Parallelitet er processen hvorved dele af et program, kan køres på samme tid, eller parallelt. Dele af programmer, som køres parallelt kaldes \texttt{Threads} \cite{JavaThreads}. Threads af en abstraktion, som benyttes i high-level programmeringssprog, som f.eks Java~\cite{HighLevel}. Threads er ofte ydeevne-optimerende, eftersom en moderne CPU har flere kerner \cite{MultiCores}, hvilket resulterer i at koden fra en Thread ikke er afhængig af eksekveringen af en anden Thread. Dette scenarie er det dog kun relevant, hvis der eksekveres en svær algoritme. 
+Threads er også ydeevne-optimerende når det kommer til IO, eftersom IO operationer ofte er langsommere, ift. læsning fra RAM eller læsning fra CPU cache \cite{OperatingSystems}. Et scenerie hvor et program henter mange forskellige billeder fra internettet (se listing \ref{lst:badParralelExample}), er i dette eksempel \texttt{fetchImage(n)}, som ses på listing \ref{lst:badParralelExample}. Den henter billedet med ID fra en remote server, hvilket ikke er optimalt, fordi metoden \texttt{fetchAllTheImages} først venter på det første kald af \texttt{fetchImage} før den starter det næste. I dette eksempel har resultatet af første \texttt{fetchImage} kald ingen effekt på det næste. Det vil sige at metoden kunne blive paralleliseret (se listing \ref{lst:goodParralelExample}) og alle \texttt{fetchImage} metoder, som bruger ~100\% af eksekveringenstiden på at vente på et IO svar, kan i stedet køre parallelt. I denne nye version, har vi stadig det samme loop, der er dog nogle ændringer: \texttt{finalI} er lavet fordi \texttt{i} kan ændre sig før Thread'en bliver kaldt. Dette resulterer i \texttt{fetchImage} metoder, der henter de forkerte billeder. I stedet for at kalde \texttt{fetchImage} metoden, laves en Thread, som kalder den. 
 Dernest lægges den i \texttt{threads} listen, og til sidst kaldes \texttt{join} metoden på alle threads for at sikre de er færdige før \texttt{fetchAllTheImages} afsluttes.
 
 \begin{listing}[h]
@@ -216,20 +215,22 @@ Et godt eksempel på brug af parallelitet i dette projekt, kan findes i metoden 
     \caption{Eksempel på brug af parallelitet\label{lst:ourParralelExample}}
 \end{listing}
 
-\section{UI} 
-Når programmet åbnes, åbnes vinduet Lagerplaner som viser en liste over nuværende lagerplaner, og en knap "Generer ny lagerplan" som fører brugeren videre til endnu et vindue. Dette vindue er baseret på mock up figur \ref{fig:3storage} fra Bilag \ref{app:mockups}. Vinduet er vist på Figur \ref{fig:lagerplaner}. 
+\clearpage
 
-"Nuværende lagerplaner:" er tom fra starten, men som man tilføjer nye lagerplaner, kommer de oprettede lagerplaner frem på listen. Dette er til forskel fra figuren, der i stedet viser enkelte varer. Det var besluttet at det ville være bedre med enkelte lagerplaner, sådan at man derinde kunne se de forskellige produkter. 
+\section{UI} 
+Når programmet åbnes, åbnes vinduet Lagerplaner som viser en liste over nuværende lagerplaner, og en knap "Generer ny lagerplan"  som fører brugeren videre til endnu et vindue. Dette vindue er baseret på mock up figur \ref{fig:3storage} fra Bilag \ref{app:mockups}. Vinduet er vist på Figur \ref{fig:lagerplaner}. 
+
+"Nuværende lagerplaner:"  er tom fra starten, men som man tilføjer nye lagerplaner, kommer de oprettede lagerplaner frem på listen. Dette er til forskel fra figuren, der i stedet viser enkelte varer. Det var besluttet at det ville være bedre med enkelte lagerplaner, sådan at man derinde kunne se de forskellige produkter. 
 Når der er oprettet en lagerplan på listen, kan man trykke på planen for at gå ind og redigere den. 
 
-Knappen "Generer ny lagerplan" åbner vinduet Periodeplaner som ses på Figur \ref{fig:periodeplaner}, som viser brugeren en periodeplan-liste for den genererede plan, samt et tekstfelt, hvor man kan navngive sin plan. Her er 3 handlingsknapper, "Aktiv", "Gem", og "Slet". 
-"Aktiv" er speciel, fordi den har 2 stadier. Den kan være være "on" eller "off". Den er "off" fra start. Denne knap er til for at bestemme om planen er nuværende aktiv eller ikke. "Gem" knappen er ret simpel. Den gemmer alle de ændringer og tilføjelser, der er lavet, til lagerplanen. "Slet" knappen sletter den nuværende lagerplan, som brugeren er inde at redigerere i. 
-Der ses også "Periode planer for <navn>:" har en liste over udvalgte perioder. Her vælger man en bestemt periode, som så åbner Periodeplan vinduet, som ses på figur \ref{fig:periodeplan}. Her kan man finpudse perioden til eget behov, og tilføje eller fjerne is produkter.   
+Knappen "Generer ny lagerplan"  åbner vinduet Periodeplaner som ses på Figur \ref{fig:periodeplaner}, som viser brugeren en periodeplan-liste for den genererede plan, samt et tekstfelt, hvor man kan navngive sin plan. Her er 3 handlingsknapper, "Aktiv", "Gem", og "Slet". 
+"Aktiv"  er speciel, fordi den har 2 stadier. Den kan være være "on"  eller "off". Den er "off"  fra start. Denne knap er til for at bestemme om planen er nuværende aktiv eller ikke. "Gem" knappen er ret simpel. Den gemmer alle de ændringer og tilføjelser, der er lavet, til lagerplanen. "Slet"  knappen sletter den nuværende lagerplan, som brugeren er inde at redigerere i. 
+Der ses også "Periode planer for <navn>:"  har en liste over udvalgte perioder. Her vælger man en bestemt periode, som så åbner Periodeplan vinduet, som ses på figur \ref{fig:periodeplan}. Her kan man finpudse perioden til eget behov, og tilføje eller fjerne is produkter.   
 
-"TIlføj produkt" knappen åbner op for vinduet på Figur \ref{fig:addprodukt}, hvori der er en liste over de is man kan vælge at tilføje. Derefter trykker man enten "OK" eller "Cancel". Den udvalgte is kommer frem på listen under "Produkter:". Når brugeren er færdig trykker man på "Gem" knappen, og lukker vinduet. 
-"Fjern Produkt" knappen fungerer på samme måde og åbner vinduet på Figur \ref{fig:fjernprodukt}. Den eneste forskel er, at der kun kan vælges blandt de produkter, der allerede er tilføjet til periodeplanen.
+"Tilføj produkt"  knappen åbner op for vinduet på Figur \ref{fig:addprodukt}, hvori der er en liste over de is man kan vælge at tilføje. Derefter trykker man enten "OK" eller "Cancel". Den udvalgte is kommer frem på listen under "Produkter:". Når brugeren er færdig trykker man på "Gem" knappen, og lukker vinduet. 
+"Fjern Produkt"  knappen fungerer på samme måde og åbner vinduet på Figur \ref{fig:fjernprodukt}. Den eneste forskel er, at der kun kan vælges blandt de produkter, der allerede er tilføjet til periodeplanen.
 
-\begin{figure}[tb]
+\begin{figure}[b]
     \centering
     \includegraphics[width=0.7\hsize]{figures/implementation/UI/lagerplaner.png}
     \caption{Lagerplaner vinduet}
